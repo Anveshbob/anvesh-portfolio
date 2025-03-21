@@ -50,7 +50,7 @@ const Contact = () => {
     if (Object.keys(newErrors).length === 0) {
       setIsSubmitting(true);
       
-fetch('https://script.google.com/macros/s/AKfycbxqedzuC2nqrYhbTFfJvBwaOsT6wblPGa692_GJkZG9yOnSDpMIt_9QS92vWTW1RkUT/exec', {
+fetch('https://script.google.com/macros/s/AKfycbxftx5kHtES-xgKr2MC1ys_QP1oObhlrOb1TlMBH7WG4bHr9TclRsUh6BYeVetduSoc/exec', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'
