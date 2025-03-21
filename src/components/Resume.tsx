@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { Download, ChevronRight, ChevronDown, TrendingUp, Database, Users, Target, Share2, Crown } from 'lucide-react';
+import { Download, ChevronRight, ChevronDown } from 'lucide-react';
 
 const Resume = () => {
   return (
@@ -21,12 +20,9 @@ const Resume = () => {
         
         <div className="mt-12 text-center opacity-0 animate-fade-in">
           <a 
-            href="#" 
+            href="/Anvesh_Seeli_Resume.pdf" 
+            download="Anvesh_Seeli_Resume.pdf"
             className="netflix-button inline-flex items-center"
-            onClick={(e) => {
-              e.preventDefault();
-              alert("Resume download feature will be implemented in the production version.");
-            }}
           >
             <Download className="mr-2 w-5 h-5" /> Download Resume
           </a>
