@@ -50,22 +50,43 @@ const Contact = () => {
     if (Object.keys(newErrors).length === 0) {
       setIsSubmitting(true);
       
-      // Simulate form submission
-      setTimeout(() => {
-        setIsSubmitting(false);
+fetch('https://script.google.com/macros/s/AKfycbxqedzuC2nqrYhbTFfJvBwaOsT6wblPGa692_GJkZG9yOnSDpMIt_9QS92vWTW1RkUT/exec', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        name: formData.name,
+        email: formData.email,
+        contactNumber: formData.contact,
+        message: formData.message
+    })
+})
+.then(response => response.json())
+.then(data => {
+    setIsSubmitting(false); // Add this line
+    if (data.result === 'success') {
         setIsSubmitted(true);
         setFormData({
-          name: '',
-          email: '',
-          contact: '',
-          message: ''
+            name: '',
+            email: '',
+            contact: '',
+            message: ''
         });
-        
+
         // Reset after showing success message
         setTimeout(() => {
-          setIsSubmitted(false);
+            setIsSubmitted(false);
         }, 5000);
-      }, 1500);
+    } else {
+        alert('An error occurred. Please try again.');
+    }
+})
+.catch(error => {
+    setIsSubmitting(false); // Add this line
+    console.error('Error:', error);
+    alert('An error occurred. Please try again.');
+});
     }
   };
   
