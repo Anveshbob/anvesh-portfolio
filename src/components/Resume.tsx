@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Download, ChevronRight, ChevronDown } from 'lucide-react';
+import { Download, ChevronRight, ChevronDown, TrendingUp, Database, Users, Target, Share2, Crown } from 'lucide-react';
 
 const Resume = () => {
   return (
@@ -37,8 +37,20 @@ const Resume = () => {
 };
 
 const Timeline = () => {
+  // Ordered chronologically, present to past
   return (
     <div className="space-y-12">
+      <TimelineItem 
+        years="2024-present"
+        title="Product Leader Marketing"
+        company="Brane Enterprises Pvt Ltd"
+        details={[
+          "Led product team of managers, designers, and engineers",
+          "Aligned product vision with business objectives through robust roadmaps",
+          "Fostered collaborative and innovative culture"
+        ]}
+      />
+      
       <TimelineItem 
         years="2021-2024"
         title="Deputy Manager, Marketing"
@@ -52,13 +64,14 @@ const Timeline = () => {
       />
       
       <TimelineItem 
-        years="2024-present"
-        title="Product Leader Marketing"
-        company="Brane Enterprises Pvt Ltd"
+        years="2020"
+        title="S&M Intern (Summer)"
+        company="Cloudtail India Pvt Ltd"
         details={[
-          "Led product team of managers, designers, and engineers",
-          "Aligned product vision with business objectives through robust roadmaps",
-          "Fostered collaborative and innovative culture"
+          "Developed a scalable Amazon Easy franchise marketing strategy",
+          "Generated 1,500+ leads with a 5x increase in hot leads",
+          "Reduced cost per hot lead by 96% through benchmarking analysis",
+          "Implemented a digital-only approach to reduce store location selection TAT significantly during lockdown"
         ]}
       />
       
@@ -130,23 +143,39 @@ const Skills = () => {
   const skillCategories = [
     {
       category: "Digital Marketing",
+      icon: <TrendingUp className="w-8 h-8 text-netflix-red" />,
+      description: "Expertise in digital marketing channels and strategies",
       skills: ["Google Ads", "Facebook-Meta Ads", "SEO", "SEM", "Email Marketing", "Influencer Marketing", "Programmatic"]
     },
     {
       category: "Data Analysis",
+      icon: <Database className="w-8 h-8 text-netflix-red" />,
+      description: "Proficiency in data analysis tools and techniques",
       skills: ["Excel", "PowerBI", "Google Analytics", "SQL", "Singular", "Amplitude"]
     },
     {
       category: "Customer Acquisition & Retention",
+      icon: <Users className="w-8 h-8 text-netflix-red" />,
+      description: "Implementing effective strategies for customer growth",
       skills: ["CRM Strategy Implementation", "User Engagement", "Conversion Optimization"]
     },
     {
       category: "Strategic Thinking",
+      icon: <Target className="w-8 h-8 text-netflix-red" />,
+      description: "Planning and executing data-driven marketing strategies",
       skills: ["Data-driven Marketing Planning", "Campaign Optimization", "Performance Analysis"]
     },
     {
       category: "Collaboration",
+      icon: <Share2 className="w-8 h-8 text-netflix-red" />,
+      description: "Working effectively across teams and departments",
       skills: ["Cross-functional Team Management", "Stakeholder Communication", "Project Leadership"]
+    },
+    {
+      category: "Leadership & Ownership",
+      icon: <Crown className="w-8 h-8 text-netflix-red" />,
+      description: "Proven ability to lead teams and deliver results",
+      skills: ["Team Leadership", "Project Ownership", "Strategic Decision Making", "Performance Accountability"]
     }
   ];
   
@@ -154,10 +183,14 @@ const Skills = () => {
     <div className="netflix-card p-6">
       <h3 className="text-2xl font-semibold mb-6">Skills & Expertise</h3>
       
-      <div className="space-y-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {skillCategories.map((category, index) => (
           <div key={index} className="opacity-0 animate-fade-in" style={{ animationDelay: `${index * 200}ms` }}>
-            <h4 className="text-netflix-red font-semibold mb-3">{category.category}</h4>
+            <div className="flex items-center gap-3 mb-3">
+              {category.icon}
+              <h4 className="text-netflix-red font-semibold">{category.category}</h4>
+            </div>
+            <p className="text-netflix-muted mb-3">{category.description}</p>
             <div className="flex flex-wrap gap-2">
               {category.skills.map((skill, skillIndex) => (
                 <span 

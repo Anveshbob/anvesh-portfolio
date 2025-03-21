@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { ChevronDown, BarChart2, Users, Target } from 'lucide-react';
+import { ChevronDown, BarChart2, Users, Target, Map } from 'lucide-react';
 
 const caseStudies = [
   {
@@ -32,6 +32,16 @@ const caseStudies = [
     tools: "Created a data-driven location selection tool analyzing over ten key factors.",
     additional: "Collaborated with regional marketing teams to streamline operations and achieve business objectives.",
     icon: <Target className="w-8 h-8 text-netflix-red" />
+  },
+  {
+    id: 4,
+    title: "Digital-Only Store Location Selection During Lockdown",
+    background: "During my internship at Cloudtail India Pvt Ltd, I developed a novel digital-only approach for store location selection.",
+    approach: "Created a data-driven location selection tool that analyzed multiple factors without physical site visits.",
+    metrics: "Reduced time-to-action (TAT) for selecting ideal store locations by 70%.",
+    tools: "Utilized digital mapping tools, demographic data analysis, and market trend analysis.",
+    additional: "This approach was particularly valuable during lockdown when physical site visits were impossible.",
+    icon: <Map className="w-8 h-8 text-netflix-red" />
   }
 ];
 
@@ -40,7 +50,7 @@ const CaseStudyCard = ({ study }: { study: typeof caseStudies[0] }) => {
 
   return (
     <div 
-      className={`netflix-card opacity-0 animate-fade-in [animation-delay:${study.id * 200}ms] ${isExpanded ? 'md:col-span-3 lg:col-span-3' : ''}`}
+      className={`netflix-card opacity-0 animate-fade-in ${isExpanded ? 'md:col-span-3 lg:col-span-3' : ''}`}
       style={{ animationDelay: `${study.id * 200}ms` }}
     >
       <div className="p-6">
