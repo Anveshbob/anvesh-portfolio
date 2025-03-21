@@ -1,7 +1,65 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Hero = () => {
+  // State to track current secret index
+  const [secretIndex, setSecretIndex] = useState(-1);
+  const [showSecret, setShowSecret] = useState(false);
+  const [secretTimer, setSecretTimer] = useState<NodeJS.Timeout | null>(null);
+  
+  const secretPoints = [
+    "My approach combines data-driven strategy with creative execution to deliver measurable results.",
+    "By focusing on ROI and customer-centric solutions, I've consistently achieved growth targets and optimized marketing performance across channels.",
+    "Strategic partnerships and innovative CRM optimization have been key drivers of my success.",
+    "My ability to lead cross-functional teams has delivered remarkable business outcomes.",
+    "Award-winning marketing strategies that exceed industry standards.",
+    "Certified expertise in AI-Powered Performance Ads and digital marketing optimization.",
+    "Lean Six Sigma Green Belt certified with a focus on process improvement.",
+    "Consistently delivering ROI above industry standards through analytical decision-making.",
+    "Digital-only approach revolutionized store location selection during challenging times.",
+    "Proven track record of exceeding marketing KPIs through data-backed strategies."
+  ];
+  
+  // Reset secret after 5 seconds
+  const startSecretTimer = () => {
+    if (secretTimer) {
+      clearTimeout(secretTimer);
+    }
+    
+    const timer = setTimeout(() => {
+      setShowSecret(false);
+      setSecretIndex(-1);
+    }, 5000);
+    
+    setSecretTimer(timer);
+  };
+  
+  // Toggle secret visibility
+  const toggleSecret = () => {
+    if (showSecret) {
+      setShowSecret(false);
+      setSecretIndex(-1);
+      if (secretTimer) {
+        clearTimeout(secretTimer);
+        setSecretTimer(null);
+      }
+    } else {
+      const newIndex = Math.floor(Math.random() * secretPoints.length);
+      setSecretIndex(newIndex);
+      setShowSecret(true);
+      startSecretTimer();
+    }
+  };
+  
+  // Clear timer on unmount
+  useEffect(() => {
+    return () => {
+      if (secretTimer) {
+        clearTimeout(secretTimer);
+      }
+    };
+  }, [secretTimer]);
+  
   // Animation for the elements when the component mounts
   useEffect(() => {
     const elements = document.querySelectorAll('.animate-on-mount');
@@ -53,25 +111,19 @@ const Hero = () => {
             </p>
             <div 
               className="mt-2 p-4 bg-netflix-card rounded-md cursor-pointer hover:bg-netflix-dark transition-all duration-300 group relative overflow-hidden"
-              onClick={(e) => {
-                const target = e.currentTarget;
-                target.querySelector('.hidden-content')?.classList.toggle('hidden');
-                target.querySelector('.lock-icon')?.classList.toggle('hidden');
-              }}
+              onClick={toggleSecret}
             >
-              <div className="lock-icon flex items-center justify-center py-4">
-                <svg className="w-8 h-8 text-netflix-red" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                </svg>
-              </div>
-              <div className="hidden-content hidden animate-fade-in">
-                <p className="text-white mb-2">
-                  My approach combines data-driven strategy with creative execution to deliver measurable results.
-                </p>
-                <p className="text-netflix-muted">
-                  By focusing on ROI and customer-centric solutions, I've consistently achieved growth targets and optimized marketing performance across channels.
-                </p>
-              </div>
+              {!showSecret ? (
+                <div className="lock-icon flex items-center justify-center py-4 animate-pulse">
+                  <svg className="w-8 h-8 text-netflix-red" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                  </svg>
+                </div>
+              ) : (
+                <div className="animate-fade-in py-4">
+                  <p className="text-white">{secretPoints[secretIndex]}</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
