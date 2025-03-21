@@ -69,7 +69,7 @@ const Timeline = () => {
         details={[
           "Managed strategic partnerships with 35 BSE-listed AMC fund houses",
           "Drove customer acquisition generating 12,500 registrations in seven months",
-          "Implemented process improvements including "Track Your Order" feature"
+          "Implemented process improvements including \"Track Your Order\" feature"
         ]}
       />
     </div>
