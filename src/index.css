@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -33,22 +34,6 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
@@ -79,14 +64,6 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -95,7 +72,65 @@
     @apply border-border;
   }
 
+  html {
+    @apply scroll-smooth;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-netflix-background text-netflix-text font-netflix antialiased;
+  }
+}
+
+@layer components {
+  .netflix-section {
+    @apply py-24 px-6 md:px-12 lg:px-24 w-full;
+  }
+  
+  .netflix-card {
+    @apply bg-netflix-card rounded-md overflow-hidden transition-all 
+    hover:shadow-[0_0_20px_rgba(229,9,20,0.3)] duration-300;
+  }
+  
+  .netflix-button {
+    @apply bg-netflix-red hover:bg-[#F40612] text-white font-semibold 
+    py-3 px-6 rounded hover:animate-button-pulse transition-all duration-300;
+  }
+  
+  .netflix-title {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold text-netflix-text mb-4;
+  }
+  
+  .netflix-subtitle {
+    @apply text-xl md:text-2xl text-netflix-muted mb-8;
+  }
+
+  .section-heading {
+    @apply text-3xl md:text-4xl font-bold text-netflix-text mb-12 opacity-0 animate-fade-in;
+  }
+
+  .section-subheading {
+    @apply text-xl text-netflix-muted mb-6;
+  }
+  
+  .card-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  .glass-effect {
+    @apply backdrop-blur-md bg-black/20 border border-white/10;
+  }
+  
+  .netflix-gradient {
+    @apply bg-gradient-to-br from-netflix-red to-[#F85D43] animate-gradient-x;
+  }
+  
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
   }
 }
