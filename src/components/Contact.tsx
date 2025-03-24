@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Linkedin, Github, Mail, MapPin, Send } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
@@ -51,11 +52,8 @@ const Contact = () => {
     if (Object.keys(newErrors).length === 0) {
       setIsSubmitting(true);
       
-      // Google Sheet URL - updated to the user's specific sheet
-      const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbxlMVK-fYnJDcUL89C15hfNCCJQYKbdZZGxhzF1FYy3xKnYrV8sXgSbSyM_AixqQ4Xw/exec';
-      
-      // Format data to match the Google Sheet columns
-      const payload = {
+      // Format data to match the Google Sheet columns exactly
+      const formattedData = {
         name: formData.name,
         email: formData.email,
         contactNumber: formData.contact,
@@ -63,18 +61,22 @@ const Contact = () => {
         timestamp: new Date().toISOString()
       };
       
-      console.log("Submitting form data:", payload);
+      console.log("Submitting form data:", formattedData);
       
-      // Send data to Google Sheets
+      // Google Sheet URL - ensure this matches exactly with your deployed Google Apps Script URL
+      const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbxlMVK-fYnJDcUL89C15hfNCCJQYKbdZZGxhzF1FYy3xKnYrV8sXgSbSyM_AixqQ4Xw/exec';
+      
+      // Using fetch with proper headers and error handling
       fetch(googleSheetsUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(formattedData),
         mode: 'no-cors' // Required for Google Apps Script
       })
       .then(() => {
+        // Since no-cors doesn't return a readable response, we assume success
         setIsSubmitting(false);
         setIsSubmitted(true);
         setFormData({
