@@ -63,7 +63,7 @@ const Contact = () => {
       console.log("Submitting form data:", formattedData);
       
       // The correct Google Apps Script Web App URL
-      const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbzZ4db3yCmMeADm0nfeUnYBipx4Y32dQAs73CKzgBD6uCzx4EH4QmRpCnV8kWssCNo/exec';
+      const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbzVAY80vtEiTKxpwnbZMtqoirLKNipAskCeGbtDCmURyP_5BFbXmf_UfGXcHd_d5_A9/exec';
       
       // Using fetch with proper headers and error handling
       fetch(googleSheetsUrl, {
