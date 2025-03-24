@@ -1,7 +1,5 @@
-
 import React, { useState } from 'react';
-import { Linkedin, Github, Mail, Phone, MapPin, Send } from 'lucide-react';
-import { toast } from "@/components/ui/use-toast";
+import { Linkedin, Github, Mail, MapPin, Send } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
@@ -53,67 +51,48 @@ const Contact = () => {
     if (Object.keys(newErrors).length === 0) {
       setIsSubmitting(true);
       
-      // Send data to both the original endpoint and Google Sheets
-      const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbw_uoGYF_Ge4uRX84bRrha_9PKGXYzUMqzK0LHxHZnRcsWPpnNEX2VQO2FMvpMsLNXO/exec';
+      // Google Sheet URL - updated to the user's specific sheet
+      const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbxlMVK-fYnJDcUL89C15hfNCCJQYKbdZZGxhzF1FYy3xKnYrV8sXgSbSyM_AixqQ4Xw/exec';
       
-      // First send to Google Sheets
+      // Format data to match the Google Sheet columns
+      const payload = {
+        name: formData.name,
+        email: formData.email,
+        contactNumber: formData.contact,
+        message: formData.message,
+        timestamp: new Date().toISOString()
+      };
+      
+      console.log("Submitting form data:", payload);
+      
+      // Send data to Google Sheets
       fetch(googleSheetsUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          contact: formData.contact,
-          message: formData.message,
-          timestamp: new Date().toISOString()
-        }),
+        body: JSON.stringify(payload),
         mode: 'no-cors' // Required for Google Apps Script
       })
       .then(() => {
-        // Then send to the original endpoint
-        return fetch('https://script.google.com/macros/s/AKfycbxftx5kHtES-xgKr2MC1ys_QP1oObhlrOb1TlMBH7WG4bHr9TclRsUh6BYeVetduSoc/exec', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            name: formData.name,
-            email: formData.email,
-            contactNumber: formData.contact,
-            message: formData.message
-          })
-        });
-      })
-      .then(response => response.json())
-      .then(data => {
         setIsSubmitting(false);
-        if (data.result === 'success') {
-          setIsSubmitted(true);
-          setFormData({
-            name: '',
-            email: '',
-            contact: '',
-            message: ''
-          });
+        setIsSubmitted(true);
+        setFormData({
+          name: '',
+          email: '',
+          contact: '',
+          message: ''
+        });
 
-          toast({
-            title: "Message Sent!",
-            description: "Thank you for reaching out. I'll get back to you soon.",
-          });
+        toast({
+          title: "Message Sent!",
+          description: "Thank you for reaching out. I'll get back to you soon.",
+        });
 
-          // Reset after showing success message
-          setTimeout(() => {
-            setIsSubmitted(false);
-          }, 5000);
-        } else {
-          toast({
-            title: "Error",
-            description: "An error occurred. Please try again.",
-            variant: "destructive"
-          });
-        }
+        // Reset after showing success message
+        setTimeout(() => {
+          setIsSubmitted(false);
+        }, 5000);
       })
       .catch(error => {
         setIsSubmitting(false);
@@ -299,7 +278,6 @@ const Contact = () => {
   );
 };
 
-// Missing Check icon component
 const Check = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" className={className} width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <polyline points="20 6 9 17 4 12"></polyline>
