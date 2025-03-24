@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Linkedin, Github, Mail, MapPin, Send } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
@@ -8,7 +7,7 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    contact: '',
+    contactNumber: '', // Changed from 'contact' to 'contactNumber'
     message: ''
   });
   
@@ -56,7 +55,7 @@ const Contact = () => {
       const formattedData = {
         name: formData.name,
         email: formData.email,
-        contactNumber: formData.contact,
+        contactNumber: formData.contactNumber, // This now matches
         message: formData.message,
         timestamp: new Date().toISOString()
       };
@@ -82,7 +81,7 @@ const Contact = () => {
         setFormData({
           name: '',
           email: '',
-          contact: '',
+          contactNumber: '', // Reset to empty
           message: ''
         });
 
@@ -162,12 +161,12 @@ const Contact = () => {
                 </div>
                 
                 <div>
-                  <label htmlFor="contact" className="block text-netflix-muted mb-2">Contact Number (Optional)</label>
+                  <label htmlFor="contactNumber" className="block text-netflix-muted mb-2">Contact Number (Optional)</label>
                   <input
                     type="text"
-                    id="contact"
-                    name="contact"
-                    value={formData.contact}
+                    id="contactNumber"
+                    name="contactNumber" // Changed from 'contact' to 'contactNumber'
+                    value={formData.contactNumber}
                     onChange={handleChange}
                     placeholder="Your Contact Number"
                     className="w-full px-4 py-3 bg-netflix-dark border border-netflix-card rounded-md focus:outline-none focus:ring-2 focus:ring-netflix-red/50 text-white"
