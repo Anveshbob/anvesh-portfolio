@@ -7,7 +7,7 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    contactNumber: '', // Changed from 'contact' to 'contactNumber'
+    contactNumber: '',
     message: ''
   });
   
@@ -55,7 +55,7 @@ const Contact = () => {
       const formattedData = {
         name: formData.name,
         email: formData.email,
-        contactNumber: formData.contactNumber, // This now matches
+        contactNumber: formData.contactNumber,
         message: formData.message,
         timestamp: new Date().toISOString()
       };
@@ -63,7 +63,7 @@ const Contact = () => {
       console.log("Submitting form data:", formattedData);
       
       // The correct Google Apps Script Web App URL
-      const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbxQWbxApxilL3E2nK1DuFZ85_hBRRmDFiTHbNbSAm1I7rsoabjIYKRtNJij2V3xVS2j/exec';
+      const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbx1q6bHLQ-pD5DRVlDIhzVm2WCVXSOKnosJeR8pYxIHuL7IqYAyYdyXa_X8qsNQC0Ck/exec';
       
       // Using fetch with proper headers and error handling
       fetch(googleSheetsUrl, {
@@ -81,7 +81,7 @@ const Contact = () => {
         setFormData({
           name: '',
           email: '',
-          contactNumber: '', // Reset to empty
+          contactNumber: '',
           message: ''
         });
 
@@ -165,7 +165,7 @@ const Contact = () => {
                   <input
                     type="text"
                     id="contactNumber"
-                    name="contactNumber" // Changed from 'contact' to 'contactNumber'
+                    name="contactNumber"
                     value={formData.contactNumber}
                     onChange={handleChange}
                     placeholder="Your Contact Number"
