@@ -1,8 +1,11 @@
 
 import React, { useState } from 'react';
 import { Linkedin, Github, Mail, Phone, MapPin, Send } from 'lucide-react';
+import { toast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -50,43 +53,77 @@ const Contact = () => {
     if (Object.keys(newErrors).length === 0) {
       setIsSubmitting(true);
       
-fetch('https://script.google.com/macros/s/AKfycbxftx5kHtES-xgKr2MC1ys_QP1oObhlrOb1TlMBH7WG4bHr9TclRsUh6BYeVetduSoc/exec', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-        name: formData.name,
-        email: formData.email,
-        contactNumber: formData.contact,
-        message: formData.message
-    })
-})
-.then(response => response.json())
-.then(data => {
-    setIsSubmitting(false); // Add this line
-    if (data.result === 'success') {
-        setIsSubmitted(true);
-        setFormData({
+      // Send data to both the original endpoint and Google Sheets
+      const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbw_uoGYF_Ge4uRX84bRrha_9PKGXYzUMqzK0LHxHZnRcsWPpnNEX2VQO2FMvpMsLNXO/exec';
+      
+      // First send to Google Sheets
+      fetch(googleSheetsUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          contact: formData.contact,
+          message: formData.message,
+          timestamp: new Date().toISOString()
+        }),
+        mode: 'no-cors' // Required for Google Apps Script
+      })
+      .then(() => {
+        // Then send to the original endpoint
+        return fetch('https://script.google.com/macros/s/AKfycbxftx5kHtES-xgKr2MC1ys_QP1oObhlrOb1TlMBH7WG4bHr9TclRsUh6BYeVetduSoc/exec', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            contactNumber: formData.contact,
+            message: formData.message
+          })
+        });
+      })
+      .then(response => response.json())
+      .then(data => {
+        setIsSubmitting(false);
+        if (data.result === 'success') {
+          setIsSubmitted(true);
+          setFormData({
             name: '',
             email: '',
             contact: '',
             message: ''
-        });
+          });
 
-        // Reset after showing success message
-        setTimeout(() => {
+          toast({
+            title: "Message Sent!",
+            description: "Thank you for reaching out. I'll get back to you soon.",
+          });
+
+          // Reset after showing success message
+          setTimeout(() => {
             setIsSubmitted(false);
-        }, 5000);
-    } else {
-        alert('An error occurred. Please try again.');
-    }
-})
-.catch(error => {
-    setIsSubmitting(false); // Add this line
-    console.error('Error:', error);
-    alert('An error occurred. Please try again.');
-});
+          }, 5000);
+        } else {
+          toast({
+            title: "Error",
+            description: "An error occurred. Please try again.",
+            variant: "destructive"
+          });
+        }
+      })
+      .catch(error => {
+        setIsSubmitting(false);
+        console.error('Error:', error);
+        toast({
+          title: "Error",
+          description: "An error occurred. Please try again.",
+          variant: "destructive"
+        });
+      });
     }
   };
   
