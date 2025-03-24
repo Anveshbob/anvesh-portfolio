@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Linkedin, Github, Mail, MapPin, Send } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
@@ -63,8 +62,8 @@ const Contact = () => {
       
       console.log("Submitting form data:", formattedData);
       
-      // Google Sheet URL - ensure this matches exactly with your deployed Google Apps Script URL
-      const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbxlMVK-fYnJDcUL89C15hfNCCJQYKbdZZGxhzF1FYy3xKnYrV8sXgSbSyM_AixqQ4Xw/exec';
+      // Replace this URL with the URL you got after deploying your Google Apps Script
+      const googleSheetsUrl = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL';
       
       // Using fetch with proper headers and error handling
       fetch(googleSheetsUrl, {
