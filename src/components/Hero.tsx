@@ -85,7 +85,7 @@ const Hero = () => {
           </div>
           
           <h1 className="netflix-title opacity-0 animate-on-mount">
-            <span className="text-shadow">Anvsh Seeli</span>
+            <span className="text-shadow">Anvesh Seeli</span>
           </h1>
           
           <h2 className="netflix-subtitle opacity-0 animate-on-mount">
