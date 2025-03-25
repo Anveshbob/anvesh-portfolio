@@ -3,7 +3,13 @@ import { Download, ChevronRight, ChevronDown, TrendingUp, Database, Users, Targe
 
 const Resume = () => {
   return (
-    <section id="resume" className="netflix-section">
+    <section id="resume" className="netflix-section relative">
+      {/* Curiosity gap element - partially visible content */}
+      <div className="absolute right-10 top-10 opacity-70 hover:opacity-100 cursor-pointer transition-opacity duration-300">
+        <span className="text-2xl text-netflix-red">Discover</span>
+        <span className="text-2xl ml-2 animate-pulse">→</span>
+      </div>
+      
       <div className="container mx-auto">
         <h2 className="section-heading">Interactive Resume</h2>
         <p className="section-subheading opacity-0 animate-fade-in">
@@ -129,6 +135,13 @@ const TimelineItem = ({ years, title, company, details }: {
               )}
             </div>
           </div>
+          
+          {/* Curiosity gap element - partially visible achievement */}
+          {!isExpanded && (
+            <div className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-netflix-red text-white px-4 py-2 rounded-l-lg">
+              <span className="font-semibold">{details[0].split(' ').slice(0, 4).join(' ')}...</span>
+            </div>
+          )}
         </div>
       </div>
     </div>
