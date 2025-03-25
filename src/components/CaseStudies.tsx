@@ -4,42 +4,46 @@ import { ChevronDown, BarChart2, Users, Target, Map } from 'lucide-react';
 const caseStudies = [
   {
     id: 1,
-    title: "Driving 17% YoY Customer Acquisition at Jubilant Foodworks",
-    background: "As Deputy Manager, Marketing from Aug'21 – Mar'24, I managed a diverse digital marketing portfolio with a monthly budget of 7 crores.",
-    approach: "Developed and executed ROI and CAC-focused performance campaigns across social media, Facebook, UAC, YouTube, SEM, influencer, affiliate, and brand partnership channels.",
-    metrics: "Achieved 17% year-over-year growth in customer acquisition.",
-    tools: "Leveraged data analytics platforms such as Singular, Google Analytics, Google Ads, and Facebook Ads Manager.",
-    additional: "Conducted five marketing incrementality tests resulting in a 2 crore+ increase in average monthly spend and an 8% uplift in incremental revenue.",
+    title: "Driving Sustainable Customer Growth for Market-Leading QSR Brand",
+    introduction: "As Deputy Manager of Marketing at Jubilant Foodworks, I spearheaded customer acquisition initiatives across multiple channels.",
+    challenge: "The quick-service restaurant market required sustainable customer growth strategies that balanced acquisition costs with measurable ROI.",
+    approach: "Developed and executed comprehensive performance marketing campaigns across social media, Facebook, UAC, YouTube, SEM, influencer marketing, affiliate programs, and brand partnerships. Implemented rigorous testing protocols including five marketing incrementality tests to optimize budget allocation.",
+    results: "Achieved 17% year-over-year customer acquisition growth while managing a monthly budget of ₹7 crores. These strategies resulted in an 8% uplift in incremental revenue and a ₹2 crore+ increase in average monthly spend.",
+    tools: "Leveraged Singular, Google Analytics, Google Ads, and Facebook Ads Manager for campaign measurement and optimization.",
+    additional: "Presented findings to 30+ cross-functional stakeholders weekly and quarterly, aligning marketing efforts with overall business objectives.",
     icon: <BarChart2 className="w-8 h-8 text-netflix-red" />
   },
   {
     id: 2,
-    title: "Increasing Traffic by 35% Through CRM Optimization",
-    background: "While at Jubilant Foodworks, I optimized CRM strategies and in-app experiences.",
-    approach: "Implemented data-driven optimizations to improve user engagement and conversion pathways.",
-    metrics: "Boosted traffic by 35%, conversions by 25%, and sales by 11%.",
-    tools: "Used Google Analytics, Amplitude, and custom dashboards to track performance.",
-    additional: "Developed and executed the annual operational plan while delivering weekly and quarterly presentations to 30+ stakeholders.",
+    title: "Transforming Customer Engagement Through Data-Driven CRM Optimization",
+    introduction: "At Jubilant Foodworks, I led initiatives to enhance customer relationships through optimized CRM strategies.",
+    challenge: "The existing CRM system needed improvement to better engage customers and convert them into repeat purchasers.",
+    approach: "Implemented data-driven optimizations across all digital touchpoints, including in-app experiences and email marketing. Developed custom dashboards to track user behavior and identify key intervention moments.",
+    results: "Boosted website traffic by 35%, conversions by 25%, and sales by 11%. These improvements were sustained through continuous monitoring and adjustment of customer journeys.",
+    tools: "Utilized Google Analytics, Amplitude, and custom-built dashboards for performance tracking.",
+    additional: "Managed the annual operational plan and coordinated with 10+ partners and support agencies to ensure campaign effectiveness.",
     icon: <Users className="w-8 h-8 text-netflix-red" />
   },
   {
     id: 3,
-    title: "Generating 1,500 Leads with 96% Cost Reduction",
-    background: "During my internship at Cloudtail India Pvt Ltd, I contributed to the Amazon Easy franchise marketing strategy.",
-    approach: "Executed two targeted marketing campaigns with in-depth benchmarking analysis.",
-    metrics: "Generated over 1,500 leads and reduced cost per hot lead by 96%.",
-    tools: "Created a data-driven location selection tool analyzing over ten key factors.",
-    additional: "Collaborated with regional marketing teams to streamline operations and achieve business objectives.",
+    title: "Revolutionizing Lead Generation with Targeted Marketing Campaigns",
+    introduction: "During my internship at Cloudtail India Pvt Ltd, I developed innovative approaches to lead generation for the Amazon Easy franchise.",
+    challenge: "The business needed to generate high-quality leads while significantly reducing acquisition costs.",
+    approach: "Executed two targeted marketing campaigns with in-depth benchmarking analysis. Created a data-driven location selection tool analyzing over ten key factors including demographic trends, competitive presence, and foot traffic patterns.",
+    results: "Generated over 1,500 qualified leads while reducing cost per hot lead by 96%. This approach enabled more efficient resource allocation and faster expansion.",
+    tools: "Utilized Excel for data analysis, PowerBI for visualization, and developed custom analysis tools.",
+    additional: "Collaborated with regional marketing teams to implement these strategies, ensuring alignment with broader business objectives.",
     icon: <Target className="w-8 h-8 text-netflix-red" />
   },
   {
     id: 4,
-    title: "Digital-Only Store Location Selection During Lockdown",
-    background: "During my internship at Cloudtail India Pvt Ltd, I developed a novel digital-only approach for store location selection.",
-    approach: "Created a data-driven location selection tool that analyzed multiple factors without physical site visits.",
-    metrics: "Reduced time-to-action (TAT) for selecting ideal store locations by 70%.",
-    tools: "Utilized digital mapping tools, demographic data analysis, and market trend analysis.",
-    additional: "This approach was particularly valuable during lockdown when physical site visits were impossible.",
+    title: "Innovating Real Estate Strategy with Digital Location Selection Tool",
+    introduction: "During my internship at Cloudtail India Pvt Ltd, I developed a novel digital approach to store location selection.",
+    challenge: "Traditional site selection methods were time-consuming and impractical during lockdown restrictions.",
+    approach: "Created a comprehensive digital location selection tool that analyzed demographic data, market trends, competitive landscape, and digital mapping information. This tool eliminated the need for physical site visits while maintaining accuracy.",
+    results: "Reduced time-to-action (TAT) for selecting ideal store locations by 70%, accelerating expansion timelines significantly.",
+    tools: "Utilized digital mapping tools, demographic databases, and custom analysis frameworks.",
+    additional: "This innovation proved particularly valuable during lockdown periods and continues to provide efficiency benefits beyond the pandemic.",
     icon: <Map className="w-8 h-8 text-netflix-red" />
   }
 ];
@@ -57,7 +61,7 @@ const CaseStudyCard = ({ study }: { study: typeof caseStudies[0] }) => {
           {study.icon}
         </div>
         <h3 className="text-xl font-semibold mb-3">{study.title}</h3>
-        <p className="text-netflix-muted mb-4">{study.background}</p>
+        <p className="text-netflix-muted mb-4">{study.introduction}</p>
         
         {!isExpanded ? (
           <button 
@@ -69,22 +73,27 @@ const CaseStudyCard = ({ study }: { study: typeof caseStudies[0] }) => {
         ) : (
           <div className="animate-fade-in">
             <div className="mb-4">
+              <h4 className="text-white font-semibold mb-2">Challenge</h4>
+              <p className="text-netflix-muted">{study.challenge}</p>
+            </div>
+            
+            <div className="mb-4">
               <h4 className="text-white font-semibold mb-2">Approach</h4>
               <p className="text-netflix-muted">{study.approach}</p>
             </div>
             
             <div className="mb-4">
               <h4 className="text-white font-semibold mb-2">Results</h4>
-              <p className="text-netflix-red font-semibold">{study.metrics}</p>
+              <p className="text-netflix-red font-semibold">{study.results}</p>
             </div>
             
             <div className="mb-4">
-              <h4 className="text-white font-semibold mb-2">Tools Used</h4>
+              <h4 className="text-white font-semibold mb-2">Tools & Technologies</h4>
               <p className="text-netflix-muted">{study.tools}</p>
             </div>
             
             <div className="mb-6">
-              <h4 className="text-white font-semibold mb-2">Additional Details</h4>
+              <h4 className="text-white font-semibold mb-2">Additional Insights</h4>
               <p className="text-netflix-muted">{study.additional}</p>
             </div>
             
