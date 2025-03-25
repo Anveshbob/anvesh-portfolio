@@ -63,8 +63,8 @@ const Contact = () => {
       
       console.log("Submitting form data:", formattedData);
       
-      // Use the specific Google Apps Script Web App URL for your sheet
-      const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbxQWbxApxilL3E2nK1DuFZ85_hBRRmDFiTHbNbSAm1I7rsoabjIYKRtNJij2V3xVS2j/exec';
+      // Updated Google Apps Script Web App URL
+      const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbwzfnYrVoZjeA5IVe-JhEnBahuR08OQUMbERfD9SYbpQI2FzxBZQaSlEJ0QyuZL2SNU/exec';
       
       fetch(googleSheetsUrl, {
         method: 'POST',
