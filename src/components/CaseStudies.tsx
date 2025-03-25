@@ -41,7 +41,7 @@ const caseStudies = [
     introduction: "During my internship at Cloudtail India Pvt Ltd, I developed a novel digital approach to store location selection.",
     challenge: "Traditional site selection methods were time-consuming and impractical during lockdown restrictions.",
     approach: "Created a comprehensive digital location selection tool that analyzed demographic data, market trends, competitive landscape, and digital mapping information. This tool eliminated the need for physical site visits while maintaining accuracy.",
-    results: "Reduced time-to-action (TAT) for selecting ideal store locations by 70%, accelerating expansion timelines significantly.",
+    results: "Reduced turn-around-time (TAT) for selecting ideal store locations by 70%, accelerating expansion timelines significantly.",
     tools: "Utilized digital mapping tools, demographic databases, and custom analysis frameworks.",
     additional: "This innovation proved particularly valuable during lockdown periods and continues to provide efficiency benefits beyond the pandemic.",
     icon: <Map className="w-8 h-8 text-netflix-red" />
