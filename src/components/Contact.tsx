@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Linkedin, Github, Mail, MapPin, Send } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
@@ -56,8 +55,8 @@ const Contact = () => {
     
     console.log("Submitting form data:", formattedData);
     
-    // Google Apps Script Web App URL
-    const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbwzfnYrVoZjeA5IVe-JhEnBahuR08OQUMbERfD9SYbpQI2FzxBZQaSlEJ0QyuZL2SNU/exec';
+    // Updated Google Apps Script Web App URL
+    const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbwyvcYd6xmzJcnVZGFIdTPoJ2sKnI1FkEVW5fseZWxruEb4NnUfYJbDsOGq8o0k-UvM/exec';
     
     // Use URLSearchParams to send data as form data
     const formParams = new URLSearchParams();
