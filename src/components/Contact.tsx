@@ -66,13 +66,21 @@ const Contact = () => {
       // Updated Google Apps Script Web App URL
       const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbwzfnYrVoZjeA5IVe-JhEnBahuR08OQUMbERfD9SYbpQI2FzxBZQaSlEJ0QyuZL2SNU/exec';
       
+      // Use URLSearchParams to send data as form data
+      const formData = new URLSearchParams();
+      formData.append('Name', formattedData.Name);
+      formData.append('Email', formattedData.Email);
+      formData.append('Contact Number', formattedData["Contact Number"]);
+      formData.append('Message', formattedData.Message);
+      formData.append('Timestamp', formattedData.Timestamp);
+
       fetch(googleSheetsUrl, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/x-www-form-urlencoded'
         },
-        body: JSON.stringify(formattedData),
-        mode: 'no-cors' // Required for Google Apps Script
+        body: formData.toString(),
+        mode: 'no-cors'
       })
       .then(() => {
         // Since no-cors doesn't return a readable response, we assume success
