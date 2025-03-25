@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Linkedin, Github, Mail, MapPin, Send } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
@@ -7,7 +8,7 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    contactNumber: '', // Changed from 'contact' to 'contactNumber'
+    contactNumber: '',
     message: ''
   });
   
@@ -53,19 +54,18 @@ const Contact = () => {
       
       // Format data to match the Google Sheet columns exactly
       const formattedData = {
-        name: formData.name,
-        email: formData.email,
-        contactNumber: formData.contactNumber, // This now matches
-        message: formData.message,
-        timestamp: new Date().toISOString()
+        Name: formData.name,
+        Email: formData.email,
+        "Contact Number": formData.contactNumber,
+        Message: formData.message,
+        Timestamp: new Date().toISOString()
       };
       
       console.log("Submitting form data:", formattedData);
       
-      // The correct Google Apps Script Web App URL
-      const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycby8VTvCLn8klWeq1fjwY_D4nFUjxZMD3Z0Oi_yzk0Zy6_v2ZO4RYbeVRokD91MmXRM/exec';
+      // Use the specific Google Apps Script Web App URL for your sheet
+      const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbxQWbxApxilL3E2nK1DuFZ85_hBRRmDFiTHbNbSAm1I7rsoabjIYKRtNJij2V3xVS2j/exec';
       
-      // Using fetch with proper headers and error handling
       fetch(googleSheetsUrl, {
         method: 'POST',
         headers: {
@@ -81,7 +81,7 @@ const Contact = () => {
         setFormData({
           name: '',
           email: '',
-          contactNumber: '', // Reset to empty
+          contactNumber: '',
           message: ''
         });
 
