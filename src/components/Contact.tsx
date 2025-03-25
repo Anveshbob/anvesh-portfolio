@@ -67,19 +67,19 @@ const Contact = () => {
       const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbwzfnYrVoZjeA5IVe-JhEnBahuR08OQUMbERfD9SYbpQI2FzxBZQaSlEJ0QyuZL2SNU/exec';
       
       // Use URLSearchParams to send data as form data
-      const formData = new URLSearchParams();
-      formData.append('Name', formattedData.Name);
-      formData.append('Email', formattedData.Email);
-      formData.append('Contact Number', formattedData["Contact Number"]);
-      formData.append('Message', formattedData.Message);
-      formData.append('Timestamp', formattedData.Timestamp);
+      const formParams = new URLSearchParams();
+      formParams.append('Name', formattedData.Name);
+      formParams.append('Email', formattedData.Email);
+      formParams.append('Contact Number', formattedData["Contact Number"]);
+      formParams.append('Message', formattedData.Message);
+      formParams.append('Timestamp', formattedData.Timestamp);
 
       fetch(googleSheetsUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         },
-        body: formData.toString(),
+        body: formParams.toString(),
         mode: 'no-cors'
       })
       .then(() => {
