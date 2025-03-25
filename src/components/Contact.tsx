@@ -2,115 +2,102 @@
 import React, { useState } from 'react';
 import { Linkedin, Github, Mail, MapPin, Send } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { 
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+
+// Create a schema for form validation
+const formSchema = z.object({
+  name: z.string().min(1, { message: "Name is required" }),
+  email: z.string().email({ message: "Invalid email address" }),
+  contactNumber: z.string().optional(),
+  message: z.string().min(1, { message: "Message is required" })
+});
+
+type FormValues = z.infer<typeof formSchema>;
 
 const Contact = () => {
   const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    contactNumber: '',
-    message: ''
-  });
-  
-  const [errors, setErrors] = useState<{[key: string]: string}>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   
-  const validate = () => {
-    const newErrors: {[key: string]: string} = {};
-    
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      contactNumber: "",
+      message: ""
     }
-    
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email is invalid';
-    }
-    
-    if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
-    }
-    
-    return newErrors;
-  };
+  });
   
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-  
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const newErrors = validate();
-    setErrors(newErrors);
+  const onSubmit = async (values: FormValues) => {
+    setIsSubmitting(true);
     
-    if (Object.keys(newErrors).length === 0) {
-      setIsSubmitting(true);
-      
-      // Format data to match the Google Sheet columns exactly
-      const formattedData = {
-        Name: formData.name,
-        Email: formData.email,
-        "Contact Number": formData.contactNumber,
-        Message: formData.message,
-        Timestamp: new Date().toISOString()
-      };
-      
-      console.log("Submitting form data:", formattedData);
-      
-      // Updated Google Apps Script Web App URL
-      const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbwzfnYrVoZjeA5IVe-JhEnBahuR08OQUMbERfD9SYbpQI2FzxBZQaSlEJ0QyuZL2SNU/exec';
-      
-      // Use URLSearchParams to send data as form data
-      const formParams = new URLSearchParams();
-      formParams.append('Name', formattedData.Name);
-      formParams.append('Email', formattedData.Email);
-      formParams.append('Contact Number', formattedData["Contact Number"]);
-      formParams.append('Message', formattedData.Message);
-      formParams.append('Timestamp', formattedData.Timestamp);
+    // Format data to match the Google Sheet columns exactly
+    const formattedData = {
+      Name: values.name,
+      Email: values.email,
+      "Contact Number": values.contactNumber || "",
+      Message: values.message,
+      Timestamp: new Date().toISOString()
+    };
+    
+    console.log("Submitting form data:", formattedData);
+    
+    // Google Apps Script Web App URL
+    const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbwzfnYrVoZjeA5IVe-JhEnBahuR08OQUMbERfD9SYbpQI2FzxBZQaSlEJ0QyuZL2SNU/exec';
+    
+    // Use URLSearchParams to send data as form data
+    const formParams = new URLSearchParams();
+    formParams.append('Name', formattedData.Name);
+    formParams.append('Email', formattedData.Email);
+    formParams.append('Contact Number', formattedData["Contact Number"]);
+    formParams.append('Message', formattedData.Message);
+    formParams.append('Timestamp', formattedData.Timestamp);
 
-      fetch(googleSheetsUrl, {
+    try {
+      const response = await fetch(googleSheetsUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: formParams.toString(),
         mode: 'no-cors'
-      })
-      .then(() => {
-        // Since no-cors doesn't return a readable response, we assume success
-        setIsSubmitting(false);
-        setIsSubmitted(true);
-        setFormData({
-          name: '',
-          email: '',
-          contactNumber: '',
-          message: ''
-        });
-
-        toast({
-          title: "Message Sent!",
-          description: "Thank you for reaching out. I'll get back to you soon.",
-        });
-
-        // Reset after showing success message
-        setTimeout(() => {
-          setIsSubmitted(false);
-        }, 5000);
-      })
-      .catch(error => {
-        setIsSubmitting(false);
-        console.error('Error:', error);
-        toast({
-          title: "Error",
-          description: "An error occurred. Please try again.",
-          variant: "destructive"
-        });
+      });
+      
+      // Since no-cors doesn't return a readable response, we assume success
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+      form.reset();
+      
+      toast({
+        title: "Message Sent!",
+        description: "Thank you for reaching out. I'll get back to you soon.",
+      });
+      
+      // Reset after showing success message
+      setTimeout(() => {
+        setIsSubmitted(false);
+      }, 5000);
+    } catch (error) {
+      setIsSubmitting(false);
+      console.error('Error:', error);
+      toast({
+        title: "Error",
+        description: "An error occurred. Please try again.",
+        variant: "destructive"
       });
     }
   };
@@ -135,88 +122,105 @@ const Contact = () => {
                 </div>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="netflix-card p-6 space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-netflix-muted mb-2">Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Your Name"
-                    className={`w-full px-4 py-3 bg-netflix-dark border ${
-                      errors.name ? 'border-netflix-red' : 'border-netflix-card'
-                    } rounded-md focus:outline-none focus:ring-2 focus:ring-netflix-red/50 text-white`}
-                  />
-                  {errors.name && <p className="text-netflix-red text-sm mt-1">{errors.name}</p>}
-                </div>
-                
-                <div>
-                  <label htmlFor="email" className="block text-netflix-muted mb-2">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="Your Email"
-                    className={`w-full px-4 py-3 bg-netflix-dark border ${
-                      errors.email ? 'border-netflix-red' : 'border-netflix-card'
-                    } rounded-md focus:outline-none focus:ring-2 focus:ring-netflix-red/50 text-white`}
-                  />
-                  {errors.email && <p className="text-netflix-red text-sm mt-1">{errors.email}</p>}
-                </div>
-                
-                <div>
-                  <label htmlFor="contactNumber" className="block text-netflix-muted mb-2">Contact Number (Optional)</label>
-                  <input
-                    type="text"
-                    id="contactNumber"
-                    name="contactNumber" // Changed from 'contact' to 'contactNumber'
-                    value={formData.contactNumber}
-                    onChange={handleChange}
-                    placeholder="Your Contact Number"
-                    className="w-full px-4 py-3 bg-netflix-dark border border-netflix-card rounded-md focus:outline-none focus:ring-2 focus:ring-netflix-red/50 text-white"
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="message" className="block text-netflix-muted mb-2">Message</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="How can I assist you?"
-                    rows={5}
-                    className={`w-full px-4 py-3 bg-netflix-dark border ${
-                      errors.message ? 'border-netflix-red' : 'border-netflix-card'
-                    } rounded-md focus:outline-none focus:ring-2 focus:ring-netflix-red/50 text-white`}
-                  />
-                  {errors.message && <p className="text-netflix-red text-sm mt-1">{errors.message}</p>}
-                </div>
-                
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="netflix-button w-full flex items-center justify-center"
-                >
-                  {isSubmitting ? (
-                    <span className="inline-flex items-center">
-                      <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      Sending...
-                    </span>
-                  ) : (
-                    <span className="inline-flex items-center">
-                      <Send className="mr-2 w-4 h-4" /> Let's Connect and Create Something Amazing
-                    </span>
-                  )}
-                </button>
-              </form>
+              <div className="netflix-card p-6">
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                    <FormField
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-netflix-muted">Name</FormLabel>
+                          <FormControl>
+                            <Input 
+                              placeholder="Your Name" 
+                              {...field} 
+                              className="bg-netflix-dark border border-netflix-card rounded-md focus:outline-none focus:ring-2 focus:ring-netflix-red/50 text-white"
+                            />
+                          </FormControl>
+                          <FormMessage className="text-netflix-red text-sm" />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-netflix-muted">Email</FormLabel>
+                          <FormControl>
+                            <Input 
+                              placeholder="Your Email" 
+                              type="email" 
+                              {...field} 
+                              className="bg-netflix-dark border border-netflix-card rounded-md focus:outline-none focus:ring-2 focus:ring-netflix-red/50 text-white"
+                            />
+                          </FormControl>
+                          <FormMessage className="text-netflix-red text-sm" />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="contactNumber"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-netflix-muted">Contact Number (Optional)</FormLabel>
+                          <FormControl>
+                            <Input 
+                              placeholder="Your Contact Number" 
+                              {...field} 
+                              className="bg-netflix-dark border border-netflix-card rounded-md focus:outline-none focus:ring-2 focus:ring-netflix-red/50 text-white"
+                            />
+                          </FormControl>
+                          <FormMessage className="text-netflix-red text-sm" />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="message"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-netflix-muted">Message</FormLabel>
+                          <FormControl>
+                            <Textarea 
+                              placeholder="How can I assist you?" 
+                              {...field} 
+                              rows={5}
+                              className="bg-netflix-dark border border-netflix-card rounded-md focus:outline-none focus:ring-2 focus:ring-netflix-red/50 text-white"
+                            />
+                          </FormControl>
+                          <FormMessage className="text-netflix-red text-sm" />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <Button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="netflix-button w-full"
+                    >
+                      {isSubmitting ? (
+                        <span className="inline-flex items-center">
+                          <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          Sending...
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center">
+                          <Send className="mr-2 w-4 h-4" /> Let's Connect and Create Something Amazing
+                        </span>
+                      )}
+                    </Button>
+                  </form>
+                </Form>
+              </div>
             )}
           </div>
           
