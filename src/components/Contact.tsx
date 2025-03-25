@@ -201,7 +201,7 @@ const Contact = () => {
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="netflix-button w-full"
+                      className="netflix-button w-full hover:bg-netflix-dark transition-colors duration-300"
                     >
                       {isSubmitting ? (
                         <span className="inline-flex items-center">
