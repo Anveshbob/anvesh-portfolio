@@ -1,5 +1,6 @@
+
 import React from 'react';
-import { Mail, MapPin, Linkedin, Github } from 'lucide-react';
+import { Mail, MapPin, Linkedin, Github, Send } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 
@@ -20,7 +21,7 @@ const Contact = () => {
   return (
     <section id="contact" className="netflix-section">
       <div className="container mx-auto">
-        <h2 className="section-heading">Let's Connect</h2>
+        <h2 className="section-heading">Let&apos;s Connect</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-12">
           <div className="opacity-0 animate-fade-in">
@@ -72,7 +73,7 @@ const Contact = () => {
                   <p className="text-netflix-muted mb-4">Location</p>
                   <div className="relative h-[240px] rounded-md overflow-hidden">
                     <iframe 
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d243646.90524513!2d78.24323111792417!3d17.412281195556447!2m3!1f0!2f0!3m2!1i1024!2i768!4f13.1!3m3!1s0x3bcb99daeaebd2c7%3A0xae93b78392bafbc2!2sHyderabad%2C%20Telangana%2C%20India!5e0!3m2!1sen!2sus!4v1635750412135m2!1sen!2sus" 
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d243646.90524513!2d78.24323111792417!3d17.412281195556447!2m3!1f0!2f0!3m2!1i1024!2i768!4f13.1!3m3!1m3!1s0x3bcb99daeaebd2c7%3A0xae93b78392bafbc2!2sHyderabad%2C%20Telangana%2C%20India!5e0!3m2!1sen!2sus!4v1635750412135m2!1sen!2sus" 
                       className="w-full h-full border-0"
                       allowFullScreen
                       loading="lazy"
@@ -82,8 +83,15 @@ const Contact = () => {
                 </div>
               </div>
             </div>
+            
+            <div className="opacity-0 animate-fade-in">
+              <h3 className="text-2xl font-semibold mb-6">Send me a message</h3>
+              <Button onClick={handleButtonClick} className="flex items-center gap-2">
+                <Mail className="h-4 w-4" />
+                Contact via Email
+              </Button>
+            </div>
           </div>
-        </div>
       </div>
     </section>
   );
