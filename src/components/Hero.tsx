@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 
 const Hero = () => {
@@ -5,7 +6,7 @@ const Hero = () => {
   const [secretIndex, setSecretIndex] = useState(-1);
   const [showSecret, setShowSecret] = useState(false);
   const [secretTimer, setSecretTimer] = useState<NodeJS.Timeout | null>(null);
-  // Add state for visitor counter
+  // Initial visitor count - will be incremented on component mount
   const [visitorCount, setVisitorCount] = useState(539);
   
   const secretPoints = [
@@ -73,7 +74,15 @@ const Hero = () => {
     });
 
     // Increment visitor count by 1 on each mount
-    setVisitorCount(prevCount => prevCount + 1);
+    setVisitorCount(prevCount => {
+      const newCount = prevCount + 1;
+      // Update the counter element directly to ensure it's visible immediately
+      const counterElement = document.getElementById('visitor-counter');
+      if (counterElement) {
+        counterElement.textContent = newCount.toString();
+      }
+      return newCount;
+    });
   }, []);
   
   return (
