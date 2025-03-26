@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 
 const Hero = () => {
@@ -6,6 +5,8 @@ const Hero = () => {
   const [secretIndex, setSecretIndex] = useState(-1);
   const [showSecret, setShowSecret] = useState(false);
   const [secretTimer, setSecretTimer] = useState<NodeJS.Timeout | null>(null);
+  // Add state for visitor counter
+  const [visitorCount, setVisitorCount] = useState(539);
   
   const secretPoints = [
     "My approach combines data-driven strategy with creative execution to deliver measurable results.",
@@ -70,6 +71,9 @@ const Hero = () => {
         el.classList.remove('opacity-0');
       }, 200 * index);
     });
+
+    // Increment visitor count by 1 on each mount
+    setVisitorCount(prevCount => prevCount + 1);
   }, []);
   
   return (
@@ -131,7 +135,7 @@ const Hero = () => {
       
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-center">
         <p className="text-netflix-muted mb-2 opacity-0 animate-on-mount">
-          <span id="visitor-counter" className="text-white font-semibold">538</span> people visited this site this week
+          <span id="visitor-counter" className="text-white font-semibold">{visitorCount}</span> people visited this site this week
         </p>
         <div className="animate-bounce">
           <svg className="w-6 h-6 mx-auto text-netflix-red" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

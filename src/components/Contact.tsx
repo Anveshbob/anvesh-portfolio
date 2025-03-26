@@ -73,11 +73,12 @@ const Contact = () => {
                   <p className="text-netflix-muted mb-4">Location</p>
                   <div className="relative h-[240px] rounded-md overflow-hidden">
                     <iframe 
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d243646.90524513!2d78.24323111792417!3d17.412281195556447!2m3!1f0!2f0!3m2!1i1024!2i768!4f13.1!3m3!1m3!1s0x3bcb99daeaebd2c7%3A0xae93b78392bafbc2!2sHyderabad%2C%20Telangana%2C%20India!5e0!3m2!1sen!2sus!4v1635750412135m2!1sen!2sus" 
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d243646.9052451354!2d78.27362503727096!3d17.41228070909086!2m3!1f0!2f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99daeaebd2c7%3A0xae93b78392bafbc2!2sHyderabad%2C%20Telangana!5e0!3m2!1sen!2sin!4v1685529338815!5m2!1sen!2sin" 
                       className="w-full h-full border-0"
                       allowFullScreen
                       loading="lazy"
                       title="Hyderabad Map"
+                      referrerPolicy="no-referrer-when-downgrade"
                     ></iframe>
                   </div>
                 </div>
