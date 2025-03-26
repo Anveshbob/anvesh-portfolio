@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Mail, MapPin, Linkedin, Github, Send } from 'lucide-react';
+import { Mail, MapPin, Linkedin, Github, Instagram, Send } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 
@@ -59,6 +59,14 @@ const Contact = () => {
                       className="w-12 h-12 rounded-full bg-netflix-dark flex items-center justify-center hover:bg-netflix-red transition-colors duration-300"
                     >
                       <Linkedin className="w-5 h-5 text-white" />
+                    </a>
+                    <a 
+                      href="https://www.instagram.com/howtodigitalmarketing_ind/profilecard/?igsh=bG54bHRtaTB1MWkz" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="w-12 h-12 rounded-full bg-netflix-dark flex items-center justify-center hover:bg-netflix-red transition-colors duration-300"
+                    >
+                      <Instagram className="w-5 h-5 text-white" />
                     </a>
                     <a 
                       href="#" 
