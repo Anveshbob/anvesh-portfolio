@@ -1,21 +1,92 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Mail, MapPin, Linkedin, Github, Instagram, Send } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+// Form schema
+const formSchema = z.object({
+  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
+  email: z.string().email({ message: "Please enter a valid email address." }),
+  contactNumber: z.string().optional(),
+  message: z.string().min(10, { message: "Message must be at least 10 characters." }),
+});
+
+type FormValues = z.infer<typeof formSchema>;
 
 const Contact = () => {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleButtonClick = () => {
-    // Open the user's default email client with a pre-filled email to your address
+  // Initialize form
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      contactNumber: "",
+      message: "",
+    },
+  });
+
+  // Handle email contact button
+  const handleEmailButtonClick = () => {
     const emailBody = `Hello,\n\nI came across your portfolio site and was impressed by your work. I would like to discuss potential collaboration opportunities.\n\nBest regards,\n[User's Name]`;
-    const userFullName = "Your Full Name"; // Replace with the actual user's full name if you can get it
-
-    const mailto = "seelianvesh@gmail.com"; // Your email address
-
+    const mailto = "seelianvesh@gmail.com";
     const link = `mailto:${mailto}?subject=Interesting Opportunity&body=${encodeURIComponent(emailBody)}`;
     window.location.href = link;
+  };
+
+  // Handle form submission
+  const onSubmit = async (data: FormValues) => {
+    setIsSubmitting(true);
+    
+    try {
+      // Replace this URL with your actual Google Apps Script Web App URL after deployment
+      const WEBAPP_URL = "https://script.google.com/macros/s/YOUR-DEPLOYMENT-ID-HERE/exec";
+      
+      // Add timestamp (server will set this to Indian timezone)
+      const formData = {
+        ...data,
+        timestamp: new Date().toISOString(),
+      };
+      
+      // Send the data to the Google Apps Script Web App
+      const response = await fetch(WEBAPP_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+        mode: "no-cors", // This is required for Google Apps Script
+      });
+      
+      // Since no-cors mode doesn't allow reading the response, we assume success
+      toast({
+        title: "Message sent successfully!",
+        description: "Thank you for reaching out. I'll get back to you soon.",
+        variant: "default",
+      });
+      
+      // Reset the form
+      form.reset();
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast({
+        title: "Something went wrong!",
+        description: "Please try again or contact me via email.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -80,7 +151,6 @@ const Contact = () => {
                 <div className="pt-6">
                   <p className="text-netflix-muted mb-4">Location</p>
                   <div className="relative h-[240px] rounded-md overflow-hidden">
-                    {/* Using a simpler embed code that doesn't rely on the pb parameter */}
                     <iframe 
                       src="https://maps.google.com/maps?q=hyderabad,india&t=&z=13&ie=UTF8&iwloc=&output=embed" 
                       className="w-full h-full border-0"
@@ -95,11 +165,101 @@ const Contact = () => {
             </div>
             
             <div className="opacity-0 animate-fade-in">
-              <h3 className="text-2xl font-semibold mb-6">Send me a message</h3>
-              <Button onClick={handleButtonClick} className="flex items-center gap-2">
-                <Mail className="h-4 w-4" />
-                Contact via Email
-              </Button>
+              <div className="mb-8">
+                <h3 className="text-2xl font-semibold mb-6">Send me a message</h3>
+                <Button onClick={handleEmailButtonClick} className="flex items-center gap-2">
+                  <Mail className="h-4 w-4" />
+                  Contact via Email
+                </Button>
+              </div>
+              
+              <div className="mt-10">
+                <h3 className="text-2xl font-semibold mb-6">Contact Form</h3>
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                    <FormField
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-white">Name</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Your name" {...field} className="bg-netflix-dark border-netflix-card" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-white">Email</FormLabel>
+                          <FormControl>
+                            <Input type="email" placeholder="your.email@example.com" {...field} className="bg-netflix-dark border-netflix-card" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="contactNumber"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-white">Contact Number (optional)</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Your phone number" {...field} className="bg-netflix-dark border-netflix-card" />
+                          </FormControl>
+                          <FormDescription className="text-netflix-muted">
+                            This field is optional
+                          </FormDescription>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="message"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-white">Message</FormLabel>
+                          <FormControl>
+                            <Textarea 
+                              placeholder="Write your message here..." 
+                              {...field} 
+                              className="bg-netflix-dark border-netflix-card min-h-[120px]" 
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <Button 
+                      type="submit" 
+                      className="w-full netflix-button"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? (
+                        <div className="flex items-center gap-2">
+                          <div className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></div>
+                          Sending...
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-2">
+                          <Send className="h-4 w-4" />
+                          Send Message
+                        </div>
+                      )}
+                    </Button>
+                  </form>
+                </Form>
+              </div>
             </div>
           </div>
       </div>
