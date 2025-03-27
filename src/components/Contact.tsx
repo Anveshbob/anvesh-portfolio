@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Mail, MapPin, Linkedin, Github, Instagram, Send } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
@@ -160,105 +161,104 @@ const Contact = () => {
                     ></iframe>
                   </div>
                 </div>
-              </div>
+            </div>
+          </div>
+          
+          <div className="opacity-0 animate-fade-in">
+            <div className="mb-8">
+              <h3 className="text-2xl font-semibold mb-6">Send me a message</h3>
+              <Button onClick={handleEmailButtonClick} className="flex items-center gap-2">
+                <Mail className="h-4 w-4" />
+                Contact via Email
+              </Button>
             </div>
             
-            <div className="opacity-0 animate-fade-in">
-              <div className="mb-8">
-                <h3 className="text-2xl font-semibold mb-6">Send me a message</h3>
-                <Button onClick={handleEmailButtonClick} className="flex items-center gap-2">
-                  <Mail className="h-4 w-4" />
-                  Contact via Email
-                </Button>
-              </div>
-              
-              <div className="mt-10">
-                <h3 className="text-2xl font-semibold mb-6">Contact Form</h3>
-                <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                    <FormField
-                      control={form.control}
-                      name="name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-white">Name</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Your name" {...field} className="bg-netflix-dark border-netflix-card" />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-white">Email</FormLabel>
-                          <FormControl>
-                            <Input type="email" placeholder="your.email@example.com" {...field} className="bg-netflix-dark border-netflix-card" />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    
-                    <FormField
-                      control={form.control}
-                      name="contactNumber"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-white">Contact Number (optional)</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Your phone number" {...field} className="bg-netflix-dark border-netflix-card" />
-                          </FormControl>
-                          <FormDescription className="text-netflix-muted">
-                            This field is optional
-                          </FormDescription>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    
-                    <FormField
-                      control={form.control}
-                      name="message"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-white">Message</FormLabel>
-                          <FormControl>
-                            <Textarea 
-                              placeholder="Write your message here..." 
-                              {...field} 
-                              className="bg-netflix-dark border-netflix-card min-h-[120px]" 
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    
-                    <Button 
-                      type="submit" 
-                      className="w-full bg-netflix-red hover:bg-[#F40612] text-white"
-                      disabled={isSubmitting}
-                    >
-                      {isSubmitting ? (
-                        <div className="flex items-center gap-2">
-                          <div className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></div>
-                          Sending...
-                        </div>
-                      ) : (
-                        <div className="flex items-center gap-2">
-                          <Send className="h-4 w-4" />
-                          Send Message
-                        </div>
-                      )}
-                    </Button>
-                  </form>
-                </Form>
-              </div>
+            <div className="mt-10">
+              <h3 className="text-2xl font-semibold mb-6">Contact Form</h3>
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-white">Name</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Your name" {...field} className="bg-netflix-dark border-netflix-card" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-white">Email</FormLabel>
+                        <FormControl>
+                          <Input type="email" placeholder="your.email@example.com" {...field} className="bg-netflix-dark border-netflix-card" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="contactNumber"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-white">Contact Number (optional)</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Your phone number" {...field} className="bg-netflix-dark border-netflix-card" />
+                        </FormControl>
+                        <FormDescription className="text-netflix-muted">
+                          This field is optional
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-white">Message</FormLabel>
+                        <FormControl>
+                          <Textarea 
+                            placeholder="Write your message here..." 
+                            {...field} 
+                            className="bg-netflix-dark border-netflix-card min-h-[120px]" 
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <Button 
+                    type="submit" 
+                    className="w-full bg-netflix-red hover:bg-[#F40612] text-white"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <div className="flex items-center gap-2">
+                        <div className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></div>
+                        Sending...
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-2">
+                        <Send className="h-4 w-4" />
+                        Send Message
+                      </div>
+                    )}
+                  </Button>
+                </form>
+              </Form>
             </div>
           </div>
         </div>
