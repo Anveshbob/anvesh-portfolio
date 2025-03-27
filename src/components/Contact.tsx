@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Mail, MapPin, Linkedin, Github, Instagram, Send } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
@@ -242,7 +241,7 @@ const Contact = () => {
                     
                     <Button 
                       type="submit" 
-                      className="w-full netflix-button"
+                      className="w-full bg-netflix-red hover:bg-[#F40612] text-white"
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? (
@@ -262,6 +261,7 @@ const Contact = () => {
               </div>
             </div>
           </div>
+        </div>
       </div>
     </section>
   );
