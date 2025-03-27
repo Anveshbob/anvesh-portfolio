@@ -1,7 +1,11 @@
+
 import React, { useState } from 'react';
 import { Download, ChevronRight, ChevronDown, TrendingUp, Database, Users, Target, Share2, Crown } from 'lucide-react';
+import ResumeDownloadDialog from './ResumeDownloadDialog';
 
 const Resume = () => {
+  const [dialogOpen, setDialogOpen] = useState(false);
+  
   return (
     <section id="resume" className="netflix-section">
       <div className="container mx-auto">
@@ -19,13 +23,17 @@ const Resume = () => {
         </div>
         
         <div className="mt-12 text-center opacity-0 animate-fade-in">
-          <a 
-            href="/Anvesh_Seeli_Resume.pdf" 
-            download="Anvesh_Seeli_Resume.pdf"
+          <button 
+            onClick={() => setDialogOpen(true)}
             className="netflix-button inline-flex items-center"
           >
             <Download className="mr-2 w-5 h-5" /> Download Resume
-          </a>
+          </button>
+          
+          <ResumeDownloadDialog 
+            open={dialogOpen}
+            onOpenChange={setDialogOpen}
+          />
         </div>
       </div>
     </section>
