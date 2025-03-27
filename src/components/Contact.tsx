@@ -5,7 +5,6 @@ import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -49,8 +48,8 @@ const Contact = () => {
     setIsSubmitting(true);
     
     try {
-      // Replace this URL with your actual Google Apps Script Web App URL after deployment
-      const WEBAPP_URL = "https://script.google.com/macros/s/YOUR-DEPLOYMENT-ID-HERE/exec";
+      // Use the provided Google Apps Script Web App URL
+      const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbyu99UznwhyM8Lc4JsnWP8t7KFoM2-pS-bab8Vetl8zQtEMxfg_jBod6gzeIlrCyLKNpA/exec";
       
       // Add timestamp (server will set this to Indian timezone)
       const formData = {
@@ -85,7 +84,7 @@ const Contact = () => {
         variant: "destructive",
       });
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
   };
 
