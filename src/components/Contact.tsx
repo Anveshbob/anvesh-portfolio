@@ -13,7 +13,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
-  contactNumber: z.string().optional(),
+  contactNumber: z.string().optional()
+    .refine(value => !value || /^\d+$/.test(value), {
+      message: "Contact number must contain only digits (0-9)."
+    }),
   message: z.string().min(10, { message: "Message must be at least 10 characters." }),
 });
 
@@ -223,10 +226,20 @@ const Contact = () => {
                       <FormItem>
                         <FormLabel className="text-white">Contact Number (optional)</FormLabel>
                         <FormControl>
-                          <Input placeholder="Your phone number" {...field} className="bg-netflix-dark border-netflix-card" />
+                          <Input 
+                            placeholder="Your phone number" 
+                            {...field} 
+                            className="bg-netflix-dark border-netflix-card"
+                            onKeyPress={(e) => {
+                              // Allow only digits
+                              if (!/\d/.test(e.key)) {
+                                e.preventDefault();
+                              }
+                            }}
+                          />
                         </FormControl>
                         <FormDescription className="text-netflix-muted">
-                          This field is optional
+                          This field is optional (numbers only)
                         </FormDescription>
                         <FormMessage />
                       </FormItem>
