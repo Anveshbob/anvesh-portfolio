@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { Mail, MapPin, Linkedin, Github, Instagram, Send } from 'lucide-react';
+import { Mail, MapPin, Linkedin, Github, Instagram, Send, Phone } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -107,6 +106,19 @@ const Contact = () => {
                       className="text-white hover:text-netflix-red transition-colors duration-300"
                     >
                       seelianvesh@gmail.com
+                    </a>
+                  </div>
+                </div>
+                
+                <div className="flex items-start">
+                  <Phone className="text-netflix-red mt-1 w-5 h-5 mr-3 flex-shrink-0" />
+                  <div>
+                    <p className="text-netflix-muted mb-1">Phone</p>
+                    <a 
+                      href="tel:+918143130661" 
+                      className="text-white hover:text-netflix-red transition-colors duration-300"
+                    >
+                      +91 8143130661
                     </a>
                   </div>
                 </div>

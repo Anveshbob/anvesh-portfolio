@@ -25,6 +25,7 @@ const Footer = () => {
           </div>
           
           <p className="text-netflix-muted mb-2">seelianvesh@gmail.com</p>
+          <p className="text-netflix-muted mb-2">+91 8143130661</p>
           <p className="text-netflix-muted text-sm">
             &copy; {new Date().getFullYear()} Anvesh Seeli. All rights reserved.
           </p>
