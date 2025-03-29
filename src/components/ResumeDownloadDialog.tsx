@@ -11,7 +11,8 @@ import {
   DialogHeader, 
   DialogTitle, 
   DialogDescription,
-  DialogClose
+  DialogClose,
+  DialogFooter
 } from "@/components/ui/dialog";
 import {
   Form,
@@ -28,13 +29,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 // Form schema
 const formSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  email: z.string().email({ message: "Please enter a valid email address." }),
+  name: z.string().min(2, { message: "Name must be at least 2 characters." }).optional(),
+  email: z.string().email({ message: "Please enter a valid email address." }).optional(),
   contactNumber: z.string().optional()
     .refine(value => !value || /^\d+$/.test(value), {
       message: "Contact number must contain only digits (0-9)."
     }),
-  message: z.string().min(10, { message: "Message must be at least 10 characters." }),
+  message: z.string().optional(),
   interest: z.string().default("Resume Download")
 });
 
@@ -87,7 +88,7 @@ const ResumeDownloadDialog = ({ open, onOpenChange }: ResumeDownloadDialogProps)
       
       // Since no-cors mode doesn't allow reading the response, we assume success
       toast({
-        title: "Thank you for your interest!",
+        title: "Thank you for sharing your details!",
         description: "Your resume is downloading now.",
         variant: "default",
       });
@@ -99,12 +100,7 @@ const ResumeDownloadDialog = ({ open, onOpenChange }: ResumeDownloadDialogProps)
       onOpenChange(false);
       
       // Trigger the resume download
-      const link = document.createElement('a');
-      link.href = '/Anvesh_Seeli_Resume.pdf';
-      link.download = 'Anvesh_Seeli_Resume.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      downloadResume();
       
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -118,13 +114,34 @@ const ResumeDownloadDialog = ({ open, onOpenChange }: ResumeDownloadDialogProps)
     }
   };
 
+  // Function to download resume
+  const downloadResume = () => {
+    const link = document.createElement('a');
+    link.href = '/Anvesh_Seeli_Resume.pdf';
+    link.download = 'Anvesh_Seeli_Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  // Function to handle direct download without form submission
+  const handleDirectDownload = () => {
+    toast({
+      title: "Resume Download Started",
+      description: "Thank you for your interest in my profile.",
+      variant: "default",
+    });
+    downloadResume();
+    onOpenChange(false);
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[500px] bg-netflix-card text-white border-netflix-dark">
         <DialogHeader>
           <DialogTitle className="text-2xl">Download Resume</DialogTitle>
           <DialogDescription className="text-netflix-muted">
-            I'm glad you're interested! Please share your details to download the resume.
+            I'm glad you're interested! Sharing your details helps me connect with you, but it's completely optional. You can download the resume directly or fill in the form below.
           </DialogDescription>
         </DialogHeader>
         
@@ -203,31 +220,43 @@ const ResumeDownloadDialog = ({ open, onOpenChange }: ResumeDownloadDialogProps)
               )}
             />
             
-            <div className="flex justify-end space-x-4 pt-4">
-              <DialogClose asChild>
-                <Button type="button" variant="outline" className="bg-netflix-dark border-netflix-card hover:bg-netflix-card text-white">
-                  Cancel
-                </Button>
-              </DialogClose>
-              
+            <DialogFooter className="flex justify-between sm:justify-between pt-4 gap-2">
               <Button 
-                type="submit" 
-                className="bg-netflix-red hover:bg-[#F40612] text-white"
-                disabled={isSubmitting}
+                type="button" 
+                variant="outline" 
+                className="bg-netflix-dark border-netflix-card hover:bg-netflix-card text-white"
+                onClick={handleDirectDownload}
               >
-                {isSubmitting ? (
-                  <div className="flex items-center gap-2">
-                    <div className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></div>
-                    Sending...
-                  </div>
-                ) : (
-                  <div className="flex items-center gap-2">
-                    <Download className="h-4 w-4" />
-                    Download Resume
-                  </div>
-                )}
+                <Download className="h-4 w-4 mr-2" />
+                Download Directly
               </Button>
-            </div>
+              
+              <div className="flex gap-2">
+                <DialogClose asChild>
+                  <Button type="button" variant="outline" className="bg-netflix-dark border-netflix-card hover:bg-netflix-card text-white">
+                    Cancel
+                  </Button>
+                </DialogClose>
+                
+                <Button 
+                  type="submit" 
+                  className="bg-netflix-red hover:bg-[#F40612] text-white"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <div className="flex items-center gap-2">
+                      <div className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></div>
+                      Sending...
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-2">
+                      <Send className="h-4 w-4" />
+                      Submit & Download
+                    </div>
+                  )}
+                </Button>
+              </div>
+            </DialogFooter>
           </form>
         </Form>
       </DialogContent>
