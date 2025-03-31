@@ -7,31 +7,36 @@ const testimonials = [
     id: 1,
     quote: "Anvesh's strategic approach to digital marketing transformed our customer acquisition efforts. His data-driven campaigns delivered measurable results that significantly impacted our business.",
     name: "Marketing Director",
-    company: "Jubilant Foodworks Ltd"
+    company: "Jubilant Foodworks Ltd",
+    designation: "Marketing Director at Jubilant Foodworks Ltd"
   },
   {
     id: 2,
     quote: "As a product leader, Anvesh demonstrated exceptional vision and execution. His ability to align product development with business goals is remarkable.",
     name: "Chief Product Officer",
-    company: "Brane Enterprises Pvt Ltd"
+    company: "Brane Enterprises Pvt Ltd",
+    designation: "Chief Product Officer at Brane Enterprises Pvt Ltd"
   },
   {
     id: 3,
     quote: "Anvesh's innovative marketing strategies generated substantial leads while reducing costs. His analytical approach to campaign optimization was invaluable.",
     name: "Co-Founder",
-    company: "Influencer Marketing Agency"
+    company: "Influencer Marketing Agency",
+    designation: "Co-Founder at Influencer Marketing Agency"
   },
   {
     id: 4,
     quote: "Working with Anvesh was transformative for our sales operations. His customer acquisition strategies and process improvements drove significant growth.",
     name: "Sales Director",
-    company: "Simply Grow Technologies Pvt Ltd"
+    company: "Simply Grow Technologies Pvt Ltd",
+    designation: "Sales Director at Simply Grow Technologies Pvt Ltd"
   },
   {
     id: 5,
     quote: "Anvesh's leadership as School Pupil Leader showcased his exceptional organizational skills and ability to inspire teams.",
     name: "Former Faculty Advisor",
-    company: "DAV Public School"
+    company: "DAV Public School",
+    designation: "Former Faculty Advisor at DAV Public School"
   }
 ];
 
@@ -91,18 +96,17 @@ const Testimonials = () => {
                   className="w-full px-4"
                   style={{ flex: `0 0 ${100 / testimonials.length}%` }}
                 >
-                  <div className="netflix-card p-8 h-full flex flex-col">
+                  <div className="netflix-card p-8 h-full flex flex-col hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all duration-300">
                     <div className="relative mb-8">
-                      <div className="absolute -top-4 -left-2 text-netflix-red text-6xl font-serif">"</div>
-                      <p className="text-lg text-netflix-muted relative z-10">
+                      <div className="absolute -top-4 -left-2 text-netflix-red text-6xl font-serif opacity-20">"</div>
+                      <p className="text-lg text-netflix-text relative z-10">
                         {testimonial.quote}
                       </p>
-                      <div className="absolute -bottom-8 -right-2 text-netflix-red text-6xl font-serif">"</div>
+                      <div className="absolute -bottom-8 -right-2 text-netflix-red text-6xl font-serif opacity-20">"</div>
                     </div>
                     
                     <div className="mt-auto">
-                      <p className="text-white font-semibold">{testimonial.name}</p>
-                      <p className="text-netflix-muted text-sm">{testimonial.company}</p>
+                      <p className="text-netflix-text font-semibold">{testimonial.designation}</p>
                     </div>
                   </div>
                 </div>
@@ -111,14 +115,14 @@ const Testimonials = () => {
           </div>
           
           <button
-            className="absolute top-1/2 -left-4 -translate-y-1/2 w-12 h-12 rounded-full bg-netflix-card flex items-center justify-center text-white hover:bg-netflix-red transition-colors duration-300 shadow-lg"
+            className="absolute top-1/2 -left-4 -translate-y-1/2 w-12 h-12 rounded-full bg-netflix-card flex items-center justify-center text-netflix-text hover:bg-netflix-red hover:text-white transition-colors duration-300 shadow-lg"
             onClick={handlePrev}
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
           
           <button
-            className="absolute top-1/2 -right-4 -translate-y-1/2 w-12 h-12 rounded-full bg-netflix-card flex items-center justify-center text-white hover:bg-netflix-red transition-colors duration-300 shadow-lg"
+            className="absolute top-1/2 -right-4 -translate-y-1/2 w-12 h-12 rounded-full bg-netflix-card flex items-center justify-center text-netflix-text hover:bg-netflix-red hover:text-white transition-colors duration-300 shadow-lg"
             onClick={handleNext}
           >
             <ChevronRight className="w-6 h-6" />
@@ -130,7 +134,7 @@ const Testimonials = () => {
                 key={index}
                 className={`w-3 h-3 rounded-full ${
                   index === activeIndex ? 'bg-netflix-red' : 'bg-netflix-card'
-                } transition-colors duration-300`}
+                } transition-colors duration-300 hover:bg-netflix-red/70`}
                 onClick={() => scrollToTestimonial(index)}
               />
             ))}

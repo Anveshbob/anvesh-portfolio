@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import ThreeBackground from './ThreeBackground';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 
 const Hero = () => {
   // State to track current secret index
@@ -95,7 +96,7 @@ const Hero = () => {
       {/* 3D Background */}
       <ThreeBackground />
       
-      <div className="absolute inset-0 bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/00103100-5b45-4d4b-af32-342649f1bda5/64774cd8-5c3a-4823-a0bb-1610d6971bd4/US-en-20230821-popsignuptwoweeks-perspective_alpha_website_large.jpg')] bg-cover bg-center opacity-10">
+      <div className="absolute inset-0 bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/00103100-5b45-4d4b-af32-342649f1bda5/64774cd8-5c3a-4823-a0bb-1610d6971bd4/US-en-20230821-popsignuptwoweeks-perspective_alpha_website_large.jpg')] bg-cover bg-center opacity-5">
       </div>
       
       <div className="container mx-auto relative z-10">
@@ -162,12 +163,28 @@ const Hero = () => {
       </div>
       
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-center">
-        <p className="text-netflix-muted mb-2 opacity-0 animate-on-mount flex items-center justify-center gap-2">
-          <span id="visitor-counter" className="text-netflix-text font-semibold">{visitorCount}</span> 
-          <span>people visited this site this week</span>
-          <span className="text-xs text-netflix-gold ml-1">(but my campaigns generate 10x that traffic)</span>
-        </p>
-        <div className="animate-bounce">
+        <HoverCard>
+          <HoverCardTrigger asChild>
+            <div className="bg-white/70 backdrop-blur-sm text-netflix-text px-4 py-2 rounded-full shadow-md border border-netflix-gold/30 animate-on-mount opacity-0 cursor-help">
+              <p className="flex items-center justify-center gap-2">
+                <span id="visitor-counter" className="text-netflix-red font-semibold counter-animate" data-target={visitorCount}>{visitorCount}</span> 
+                <span>people visited this site this week</span>
+                <span className="text-xs text-netflix-gold ml-1">(but my campaigns generate 10x that traffic)</span>
+              </p>
+            </div>
+          </HoverCardTrigger>
+          <HoverCardContent className="w-80">
+            <div className="flex justify-between space-x-4">
+              <div className="space-y-1">
+                <h4 className="text-sm font-semibold">Real-time Visitor Counter</h4>
+                <p className="text-sm">
+                  This counter updates every 5 seconds to simulate real traffic. My actual marketing campaigns typically generated 5,400+ visitors per week for target audiences.
+                </p>
+              </div>
+            </div>
+          </HoverCardContent>
+        </HoverCard>
+        <div className="animate-bounce mt-4">
           <svg className="w-6 h-6 mx-auto text-netflix-red" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
           </svg>

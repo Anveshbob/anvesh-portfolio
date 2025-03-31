@@ -1,23 +1,29 @@
 
 import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 
 interface ChartData {
   label: string;
   value: number;
   color: string;
+  details?: string;
 }
 
 interface ThreeDChartProps {
   data: ChartData[];
   title?: string;
   height?: number;
+  chartType?: 'bar' | 'pie' | 'line';
+  tooltipText?: string;
 }
 
 const ThreeDChart: React.FC<ThreeDChartProps> = ({ 
   data, 
   title = "Performance Metrics", 
-  height = 200 
+  height = 200,
+  chartType = 'bar',
+  tooltipText
 }) => {
   const chartRef = useRef<HTMLDivElement>(null);
   
@@ -58,50 +64,164 @@ const ThreeDChart: React.FC<ThreeDChartProps> = ({
     gridHelper.position.y = -0.01;
     scene.add(gridHelper);
     
-    // Create bars
+    // Create chart based on type
     const bars: THREE.Mesh[] = [];
     const maxValue = Math.max(...data.map(item => item.value));
-    const barWidth = 2;
-    const spacing = 1;
-    const startX = -(data.length * (barWidth + spacing)) / 2 + barWidth / 2;
     
-    data.forEach((item, index) => {
-      const normalizedHeight = (item.value / maxValue) * 10;
+    if (chartType === 'bar') {
+      // Create 3D bar chart
+      const barWidth = 2;
+      const spacing = 1;
+      const startX = -(data.length * (barWidth + spacing)) / 2 + barWidth / 2;
       
-      // Create bar geometry
-      const geometry = new THREE.BoxGeometry(barWidth, normalizedHeight, barWidth);
+      data.forEach((item, index) => {
+        const normalizedHeight = (item.value / maxValue) * 10;
+        
+        // Create bar geometry
+        const geometry = new THREE.BoxGeometry(barWidth, normalizedHeight, barWidth);
+        
+        // Move pivot to bottom
+        geometry.translate(0, normalizedHeight / 2, 0);
+        
+        // Create material
+        const material = new THREE.MeshPhongMaterial({
+          color: new THREE.Color(item.color),
+          transparent: true,
+          opacity: 0.9,
+          shininess: 100
+        });
+        
+        // Create mesh
+        const bar = new THREE.Mesh(geometry, material);
+        bar.position.x = startX + index * (barWidth + spacing);
+        
+        scene.add(bar);
+        bars.push(bar);
+      });
+    } else if (chartType === 'pie') {
+      // Create 3D pie chart
+      const radius = 6;
+      const depth = 1.5;
+      let startAngle = 0;
+      const totalValue = data.reduce((sum, item) => sum + item.value, 0);
       
-      // Move pivot to bottom
-      geometry.translate(0, normalizedHeight / 2, 0);
-      
-      // Create material
-      const material = new THREE.MeshPhongMaterial({
-        color: new THREE.Color(item.color),
-        transparent: true,
-        opacity: 0.9,
-        shininess: 100
+      data.forEach((item) => {
+        const angle = (item.value / totalValue) * Math.PI * 2;
+        
+        // Create pie segment
+        const shape = new THREE.Shape();
+        shape.moveTo(0, 0);
+        shape.arc(0, 0, radius, startAngle, startAngle + angle, false);
+        shape.lineTo(0, 0);
+        
+        const extrudeSettings = {
+          depth: depth,
+          bevelEnabled: true,
+          bevelSegments: 1,
+          bevelSize: 0.2,
+          bevelThickness: 0.1
+        };
+        
+        const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+        const material = new THREE.MeshPhongMaterial({
+          color: new THREE.Color(item.color),
+          transparent: true,
+          opacity: 0.9,
+          shininess: 100
+        });
+        
+        const segment = new THREE.Mesh(geometry, material);
+        segment.position.z = -depth / 2;
+        
+        scene.add(segment);
+        bars.push(segment);
+        
+        startAngle += angle;
       });
       
-      // Create mesh
-      const bar = new THREE.Mesh(geometry, material);
-      bar.position.x = startX + index * (barWidth + spacing);
+      // Adjust camera for pie chart
+      camera.position.set(0, 15, 20);
+      camera.lookAt(0, 0, 0);
+    } else if (chartType === 'line') {
+      // Create 3D line chart
+      const points = [];
+      const lineWidth = 12;
+      const spacing = lineWidth / (data.length - 1);
+      const startX = -lineWidth / 2;
       
-      scene.add(bar);
-      bars.push(bar);
-    });
+      // Create points for the line
+      for (let i = 0; i < data.length; i++) {
+        const x = startX + i * spacing;
+        const y = (data[i].value / maxValue) * 8;
+        points.push(new THREE.Vector3(x, y, 0));
+      }
+      
+      // Create the line
+      const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
+      const lineMaterial = new THREE.LineBasicMaterial({ 
+        color: 0x2563EB,
+        linewidth: 2
+      });
+      const line = new THREE.Line(lineGeometry, lineMaterial);
+      scene.add(line);
+      
+      // Create spheres at data points
+      for (let i = 0; i < data.length; i++) {
+        const sphereGeometry = new THREE.SphereGeometry(0.5, 16, 16);
+        const sphereMaterial = new THREE.MeshPhongMaterial({
+          color: new THREE.Color(data[i].color),
+          transparent: true,
+          opacity: 0.9,
+          shininess: 100
+        });
+        
+        const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+        sphere.position.copy(points[i]);
+        
+        scene.add(sphere);
+        bars.push(sphere);
+      }
+      
+      // Add bars below points for visual reference
+      for (let i = 0; i < data.length; i++) {
+        const barGeometry = new THREE.BoxGeometry(0.5, points[i].y, 0.5);
+        barGeometry.translate(0, points[i].y / 2, 0);
+        
+        const barMaterial = new THREE.MeshPhongMaterial({
+          color: new THREE.Color(data[i].color),
+          transparent: true,
+          opacity: 0.3,
+          shininess: 100
+        });
+        
+        const bar = new THREE.Mesh(barGeometry, barMaterial);
+        bar.position.x = points[i].x;
+        bar.position.z = points[i].z;
+        
+        scene.add(bar);
+        bars.push(bar);
+      }
+    }
     
     // Animation
     let frame = 0;
     const animate = () => {
       frame = requestAnimationFrame(animate);
       
-      // Rotate the chart slightly
-      bars.forEach((bar, index) => {
-        bar.rotation.y += 0.005;
-        
-        // Add a subtle floating animation
-        bar.position.y = Math.sin(Date.now() * 0.001 + index) * 0.1;
-      });
+      if (chartType === 'bar' || chartType === 'line') {
+        // Rotate bars slightly
+        bars.forEach((bar, index) => {
+          bar.rotation.y += 0.003;
+          
+          // Add a subtle floating animation
+          bar.position.y += Math.sin(Date.now() * 0.0008 + index) * 0.01;
+        });
+      } else if (chartType === 'pie') {
+        // Rotate the entire pie chart
+        bars.forEach(segment => {
+          segment.rotation.y += 0.005;
+        });
+      }
       
       renderer.render(scene, camera);
     };
@@ -129,26 +249,44 @@ const ThreeDChart: React.FC<ThreeDChartProps> = ({
       
       // Dispose of resources
       bars.forEach(bar => {
-        bar.geometry.dispose();
-        (bar.material as THREE.Material).dispose();
+        if (bar.geometry) bar.geometry.dispose();
+        if ((bar.material as THREE.Material)) (bar.material as THREE.Material).dispose();
         scene.remove(bar);
       });
     };
-  }, [data, height]);
+  }, [data, height, chartType]);
   
   return (
-    <div className="netflix-card p-4">
+    <div className="netflix-card p-4 hover:shadow-[0_5px_25px_rgba(37,99,235,0.4)] transition-all duration-300">
       {title && <h3 className="text-lg font-semibold mb-2">{title}</h3>}
-      <div ref={chartRef} style={{ height: `${height}px` }}></div>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div ref={chartRef} style={{ height: `${height}px` }} className="cursor-help" />
+          </TooltipTrigger>
+          <TooltipContent className="max-w-xs">
+            <p>{tooltipText || "Interactive 3D chart. Click and drag to rotate."}</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
       <div className="mt-4 grid grid-cols-3 gap-2">
         {data.map((item, index) => (
-          <div key={index} className="flex items-center justify-center">
-            <div 
-              className="w-3 h-3 rounded-full mr-1" 
-              style={{ backgroundColor: item.color }}
-            ></div>
-            <span className="text-sm">{item.label}</span>
-          </div>
+          <TooltipProvider key={index}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div className="flex items-center justify-center cursor-help">
+                  <div 
+                    className="w-3 h-3 rounded-full mr-1" 
+                    style={{ backgroundColor: item.color }}
+                  ></div>
+                  <span className="text-sm">{item.label}</span>
+                </div>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{item.details || `${item.label}: ${item.value}`}</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         ))}
       </div>
     </div>
