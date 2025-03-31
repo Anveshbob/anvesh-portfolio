@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState, useRef } from 'react';
+import ThreeBackground from './ThreeBackground';
 
 const Hero = () => {
   // State to track current secret index
@@ -91,19 +92,21 @@ const Hero = () => {
   
   return (
     <section id="home" className="relative min-h-screen flex items-center netflix-section pt-32 pb-20">
-      <div className="absolute inset-0 bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/00103100-5b45-4d4b-af32-342649f1bda5/64774cd8-5c3a-4823-a0bb-1610d6971bd4/US-en-20230821-popsignuptwoweeks-perspective_alpha_website_large.jpg')] bg-cover bg-center">
-        <div className="absolute inset-0 bg-netflix-background/90"></div>
+      {/* 3D Background */}
+      <ThreeBackground />
+      
+      <div className="absolute inset-0 bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/00103100-5b45-4d4b-af32-342649f1bda5/64774cd8-5c3a-4823-a0bb-1610d6971bd4/US-en-20230821-popsignuptwoweeks-perspective_alpha_website_large.jpg')] bg-cover bg-center opacity-10">
       </div>
       
       <div className="container mx-auto relative z-10">
         <div className="max-w-3xl f-pattern">
           <div className="col-span-3">
-            <div className="mb-3 inline-block px-3 py-1 border border-netflix-gold rounded-full text-sm text-netflix-gold opacity-0 animate-on-mount">
+            <div className="mb-3 inline-block px-3 py-1 border border-netflix-gold rounded-full text-sm text-netflix-gold opacity-0 animate-on-mount btn-3d">
               Welcome to my portfolio
             </div>
             
-            <h1 className="netflix-title opacity-0 animate-on-mount">
-              <span className="text-shadow">Anvesh Seeli</span>
+            <h1 className="netflix-title opacity-0 animate-on-mount text-3d">
+              <span>Anvesh Seeli</span>
             </h1>
             
             <h2 className="netflix-subtitle opacity-0 animate-on-mount">
@@ -114,21 +117,21 @@ const Hero = () => {
               Specializing in customer acquisition, retention, and <span className="highlight">ROI-driven campaigns</span>
             </p>
             
-            <div className="data-point opacity-0 animate-on-mount">
+            <div className="data-point opacity-0 animate-on-mount card-3d glassmorphism p-3 mb-4">
               <div className="data-number">42%</div>
               <span>Increase in customer acquisition</span>
             </div>
             
-            <div className="data-point opacity-0 animate-on-mount">
+            <div className="data-point opacity-0 animate-on-mount card-3d glassmorphism p-3 mb-4">
               <div className="data-number">35%</div>
               <span>Boost in traffic through CRM optimization</span>
             </div>
             
             <div className="flex flex-wrap gap-4 mt-6 opacity-0 animate-on-mount">
-              <a href="#case-studies" className="netflix-button">
+              <a href="#case-studies" className="netflix-button btn-3d">
                 Explore My Work
               </a>
-              <a href="#contact" className="border border-netflix-green text-netflix-green py-3 px-6 rounded hover:bg-netflix-green/10 transition-all duration-300">
+              <a href="#contact" className="border border-netflix-green text-netflix-green py-3 px-6 rounded hover:bg-netflix-green/10 transition-all duration-300 btn-3d">
                 Get In Touch
               </a>
             </div>
@@ -136,21 +139,21 @@ const Hero = () => {
           
           <div className="col-span-3 mt-16 opacity-0 animate-on-mount">
             <p className="text-netflix-muted">
-              <span className="font-semibold text-white">The Secret Behind My Success</span> — Click to discover
+              <span className="font-semibold text-netflix-text">The Secret Behind My Success</span> — Click to discover
             </p>
             <div 
-              className="mt-2 p-4 bg-netflix-card rounded-md cursor-pointer hover:bg-netflix-dark transition-all duration-300 group relative overflow-hidden"
+              className="mt-2 p-4 bg-netflix-card rounded-md cursor-pointer hover:bg-white transition-all duration-300 group relative overflow-hidden rotate-hover preserve-3d shadow-lg"
               onClick={toggleSecret}
             >
               {!showSecret ? (
                 <div className="lock-icon flex items-center justify-center py-4 animate-pulse">
-                  <svg className="w-8 h-8 text-netflix-red" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <svg className="w-8 h-8 text-netflix-red float-element" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
                   </svg>
                 </div>
               ) : (
                 <div className="animate-fade-in py-4">
-                  <p className="text-white">{secretPoints[secretIndex]}</p>
+                  <p className="text-netflix-text">{secretPoints[secretIndex]}</p>
                 </div>
               )}
             </div>
@@ -160,7 +163,7 @@ const Hero = () => {
       
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-center">
         <p className="text-netflix-muted mb-2 opacity-0 animate-on-mount flex items-center justify-center gap-2">
-          <span id="visitor-counter" className="text-white font-semibold">{visitorCount}</span> 
+          <span id="visitor-counter" className="text-netflix-text font-semibold">{visitorCount}</span> 
           <span>people visited this site this week</span>
           <span className="text-xs text-netflix-gold ml-1">(but my campaigns generate 10x that traffic)</span>
         </p>

@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -25,12 +26,12 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				netflix: {
-					background: '#16161F',
+					background: '#F1F0FB', // Updated to a light soft gray with slight purple tint
 					red: '#2563EB',
 					dark: '#111111',
-					card: '#1E1E26',
-					text: '#FFFFFF',
-					muted: '#8C8C8C',
+					card: '#FFFFFF', // Updated to white for better contrast
+					text: '#333333', // Updated to dark gray for better readability
+					muted: '#6B7280', // Updated to medium gray
 					green: '#10B981',
 					gold: '#F59E0B'
 				},

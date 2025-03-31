@@ -8,6 +8,7 @@ import Testimonials from '../components/Testimonials';
 import Certifications from '../components/Certifications';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
+import ThreeDChart from '../components/ThreeDChart';
 
 const Index = () => {
   // Animation for elements when they come into view
@@ -56,11 +57,45 @@ const Index = () => {
       }
     }, stepTime);
   };
+
+  // Data for 3D charts
+  const marketingPerformanceData = [
+    { label: "SEO", value: 75, color: "#2563EB" },
+    { label: "SEM", value: 85, color: "#10B981" },
+    { label: "Social", value: 92, color: "#F59E0B" },
+  ];
+  
+  const acquisitionData = [
+    { label: "2020", value: 42, color: "#2563EB" },
+    { label: "2021", value: 65, color: "#10B981" },
+    { label: "2022", value: 78, color: "#F59E0B" },
+  ];
   
   return (
     <div className="min-h-screen bg-netflix-background text-netflix-text font-inter">
       <Navbar />
       <Hero />
+      <div className="netflix-section">
+        <div className="container mx-auto">
+          <h2 className="section-heading">Performance Metrics</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="card-3d">
+              <ThreeDChart 
+                data={marketingPerformanceData} 
+                title="Channel Performance" 
+                height={300}
+              />
+            </div>
+            <div className="card-3d">
+              <ThreeDChart 
+                data={acquisitionData} 
+                title="Customer Acquisition Growth" 
+                height={300}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
       <CaseStudies />
       <Resume />
       <Certifications />
