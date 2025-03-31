@@ -96,7 +96,7 @@ const Testimonials = () => {
                   className="w-full px-4"
                   style={{ flex: `0 0 ${100 / testimonials.length}%` }}
                 >
-                  <div className="netflix-card p-8 h-full flex flex-col hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all duration-300">
+                  <div className="netflix-card p-8 h-full flex flex-col hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] transition-all duration-300">
                     <div className="relative mb-8">
                       <div className="absolute -top-4 -left-2 text-netflix-red text-6xl font-serif opacity-20">"</div>
                       <p className="text-lg text-netflix-text relative z-10">
@@ -115,14 +115,14 @@ const Testimonials = () => {
           </div>
           
           <button
-            className="absolute top-1/2 -left-4 -translate-y-1/2 w-12 h-12 rounded-full bg-netflix-card flex items-center justify-center text-netflix-text hover:bg-netflix-red hover:text-white transition-colors duration-300 shadow-lg"
+            className="absolute top-1/2 -left-4 -translate-y-1/2 w-12 h-12 rounded-full bg-netflix-card flex items-center justify-center text-netflix-text hover:bg-netflix-red hover:text-netflix-text transition-colors duration-300 shadow-lg"
             onClick={handlePrev}
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
           
           <button
-            className="absolute top-1/2 -right-4 -translate-y-1/2 w-12 h-12 rounded-full bg-netflix-card flex items-center justify-center text-netflix-text hover:bg-netflix-red hover:text-white transition-colors duration-300 shadow-lg"
+            className="absolute top-1/2 -right-4 -translate-y-1/2 w-12 h-12 rounded-full bg-netflix-card flex items-center justify-center text-netflix-text hover:bg-netflix-red hover:text-netflix-text transition-colors duration-300 shadow-lg"
             onClick={handleNext}
           >
             <ChevronRight className="w-6 h-6" />

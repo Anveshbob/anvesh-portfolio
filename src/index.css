@@ -106,11 +106,11 @@
   
   .netflix-card {
     @apply bg-netflix-card rounded-md overflow-hidden transition-all shadow-md
-    hover:shadow-[0_0_20px_rgba(37,99,235,0.3)] duration-300;
+    hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] duration-300;
   }
   
   .netflix-button {
-    @apply bg-netflix-gold hover:bg-amber-500 text-white font-semibold 
+    @apply bg-netflix-red hover:bg-netflix-red/80 text-netflix-text font-semibold 
     py-3 px-6 rounded hover:animate-button-pulse transition-all duration-300;
   }
   
@@ -161,12 +161,12 @@
   
   .text-3d {
     @apply text-netflix-red font-bold;
-    text-shadow: 1px 1px 0 #fff, 2px 2px 0 #2563EB, 3px 3px 0 #10B981;
+    text-shadow: 1px 1px 0 #2A2F3C, 2px 2px 0 #8B5CF6, 3px 3px 0 #10B981;
   }
   
   .btn-3d {
     @apply relative transition-all duration-300 transform hover:translate-y-[-3px] active:translate-y-[1px];
-    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2), 0 1px 3px rgba(37, 99, 235, 0.1);
+    box-shadow: 0 4px 6px rgba(139, 92, 246, 0.2), 0 1px 3px rgba(139, 92, 246, 0.1);
   }
   
   .rotate-hover {
@@ -179,7 +179,7 @@
   }
   
   .glassmorphism {
-    @apply bg-white/30 backdrop-blur-md rounded-xl shadow-lg border border-white/20;
+    @apply bg-white/10 backdrop-blur-md rounded-xl shadow-lg border border-white/20;
   }
   
   .perspective-container {

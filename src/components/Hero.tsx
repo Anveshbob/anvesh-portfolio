@@ -143,7 +143,7 @@ const Hero = () => {
               <span className="font-semibold text-netflix-text">The Secret Behind My Success</span> — Click to discover
             </p>
             <div 
-              className="mt-2 p-4 bg-netflix-card rounded-md cursor-pointer hover:bg-white transition-all duration-300 group relative overflow-hidden rotate-hover preserve-3d shadow-lg"
+              className="mt-2 p-4 bg-netflix-card rounded-md cursor-pointer hover:bg-netflix-card/80 transition-all duration-300 group relative overflow-hidden rotate-hover preserve-3d shadow-lg"
               onClick={toggleSecret}
             >
               {!showSecret ? (
@@ -162,10 +162,11 @@ const Hero = () => {
         </div>
       </div>
       
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-center">
+      {/* Moved visitor counter down by increasing the bottom value */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center mt-12">
         <HoverCard>
           <HoverCardTrigger asChild>
-            <div className="bg-white/70 backdrop-blur-sm text-netflix-text px-4 py-2 rounded-full shadow-md border border-netflix-gold/30 animate-on-mount opacity-0 cursor-help">
+            <div className="bg-netflix-card/70 backdrop-blur-sm text-netflix-text px-4 py-2 rounded-full shadow-md border border-netflix-gold/30 animate-on-mount opacity-0 cursor-help">
               <p className="flex items-center justify-center gap-2">
                 <span id="visitor-counter" className="text-netflix-red font-semibold counter-animate" data-target={visitorCount}>{visitorCount}</span> 
                 <span>people visited this site this week</span>
@@ -173,7 +174,7 @@ const Hero = () => {
               </p>
             </div>
           </HoverCardTrigger>
-          <HoverCardContent className="w-80">
+          <HoverCardContent className="w-80 bg-netflix-card text-netflix-text border-netflix-gold/30">
             <div className="flex justify-between space-x-4">
               <div className="space-y-1">
                 <h4 className="text-sm font-semibold">Real-time Visitor Counter</h4>
