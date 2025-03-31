@@ -1,13 +1,15 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 const Hero = () => {
   // State to track current secret index
   const [secretIndex, setSecretIndex] = useState(-1);
   const [showSecret, setShowSecret] = useState(false);
   const [secretTimer, setSecretTimer] = useState<NodeJS.Timeout | null>(null);
+  
   // Initial visitor count - will be incremented on component mount
-  const [visitorCount, setVisitorCount] = useState(539);
+  const [visitorCount, setVisitorCount] = useState(540);
+  const countIntervalRef = useRef<NodeJS.Timeout | null>(null);
   
   const secretPoints = [
     "My approach combines data-driven strategy with creative execution to deliver measurable results.",
@@ -53,6 +55,19 @@ const Hero = () => {
     }
   };
   
+  // Start visitor counter increment
+  useEffect(() => {
+    countIntervalRef.current = setInterval(() => {
+      setVisitorCount(prevCount => prevCount + 1);
+    }, 5000);
+    
+    return () => {
+      if (countIntervalRef.current) {
+        clearInterval(countIntervalRef.current);
+      }
+    };
+  }, []);
+  
   // Clear timer on unmount
   useEffect(() => {
     return () => {
@@ -72,17 +87,6 @@ const Hero = () => {
         el.classList.remove('opacity-0');
       }, 200 * index);
     });
-
-    // Increment visitor count by 1 on each mount
-    setVisitorCount(prevCount => {
-      const newCount = prevCount + 1;
-      // Update the counter element directly to ensure it's visible immediately
-      const counterElement = document.getElementById('visitor-counter');
-      if (counterElement) {
-        counterElement.textContent = newCount.toString();
-      }
-      return newCount;
-    });
   }, []);
   
   return (
@@ -92,33 +96,45 @@ const Hero = () => {
       </div>
       
       <div className="container mx-auto relative z-10">
-        <div className="max-w-3xl">
-          <div className="mb-3 inline-block px-3 py-1 border border-netflix-red rounded-full text-sm text-netflix-red opacity-0 animate-on-mount">
-            Welcome to my portfolio
+        <div className="max-w-3xl f-pattern">
+          <div className="col-span-3">
+            <div className="mb-3 inline-block px-3 py-1 border border-netflix-gold rounded-full text-sm text-netflix-gold opacity-0 animate-on-mount">
+              Welcome to my portfolio
+            </div>
+            
+            <h1 className="netflix-title opacity-0 animate-on-mount">
+              <span className="text-shadow">Anvesh Seeli</span>
+            </h1>
+            
+            <h2 className="netflix-subtitle opacity-0 animate-on-mount">
+              Results-driven Marketing Leader | <span className="highlight">4+ Years</span> in Digital & Social Media Marketing
+            </h2>
+            
+            <p className="text-lg text-netflix-muted mb-8 opacity-0 animate-on-mount leading-readable">
+              Specializing in customer acquisition, retention, and <span className="highlight">ROI-driven campaigns</span>
+            </p>
+            
+            <div className="data-point opacity-0 animate-on-mount">
+              <div className="data-number">42%</div>
+              <span>Increase in customer acquisition</span>
+            </div>
+            
+            <div className="data-point opacity-0 animate-on-mount">
+              <div className="data-number">35%</div>
+              <span>Boost in traffic through CRM optimization</span>
+            </div>
+            
+            <div className="flex flex-wrap gap-4 mt-6 opacity-0 animate-on-mount">
+              <a href="#case-studies" className="netflix-button">
+                Explore My Work
+              </a>
+              <a href="#contact" className="border border-netflix-green text-netflix-green py-3 px-6 rounded hover:bg-netflix-green/10 transition-all duration-300">
+                Get In Touch
+              </a>
+            </div>
           </div>
           
-          <h1 className="netflix-title opacity-0 animate-on-mount">
-            <span className="text-shadow">Anvesh Seeli</span>
-          </h1>
-          
-          <h2 className="netflix-subtitle opacity-0 animate-on-mount">
-            Results-driven Marketing Leader | 4+ Years in Digital & Social Media Marketing
-          </h2>
-          
-          <p className="text-lg text-netflix-muted mb-8 opacity-0 animate-on-mount">
-            Specializing in customer acquisition, retention, and ROI-driven campaigns
-          </p>
-          
-          <div className="flex flex-wrap gap-4 opacity-0 animate-on-mount">
-            <a href="#case-studies" className="netflix-button">
-              Explore My Work
-            </a>
-            <a href="#contact" className="border border-white text-white py-3 px-6 rounded hover:bg-white/10 transition-all duration-300">
-              Get In Touch
-            </a>
-          </div>
-          
-          <div className="mt-16 opacity-0 animate-on-mount">
+          <div className="col-span-3 mt-16 opacity-0 animate-on-mount">
             <p className="text-netflix-muted">
               <span className="font-semibold text-white">The Secret Behind My Success</span> — Click to discover
             </p>
@@ -143,8 +159,10 @@ const Hero = () => {
       </div>
       
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-center">
-        <p className="text-netflix-muted mb-2 opacity-0 animate-on-mount">
-          <span id="visitor-counter" className="text-white font-semibold">{visitorCount}</span> people visited this site this week
+        <p className="text-netflix-muted mb-2 opacity-0 animate-on-mount flex items-center justify-center gap-2">
+          <span id="visitor-counter" className="text-white font-semibold">{visitorCount}</span> 
+          <span>people visited this site this week</span>
+          <span className="text-xs text-netflix-gold ml-1">(but my campaigns generate 10x that traffic)</span>
         </p>
         <div className="animate-bounce">
           <svg className="w-6 h-6 mx-auto text-netflix-red" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

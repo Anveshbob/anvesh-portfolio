@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -27,11 +26,13 @@ export default {
 				foreground: 'hsl(var(--foreground))',
 				netflix: {
 					background: '#16161F',
-					red: '#E50914',
+					red: '#2563EB',
 					dark: '#111111',
 					card: '#1E1E26',
 					text: '#FFFFFF',
-					muted: '#8C8C8C'
+					muted: '#8C8C8C',
+					green: '#10B981',
+					gold: '#F59E0B'
 				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
@@ -72,13 +73,22 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				}
 			},
+			fontFamily: {
+				netflix: ['Inter', 'Helvetica Neue', 'Segoe UI', 'Roboto', 'Arial', 'sans-serif'],
+				inter: ['Inter', 'sans-serif']
+			},
+			fontSize: {
+				'heading': '32px',
+				'subheading': '24px',
+				'body': '18px',
+			},
+			lineHeight: {
+				'readable': '1.6',
+			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
-			},
-			fontFamily: {
-				netflix: ['Helvetica Neue', 'Segoe UI', 'Roboto', 'Arial', 'sans-serif']
 			},
 			keyframes: {
 				'accordion-down': {
@@ -113,6 +123,10 @@ export default {
 				'slide-down': {
 					'0%': { transform: 'translateY(-100%)', opacity: '0' },
 					'100%': { transform: 'translateY(0)', opacity: '1' }
+				},
+				'number-increment': {
+					'0%': { opacity: '0', transform: 'translateY(10px)' },
+					'100%': { opacity: '1', transform: 'translateY(0)' }
 				}
 			},
 			animation: {
@@ -123,7 +137,8 @@ export default {
 				'button-pulse': 'button-pulse 0.3s ease-in-out',
 				'gradient-x': 'gradient-x 3s ease infinite',
 				'slide-up': 'slide-up 0.5s ease-out forwards',
-				'slide-down': 'slide-down 0.5s ease-out forwards'
+				'slide-down': 'slide-down 0.5s ease-out forwards',
+				'number-increment': 'number-increment 0.3s ease-out forwards'
 			}
 		}
 	},
