@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import ThreeBackground from './ThreeBackground';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 
 const Hero = () => {
   // State to track current secret index
@@ -117,27 +116,13 @@ const Hero = () => {
                 Welcome to my portfolio
               </div>
               
-              <HoverCard>
-                <HoverCardTrigger asChild>
-                  <div className="bg-netflix-card/70 backdrop-blur-sm text-netflix-text px-4 py-2 rounded-full shadow-md border border-netflix-gold/30 animate-on-mount opacity-0 cursor-help mt-2 md:mt-0">
-                    <p className="flex items-center justify-center gap-2">
-                      <span id="visitor-counter" className="text-netflix-red font-semibold counter-animate" data-target={visitorCount}>{visitorCount}</span> 
-                      <span>people visited this site this week</span>
-                      <span className="text-xs text-netflix-gold ml-1">(but my campaigns generate 1000x that traffic)</span>
-                    </p>
-                  </div>
-                </HoverCardTrigger>
-                <HoverCardContent className="w-80 bg-netflix-card text-netflix-text border-netflix-gold/30">
-                  <div className="flex justify-between space-x-4">
-                    <div className="space-y-1">
-                      <h4 className="text-sm font-semibold">Real-time Visitor Counter</h4>
-                      <p className="text-sm">
-                        This counter updates every 5 seconds with varying increments to simulate real traffic patterns. My actual marketing campaigns typically generated 5,400+ visitors per week for target audiences.
-                      </p>
-                    </div>
-                  </div>
-                </HoverCardContent>
-              </HoverCard>
+              <div className="bg-netflix-card/70 backdrop-blur-sm text-netflix-text px-3 py-1.5 rounded-full shadow-md border border-netflix-gold/30 animate-on-mount opacity-0 mt-2 md:mt-0">
+                <p className="flex items-center justify-center gap-1.5 text-sm">
+                  <span id="visitor-counter" className="text-netflix-red font-semibold counter-animate" data-target={visitorCount}>{visitorCount}</span> 
+                  <span>people visited this site this week</span>
+                  <span className="text-xs text-netflix-gold ml-1">(but my campaigns generate 1000x that traffic)</span>
+                </p>
+              </div>
             </div>
             
             <h1 className="netflix-title opacity-0 animate-on-mount text-3d">
