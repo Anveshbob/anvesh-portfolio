@@ -57,10 +57,21 @@ const Hero = () => {
     }
   };
   
-  // Start visitor counter increment
+  // Start visitor counter increment with random values
   useEffect(() => {
+    // Array of possible increment values
+    const incrementValues = [1, 2, 3, 4];
+    let currentIncrementIndex = 0;
+    
     countIntervalRef.current = setInterval(() => {
-      setVisitorCount(prevCount => prevCount + 1);
+      // Get the current increment value from the array
+      const incrementAmount = incrementValues[currentIncrementIndex];
+      
+      // Update the visitor count by the current increment amount
+      setVisitorCount(prevCount => prevCount + incrementAmount);
+      
+      // Move to the next increment value in the array, cycling back to the start if necessary
+      currentIncrementIndex = (currentIncrementIndex + 1) % incrementValues.length;
     }, 5000);
     
     return () => {
@@ -162,8 +173,8 @@ const Hero = () => {
         </div>
       </div>
       
-      {/* Moved visitor counter down by increasing the bottom value */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center mt-12">
+      {/* Visitor counter moved further down */}
+      <div className="absolute bottom-16 left-1/2 -translate-x-1/2 text-center mt-20">
         <HoverCard>
           <HoverCardTrigger asChild>
             <div className="bg-netflix-card/70 backdrop-blur-sm text-netflix-text px-4 py-2 rounded-full shadow-md border border-netflix-gold/30 animate-on-mount opacity-0 cursor-help">
@@ -179,7 +190,7 @@ const Hero = () => {
               <div className="space-y-1">
                 <h4 className="text-sm font-semibold">Real-time Visitor Counter</h4>
                 <p className="text-sm">
-                  This counter updates every 5 seconds to simulate real traffic. My actual marketing campaigns typically generated 5,400+ visitors per week for target audiences.
+                  This counter updates every 5 seconds with varying increments to simulate real traffic patterns. My actual marketing campaigns typically generated 5,400+ visitors per week for target audiences.
                 </p>
               </div>
             </div>

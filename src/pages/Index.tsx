@@ -8,7 +8,6 @@ import Testimonials from '../components/Testimonials';
 import Certifications from '../components/Certifications';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 
 const Index = () => {
   // Animation for elements when they come into view
@@ -68,41 +67,6 @@ const Index = () => {
       <Testimonials />
       <Contact />
       <Footer />
-      
-      {/* Interactive data tooltip that follows mouse */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <HoverCard>
-          <HoverCardTrigger asChild>
-            <div className="bg-netflix-card/80 backdrop-blur-md text-netflix-text px-4 py-2 rounded-full shadow-lg border border-netflix-red/20 flex items-center gap-2 cursor-help hover:bg-netflix-card transition-all duration-300">
-              <div className="w-3 h-3 bg-netflix-red rounded-full animate-pulse"></div>
-              <span className="font-semibold">Performance Insights</span>
-            </div>
-          </HoverCardTrigger>
-          <HoverCardContent className="w-80 p-4 bg-netflix-card border-netflix-gold/30 text-netflix-text">
-            <div className="space-y-3">
-              <h4 className="text-sm font-medium">Marketing Performance Summary</h4>
-              <div className="space-y-1">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-netflix-muted">Customer Acquisition</span>
-                  <span className="text-sm font-medium text-netflix-text">+17% YoY</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-netflix-muted">Traffic Growth</span>
-                  <span className="text-sm font-medium text-netflix-text">+35%</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-netflix-muted">Digital Orders</span>
-                  <span className="text-sm font-medium text-netflix-text">65% of Total</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-netflix-muted">Outlet Expansion</span>
-                  <span className="text-sm font-medium text-netflix-text">1,600+</span>
-                </div>
-              </div>
-            </div>
-          </HoverCardContent>
-        </HoverCard>
-      </div>
     </div>
   );
 };
