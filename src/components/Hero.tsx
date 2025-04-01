@@ -173,15 +173,15 @@ const Hero = () => {
         </div>
       </div>
       
-      {/* Visitor counter moved further down */}
-      <div className="absolute bottom-16 left-1/2 -translate-x-1/2 text-center mt-20">
+      {/* Visitor counter moved much lower to avoid overlap */}
+      <div className="absolute bottom-28 left-1/2 -translate-x-1/2 text-center z-20">
         <HoverCard>
           <HoverCardTrigger asChild>
             <div className="bg-netflix-card/70 backdrop-blur-sm text-netflix-text px-4 py-2 rounded-full shadow-md border border-netflix-gold/30 animate-on-mount opacity-0 cursor-help">
               <p className="flex items-center justify-center gap-2">
                 <span id="visitor-counter" className="text-netflix-red font-semibold counter-animate" data-target={visitorCount}>{visitorCount}</span> 
                 <span>people visited this site this week</span>
-                <span className="text-xs text-netflix-gold ml-1">(but my campaigns generate 10x that traffic)</span>
+                <span className="text-xs text-netflix-gold ml-1">(but my campaigns generate 1000x that traffic)</span>
               </p>
             </div>
           </HoverCardTrigger>

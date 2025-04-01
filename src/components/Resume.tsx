@@ -1,10 +1,17 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Download, ChevronRight, ChevronDown, TrendingUp, Database, Users, Target, Share2, Crown } from 'lucide-react';
-import ResumeDownloadDialog from './ResumeDownloadDialog';
 
 const Resume = () => {
-  const [dialogOpen, setDialogOpen] = useState(false);
+  // Direct download function
+  const downloadResume = () => {
+    const link = document.createElement('a');
+    link.href = '/Anvesh_Seeli_Resume.pdf';
+    link.download = 'Anvesh_Seeli_Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
   
   return (
     <section id="resume" className="netflix-section">
@@ -24,16 +31,11 @@ const Resume = () => {
         
         <div className="mt-12 text-center opacity-0 animate-fade-in">
           <button 
-            onClick={() => setDialogOpen(true)}
+            onClick={downloadResume}
             className="netflix-button inline-flex items-center"
           >
             <Download className="mr-2 w-5 h-5" /> Download Resume
           </button>
-          
-          <ResumeDownloadDialog 
-            open={dialogOpen}
-            onOpenChange={setDialogOpen}
-          />
         </div>
       </div>
     </section>
