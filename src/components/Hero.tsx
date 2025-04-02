@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useRef } from 'react';
 import ThreeBackground from './ThreeBackground';
 
@@ -101,57 +102,60 @@ const Hero = () => {
   }, []);
   
   return (
-    <section id="home" className="relative min-h-screen flex items-center netflix-section pt-32 pb-20">
+    <section id="home" className="relative min-h-screen flex items-center pt-32 pb-20 bg-gradient-to-b from-netflix-dark via-netflix-background to-netflix-background">
+      {/* Background overlay with subtle pattern */}
+      <div className="absolute inset-0 bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/00103100-5b45-4d4b-af32-342649f1bda5/64774cd8-5c3a-4823-a0bb-1610d6971bd4/US-en-20230821-popsignuptwoweeks-perspective_alpha_website_large.jpg')] bg-cover bg-center opacity-10">
+      </div>
+      
       {/* 3D Background */}
       <ThreeBackground />
-      
-      <div className="absolute inset-0 bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/00103100-5b45-4d4b-af32-342649f1bda5/64774cd8-5c3a-4823-a0bb-1610d6971bd4/US-en-20230821-popsignuptwoweeks-perspective_alpha_website_large.jpg')] bg-cover bg-center opacity-5">
-      </div>
       
       <div className="container mx-auto relative z-10">
         <div className="max-w-3xl f-pattern">
           <div className="col-span-3">
             <div className="flex flex-col md:flex-row items-center justify-between mb-8">
-              <div className="mb-3 inline-block px-3 py-1 border border-netflix-gold rounded-full text-sm text-netflix-gold opacity-0 animate-on-mount btn-3d">
+              <div className="mb-3 inline-block px-3 py-1 border border-netflix-green/50 rounded-md text-sm text-netflix-text bg-netflix-card/30 shadow-md opacity-0 animate-on-mount">
                 Welcome to my portfolio
               </div>
               
-              <div className="bg-netflix-card/70 backdrop-blur-sm text-netflix-text px-3 py-1.5 rounded-full shadow-md border border-netflix-gold/30 animate-on-mount opacity-0 mt-2 md:mt-0">
-                <p className="flex items-center justify-center gap-1.5 text-sm">
+              <div className="bg-netflix-card/50 backdrop-blur-sm text-netflix-text px-2.5 py-1 rounded-md shadow-md border border-netflix-card/80 animate-on-mount opacity-0 mt-2 md:mt-0">
+                <p className="flex items-center justify-center gap-1 text-xs">
                   <span id="visitor-counter" className="text-netflix-red font-semibold counter-animate" data-target={visitorCount}>{visitorCount}</span> 
                   <span>people visited this site this week</span>
-                  <span className="text-xs text-netflix-gold ml-1">(but my campaigns generate 1000x that traffic)</span>
+                  <span className="text-xs text-netflix-muted ml-1">(my campaigns generate 1000x that traffic)</span>
                 </p>
               </div>
             </div>
             
-            <h1 className="netflix-title opacity-0 animate-on-mount text-3d">
-              <span>Anvesh Seeli</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-netflix-text mb-4 opacity-0 animate-on-mount">
+              <span className="text-gradient">Anvesh Seeli</span>
             </h1>
             
-            <h2 className="netflix-subtitle opacity-0 animate-on-mount">
-              Results-driven Marketing Leader | <span className="highlight">4+ Years</span> in Digital & Social Media Marketing
+            <h2 className="text-xl md:text-2xl text-netflix-muted mb-8 opacity-0 animate-on-mount">
+              Results-driven Marketing Leader | <span className="text-netflix-red font-medium">4+ Years</span> in Digital & Social Media Marketing
             </h2>
             
             <p className="text-lg text-netflix-muted mb-8 opacity-0 animate-on-mount leading-readable">
-              Specializing in customer acquisition, retention, and <span className="highlight">ROI-driven campaigns</span>
+              Specializing in customer acquisition, retention, and <span className="text-netflix-red font-medium">ROI-driven campaigns</span>
             </p>
             
-            <div className="data-point opacity-0 animate-on-mount card-3d glassmorphism p-3 mb-4">
-              <div className="data-number">42%</div>
-              <span>Increase in customer acquisition</span>
-            </div>
-            
-            <div className="data-point opacity-0 animate-on-mount card-3d glassmorphism p-3 mb-4">
-              <div className="data-number">35%</div>
-              <span>Boost in traffic through CRM optimization</span>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+              <div className="bg-netflix-card/40 backdrop-blur-sm border border-netflix-card/80 rounded-lg p-4 shadow-lg opacity-0 animate-on-mount">
+                <div className="text-netflix-red text-2xl font-bold mb-1">42%</div>
+                <span className="text-netflix-text">Increase in customer acquisition</span>
+              </div>
+              
+              <div className="bg-netflix-card/40 backdrop-blur-sm border border-netflix-card/80 rounded-lg p-4 shadow-lg opacity-0 animate-on-mount">
+                <div className="text-netflix-red text-2xl font-bold mb-1">35%</div>
+                <span className="text-netflix-text">Boost in traffic through CRM optimization</span>
+              </div>
             </div>
             
             <div className="flex flex-wrap gap-4 mt-6 opacity-0 animate-on-mount">
-              <a href="#case-studies" className="netflix-button btn-3d">
+              <a href="#case-studies" className="bg-netflix-red hover:bg-netflix-red/80 text-netflix-text font-semibold py-2.5 px-5 rounded-md shadow-md transition-all duration-300">
                 Explore My Work
               </a>
-              <a href="#contact" className="border border-netflix-green text-netflix-green py-3 px-6 rounded hover:bg-netflix-green/10 transition-all duration-300 btn-3d">
+              <a href="#contact" className="border border-netflix-green text-netflix-green py-2.5 px-5 rounded-md hover:bg-netflix-green/10 shadow-md transition-all duration-300">
                 Get In Touch
               </a>
             </div>
@@ -162,12 +166,12 @@ const Hero = () => {
               <span className="font-semibold text-netflix-text">The Secret Behind My Success</span> — Click to discover
             </p>
             <div 
-              className="mt-2 p-4 bg-netflix-card rounded-md cursor-pointer hover:bg-netflix-card/80 transition-all duration-300 group relative overflow-hidden rotate-hover preserve-3d shadow-lg"
+              className="mt-2 p-4 bg-netflix-card/50 backdrop-blur-sm border border-netflix-card/80 rounded-md cursor-pointer hover:bg-netflix-card/70 transition-all duration-300 group relative overflow-hidden shadow-lg"
               onClick={toggleSecret}
             >
               {!showSecret ? (
                 <div className="lock-icon flex items-center justify-center py-4 animate-pulse">
-                  <svg className="w-8 h-8 text-netflix-red float-element" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <svg className="w-8 h-8 text-netflix-red" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
                   </svg>
                 </div>

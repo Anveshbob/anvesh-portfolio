@@ -4,12 +4,12 @@ import { ArrowUp } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-netflix-background/90 py-12 px-6 border-t border-netflix-card">
+    <footer className="bg-netflix-dark/90 py-12 px-6 border-t border-netflix-card/20">
       <div className="container mx-auto">
         <div className="flex justify-center mb-8">
           <button 
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="w-12 h-12 rounded-full bg-netflix-red flex items-center justify-center hover:bg-netflix-red/80 transition-colors duration-300"
+            className="w-12 h-12 rounded-full bg-netflix-red/90 flex items-center justify-center hover:bg-netflix-red transition-colors duration-300 shadow-lg"
           >
             <ArrowUp className="w-6 h-6 text-netflix-text" />
           </button>

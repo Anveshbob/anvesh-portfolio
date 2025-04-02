@@ -33,7 +33,7 @@ const Navbar = () => {
   return (
     <nav 
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-netflix-background/95 shadow-md' : 'bg-gradient-to-b from-netflix-background/90 to-transparent'
+        isScrolled ? 'bg-netflix-background/95 backdrop-blur-md shadow-md' : 'bg-gradient-to-b from-netflix-dark/90 to-transparent'
       }`}
     >
       <div className="container mx-auto px-6 py-4">
@@ -67,7 +67,7 @@ const Navbar = () => {
         {/* Mobile Navigation Menu */}
         {isOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-4 space-y-4 bg-netflix-card mt-2 rounded-md animate-slide-down">
+            <div className="px-2 pt-2 pb-4 space-y-4 bg-netflix-card mt-2 rounded-md animate-slide-down backdrop-blur-md">
               {navLinks.map((link) => (
                 <a
                   key={link.name}

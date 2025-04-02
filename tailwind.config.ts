@@ -26,14 +26,14 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				netflix: {
-					background: '#1A1F2C', // Updated to dark blue/gray background
-					red: '#8B5CF6', // Updated to vibrant purple
-					dark: '#111111',
-					card: '#2A2F3C', // Updated to slightly lighter than background
-					text: '#F1F0FB', // Updated to light off-white with slight purple tint
-					muted: '#9F9EA1', // Updated to silver gray
-					green: '#10B981', // Kept the same
-					gold: '#D6BCFA' // Updated to light purple
+					background: '#0F172A', // Deep navy blue
+					red: '#3B82F6', // Professional blue
+					dark: '#020617', // Darker blue/navy
+					card: '#1E293B', // Slate for cards
+					text: '#F8FAFC', // Clean white text
+					muted: '#94A3B8', // Subdued slate
+					green: '#10B981', // Emerald green accent
+					gold: '#CBD5E1' // Subtle highlight
 				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
