@@ -120,9 +120,9 @@ const TimelineItem = ({ years, title, company, details }: {
               <div className="flex justify-between items-center">
                 <div>
                   <h3 className="text-xl font-semibold">{title}</h3>
-                  <p className="text-netflix-muted">{company}</p>
+                  <p className="text-netflix-muted group-hover:text-white hover:text-white transition-colors duration-300">{company}</p>
                 </div>
-                <button className="text-netflix-red">
+                <button className="text-netflix-red hover:text-white transition-colors duration-300">
                   {isExpanded ? <ChevronDown className="w-5 h-5" /> : <ChevronRight className="w-5 h-5" />}
                 </button>
               </div>
@@ -131,8 +131,8 @@ const TimelineItem = ({ years, title, company, details }: {
                 <div className="mt-4 space-y-2 animate-fade-in">
                   {details.map((detail, index) => (
                     <div key={index} className="flex items-start">
-                      <div className="text-netflix-red mr-2">•</div>
-                      <p className="text-netflix-muted">{detail}</p>
+                      <div className="text-netflix-red hover:text-white transition-colors duration-300 mr-2">•</div>
+                      <p className="text-netflix-muted hover:text-white transition-colors duration-300">{detail}</p>
                     </div>
                   ))}
                 </div>

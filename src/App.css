@@ -50,3 +50,12 @@
   @apply bg-netflix-red hover:bg-netflix-red/80 text-white font-semibold 
   py-3 px-6 rounded hover:animate-button-pulse transition-all duration-300;
 }
+
+/* Timeline item hover effect */
+.netflix-card:hover .text-netflix-muted {
+  color: white;
+}
+
+.netflix-card:hover .text-netflix-red {
+  color: white;
+}
