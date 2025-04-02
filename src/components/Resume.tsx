@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Download, ChevronRight, ChevronDown, TrendingUp, Database, Users, Target, Share2, Crown } from 'lucide-react';
 
@@ -31,7 +32,7 @@ const Resume = () => {
         <div className="mt-12 text-center opacity-0 animate-fade-in">
           <button 
             onClick={downloadResume}
-            className="netflix-button inline-flex items-center"
+            className="netflix-button inline-flex items-center text-white"
           >
             <Download className="mr-2 w-5 h-5" /> Download Resume
           </button>
@@ -112,7 +113,7 @@ const TimelineItem = ({ years, title, company, details }: {
         
         <div className="md:w-3/4">
           <div 
-            className="netflix-card cursor-pointer hover:bg-netflix-dark transition-all duration-300"
+            className="netflix-card cursor-pointer hover:bg-netflix-dark hover:text-white transition-all duration-300"
             onClick={() => setIsExpanded(!isExpanded)}
           >
             <div className="p-6">
@@ -200,7 +201,7 @@ const Skills = () => {
               {category.skills.map((skill, skillIndex) => (
                 <span 
                   key={skillIndex} 
-                  className="bg-netflix-dark px-3 py-1 rounded-full text-sm hover:bg-netflix-red transition-colors duration-300"
+                  className="bg-netflix-dark px-3 py-1 rounded-full text-sm text-white hover:bg-netflix-red transition-colors duration-300"
                 >
                   {skill}
                 </span>

@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Mail, MapPin, Linkedin, Github, Instagram, Send, Phone } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
@@ -198,7 +199,7 @@ const Contact = () => {
                       <FormItem>
                         <FormLabel className="text-white">Name</FormLabel>
                         <FormControl>
-                          <Input placeholder="Your name" {...field} className="bg-netflix-dark border-netflix-card" />
+                          <Input placeholder="Your name" {...field} className="bg-netflix-dark border-netflix-card text-white placeholder:text-gray-300" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -212,7 +213,7 @@ const Contact = () => {
                       <FormItem>
                         <FormLabel className="text-white">Email</FormLabel>
                         <FormControl>
-                          <Input type="email" placeholder="your.email@example.com" {...field} className="bg-netflix-dark border-netflix-card" />
+                          <Input type="email" placeholder="your.email@example.com" {...field} className="bg-netflix-dark border-netflix-card text-white placeholder:text-gray-300" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -229,7 +230,7 @@ const Contact = () => {
                           <Input 
                             placeholder="Your phone number" 
                             {...field} 
-                            className="bg-netflix-dark border-netflix-card"
+                            className="bg-netflix-dark border-netflix-card text-white placeholder:text-gray-300"
                             onKeyPress={(e) => {
                               // Allow only digits
                               if (!/\d/.test(e.key)) {
@@ -256,7 +257,7 @@ const Contact = () => {
                           <Textarea 
                             placeholder="Write your message here..." 
                             {...field} 
-                            className="bg-netflix-dark border-netflix-card min-h-[120px]" 
+                            className="bg-netflix-dark border-netflix-card min-h-[120px] text-white placeholder:text-gray-300" 
                           />
                         </FormControl>
                         <FormMessage />

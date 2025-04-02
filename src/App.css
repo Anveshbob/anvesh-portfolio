@@ -1,5 +1,4 @@
 
-
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -47,3 +46,7 @@
   @apply bg-gradient-to-r from-netflix-dark via-netflix-red to-blue-500 bg-clip-text text-transparent;
 }
 
+.netflix-button {
+  @apply bg-netflix-red hover:bg-netflix-red/80 text-white font-semibold 
+  py-3 px-6 rounded hover:animate-button-pulse transition-all duration-300;
+}
