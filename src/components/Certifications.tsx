@@ -68,10 +68,10 @@ const CertificationCategory = ({
         {certifications.map((cert, index) => (
           <li 
             key={index} 
-            className="flex items-center gap-3 p-3 rounded-md hover:bg-netflix-dark transition-colors duration-300"
+            className="flex items-center gap-3 p-3 rounded-md hover:bg-netflix-dark hover:text-white transition-colors duration-300"
             style={{ animationDelay: `${index * 100}ms` }}
           >
-            <span className="text-netflix-red">{cert.icon}</span>
+            <span className="text-netflix-red group-hover:text-white">{cert.icon}</span>
             <span>{cert.name}</span>
           </li>
         ))}

@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -74,7 +75,7 @@ export default {
 				}
 			},
 			fontFamily: {
-				netflix: ['Samsung Sharp Sans', 'SamsungOne', 'Roboto', 'Arial', 'sans-serif'],
+				netflix: ['SamsungOne', 'SamsungSharpSans', 'Roboto', 'Arial', 'sans-serif'],
 				inter: ['SamsungOne', 'Roboto', 'sans-serif']
 			},
 			fontSize: {

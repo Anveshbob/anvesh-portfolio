@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { ChevronDown, BarChart2, Users, Target, Map } from 'lucide-react';
 
@@ -65,7 +66,7 @@ const CaseStudyCard = ({ study }: { study: typeof caseStudies[0] }) => {
         
         {!isExpanded ? (
           <button 
-            className="flex items-center text-netflix-red hover:text-white transition-colors duration-300"
+            className="flex items-center text-netflix-red hover:text-netflix-dark transition-colors duration-300"
             onClick={() => setIsExpanded(true)}
           >
             Learn More <ChevronDown className="ml-1 w-4 h-4" />
@@ -73,32 +74,32 @@ const CaseStudyCard = ({ study }: { study: typeof caseStudies[0] }) => {
         ) : (
           <div className="animate-fade-in">
             <div className="mb-4">
-              <h4 className="text-white font-semibold mb-2">Challenge</h4>
+              <h4 className="font-semibold mb-2">Challenge</h4>
               <p className="text-netflix-muted">{study.challenge}</p>
             </div>
             
             <div className="mb-4">
-              <h4 className="text-white font-semibold mb-2">Approach</h4>
+              <h4 className="font-semibold mb-2">Approach</h4>
               <p className="text-netflix-muted">{study.approach}</p>
             </div>
             
             <div className="mb-4">
-              <h4 className="text-white font-semibold mb-2">Results</h4>
+              <h4 className="font-semibold mb-2">Results</h4>
               <p className="text-netflix-red font-semibold">{study.results}</p>
             </div>
             
             <div className="mb-4">
-              <h4 className="text-white font-semibold mb-2">Tools & Technologies</h4>
+              <h4 className="font-semibold mb-2">Tools & Technologies</h4>
               <p className="text-netflix-muted">{study.tools}</p>
             </div>
             
             <div className="mb-6">
-              <h4 className="text-white font-semibold mb-2">Additional Insights</h4>
+              <h4 className="font-semibold mb-2">Additional Insights</h4>
               <p className="text-netflix-muted">{study.additional}</p>
             </div>
             
             <button 
-              className="text-netflix-red hover:text-white transition-colors duration-300"
+              className="text-netflix-red hover:text-netflix-dark transition-colors duration-300"
               onClick={() => setIsExpanded(false)}
             >
               Close
