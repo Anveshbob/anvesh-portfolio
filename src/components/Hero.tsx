@@ -102,33 +102,30 @@ const Hero = () => {
   }, []);
   
   return (
-    <section id="home" className="relative min-h-screen flex items-center pt-32 pb-20 bg-gradient-to-b from-netflix-dark via-netflix-background to-netflix-background">
+    <section id="home" className="relative min-h-screen flex items-center pt-32 pb-20 bg-white">
       {/* Background overlay with subtle pattern */}
-      <div className="absolute inset-0 bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/00103100-5b45-4d4b-af32-342649f1bda5/64774cd8-5c3a-4823-a0bb-1610d6971bd4/US-en-20230821-popsignuptwoweeks-perspective_alpha_website_large.jpg')] bg-cover bg-center opacity-10">
+      <div className="absolute inset-0 bg-[url('https://images.samsung.com/is/image/samsung/assets/us/home/062420/HP-KV-S20-Plus-Note-20-heros-1440x640.jpg')] bg-cover bg-center opacity-5">
       </div>
       
-      {/* 3D Background */}
-      <ThreeBackground />
-      
+      {/* Samsung-style content */}
       <div className="container mx-auto relative z-10">
         <div className="max-w-3xl f-pattern">
           <div className="col-span-3">
             <div className="flex flex-col md:flex-row items-center justify-between mb-8">
-              <div className="mb-3 inline-block px-3 py-1 border border-netflix-green/50 rounded-md text-sm text-netflix-text bg-netflix-card/30 shadow-md opacity-0 animate-on-mount">
+              <div className="mb-3 inline-block px-3 py-1 border border-netflix-red/30 rounded-md text-sm text-black bg-white shadow-sm opacity-0 animate-on-mount">
                 Welcome to my portfolio
               </div>
               
-              <div className="bg-netflix-card/50 backdrop-blur-sm text-netflix-text px-2.5 py-1 rounded-md shadow-md border border-netflix-card/80 animate-on-mount opacity-0 mt-2 md:mt-0">
+              <div className="bg-white text-black px-2 py-0.5 rounded shadow-sm border border-gray-200 animate-on-mount opacity-0 mt-2 md:mt-0">
                 <p className="flex items-center justify-center gap-1 text-xs">
                   <span id="visitor-counter" className="text-netflix-red font-semibold counter-animate" data-target={visitorCount}>{visitorCount}</span> 
-                  <span>people visited this site this week</span>
-                  <span className="text-xs text-netflix-muted ml-1">(my campaigns generate 1000x that traffic)</span>
+                  <span>visitors this week</span>
                 </p>
               </div>
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-netflix-text mb-4 opacity-0 animate-on-mount">
-              <span className="text-gradient">Anvesh Seeli</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-4 opacity-0 animate-on-mount">
+              <span className="bg-gradient-to-r from-netflix-dark via-netflix-red to-blue-400 bg-clip-text text-transparent">Anvesh Seeli</span>
             </h1>
             
             <h2 className="text-xl md:text-2xl text-netflix-muted mb-8 opacity-0 animate-on-mount">
@@ -140,22 +137,22 @@ const Hero = () => {
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-              <div className="bg-netflix-card/40 backdrop-blur-sm border border-netflix-card/80 rounded-lg p-4 shadow-lg opacity-0 animate-on-mount">
+              <div className="bg-netflix-card border border-gray-200 rounded-lg p-4 shadow-sm opacity-0 animate-on-mount">
                 <div className="text-netflix-red text-2xl font-bold mb-1">42%</div>
-                <span className="text-netflix-text">Increase in customer acquisition</span>
+                <span className="text-black">Increase in customer acquisition</span>
               </div>
               
-              <div className="bg-netflix-card/40 backdrop-blur-sm border border-netflix-card/80 rounded-lg p-4 shadow-lg opacity-0 animate-on-mount">
+              <div className="bg-netflix-card border border-gray-200 rounded-lg p-4 shadow-sm opacity-0 animate-on-mount">
                 <div className="text-netflix-red text-2xl font-bold mb-1">35%</div>
-                <span className="text-netflix-text">Boost in traffic through CRM optimization</span>
+                <span className="text-black">Boost in traffic through CRM optimization</span>
               </div>
             </div>
             
             <div className="flex flex-wrap gap-4 mt-6 opacity-0 animate-on-mount">
-              <a href="#case-studies" className="bg-netflix-red hover:bg-netflix-red/80 text-netflix-text font-semibold py-2.5 px-5 rounded-md shadow-md transition-all duration-300">
+              <a href="#case-studies" className="bg-netflix-red hover:bg-blue-700 text-white font-semibold py-2.5 px-5 rounded-md transition-all duration-300">
                 Explore My Work
               </a>
-              <a href="#contact" className="border border-netflix-green text-netflix-green py-2.5 px-5 rounded-md hover:bg-netflix-green/10 shadow-md transition-all duration-300">
+              <a href="#contact" className="border border-netflix-red text-netflix-red py-2.5 px-5 rounded-md hover:bg-netflix-red/5 transition-all duration-300">
                 Get In Touch
               </a>
             </div>
@@ -163,10 +160,10 @@ const Hero = () => {
           
           <div className="col-span-3 mt-16 opacity-0 animate-on-mount">
             <p className="text-netflix-muted">
-              <span className="font-semibold text-netflix-text">The Secret Behind My Success</span> — Click to discover
+              <span className="font-semibold text-black">The Secret Behind My Success</span> — Click to discover
             </p>
             <div 
-              className="mt-2 p-4 bg-netflix-card/50 backdrop-blur-sm border border-netflix-card/80 rounded-md cursor-pointer hover:bg-netflix-card/70 transition-all duration-300 group relative overflow-hidden shadow-lg"
+              className="mt-2 p-4 bg-netflix-card border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition-all duration-300 group relative overflow-hidden shadow-sm"
               onClick={toggleSecret}
             >
               {!showSecret ? (
@@ -177,7 +174,7 @@ const Hero = () => {
                 </div>
               ) : (
                 <div className="animate-fade-in py-4">
-                  <p className="text-netflix-text">{secretPoints[secretIndex]}</p>
+                  <p className="text-black">{secretPoints[secretIndex]}</p>
                 </div>
               )}
             </div>

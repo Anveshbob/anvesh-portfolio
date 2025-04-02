@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -26,14 +25,14 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				netflix: {
-					background: '#0F172A', // Deep navy blue
-					red: '#3B82F6', // Professional blue
-					dark: '#020617', // Darker blue/navy
-					card: '#1E293B', // Slate for cards
-					text: '#F8FAFC', // Clean white text
-					muted: '#94A3B8', // Subdued slate
-					green: '#10B981', // Emerald green accent
-					gold: '#CBD5E1' // Subtle highlight
+					background: '#FFFFFF', // White background like Samsung
+					dark: '#1428A0', // Samsung deep blue
+					red: '#1428A0', // Primary Samsung blue
+					card: '#F7F7F7', // Light gray for cards
+					text: '#000000', // Black text like Samsung
+					muted: '#5F6368', // Gray text for secondary content
+					green: '#189A38', // Green accent for success elements
+					gold: '#F4AB3A' // Gold accent for highlights
 				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
@@ -75,8 +74,8 @@ export default {
 				}
 			},
 			fontFamily: {
-				netflix: ['Inter', 'Helvetica Neue', 'Segoe UI', 'Roboto', 'Arial', 'sans-serif'],
-				inter: ['Inter', 'sans-serif']
+				netflix: ['Samsung Sharp Sans', 'SamsungOne', 'Roboto', 'Arial', 'sans-serif'],
+				inter: ['SamsungOne', 'Roboto', 'sans-serif']
 			},
 			fontSize: {
 				'heading': '32px',
