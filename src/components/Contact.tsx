@@ -101,7 +101,7 @@ const Contact = () => {
           <div className="opacity-0 animate-fade-in">
             <h3 className="text-2xl font-semibold mb-6">Contact Information</h3>
               
-            <div className="space-y-6 bg-slate-50">
+            <div className="space-y-6 bg-zinc-50">
                 <div className="flex items-start">
                   <Mail className="text-netflix-red mt-1 w-5 h-5 mr-3 flex-shrink-0" />
                   <div>
