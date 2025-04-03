@@ -5,13 +5,13 @@ import { ChevronDown, BarChart2, Users, Target, Map } from 'lucide-react';
 const caseStudies = [
   {
     id: 1,
-    title: "Driving App Installations for a Leading Food Tech Company",
-    introduction: "As a key member of the marketing team at a market-leading food tech company, I was tasked with increasing app installations and driving customer engagement through digital marketing strategies.",
-    challenge: "The app faced several challenges: low visibility in app stores, limited user engagement, competition from other food delivery apps, and the need for a cohesive digital marketing strategy.",
-    approach: "Developed a multi-faceted strategy including App Store Optimization (ASO), targeted campaigns across digital platforms, influencer partnerships, CRM optimization, and enhanced in-app experiences. Managed a monthly budget of 7 crores for high-performing campaigns across multiple channels.",
+    title: "Driving App Installations & Growth for a Leading QSR Company",
+    introduction: "As a key member of the marketing team at a market-leading food tech company, I was tasked with increasing app installations and driving customer engagement through digital marketing strategies. The goal was to boost the app's visibility, attract new users, and enhance the overall customer experience.",
+    challenge: "At the beginning of my tenure, the app faced several challenges: Low visibility in app stores, limited user engagement, competition from other food delivery apps, and the need for a cohesive digital marketing strategy.",
+    approach: "Developed a multi-faceted digital marketing strategy focused on App Store Optimization (ASO), targeted campaigns across multiple platforms, influencer partnerships, CRM optimization, and enhanced in-app experiences. Managed a monthly budget of 7 crores for high-performing campaigns across multiple channels.",
     results: "Achieved 42% increase in app installations, 35% boost in user engagement, 17% year-over-year growth in customer acquisition, and 8% uplift in incremental revenue confirmed by marketing incrementality tests.",
     tools: "Utilized tools like Singular and Google Analytics to measure campaign performance and optimize strategies in real-time.",
-    additional: "Conducted A/B testing on app features and landing pages to identify high-converting elements. Partnered with 15+ influencers to create authentic content that resonated with their audiences.",
+    additional: "Partnered with 20,000+ influencers to create authentic content and conducted A/B testing on app features and landing pages to identify high-converting elements.",
     icon: <BarChart2 className="w-8 h-8 text-netflix-red" />
   },
   {
