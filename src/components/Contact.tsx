@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Mail, MapPin, Linkedin, Github, Instagram, Send, Phone } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
@@ -101,12 +102,12 @@ const Contact = () => {
           <div className="opacity-0 animate-fade-in">
             <h3 className="text-2xl font-semibold mb-6">Contact Information</h3>
               
-            <div className="space-y-6 bg-zinc-50">
+            <div className="space-y-6 bg-zinc-50 p-6 rounded-lg shadow-md">
                 <div className="flex items-start">
                   <Mail className="text-netflix-red mt-1 w-5 h-5 mr-3 flex-shrink-0" />
                   <div>
-                    <p className="text-netflix-muted mb-1">Email</p>
-                    <a href="mailto:seelianvesh@gmail.com" className="text-blue hover:text-netflix-red transition-colors duration-300">
+                    <p className="text-netflix-red font-semibold mb-1">Email</p>
+                    <a href="mailto:seelianvesh@gmail.com" className="text-blue-700 hover:text-netflix-red transition-colors duration-300 font-medium">
                       seelianvesh@gmail.com
                     </a>
                   </div>
@@ -115,8 +116,8 @@ const Contact = () => {
                 <div className="flex items-start">
                   <Phone className="text-netflix-red mt-1 w-5 h-5 mr-3 flex-shrink-0" />
                   <div>
-                    <p className="text-netflix-muted mb-1">Phone</p>
-                    <a href="tel:+918143130661" className="text-blue hover:text-netflix-red transition-colors duration-300">
+                    <p className="text-netflix-red font-semibold mb-1">Phone</p>
+                    <a href="tel:+918143130661" className="text-blue-700 hover:text-netflix-red transition-colors duration-300 font-medium">
                       +91 8143130661
                     </a>
                   </div>
@@ -125,13 +126,13 @@ const Contact = () => {
                 <div className="flex items-start">
                   <MapPin className="text-netflix-red mt-1 w-5 h-5 mr-3 flex-shrink-0" />
                   <div>
-                    <p className="text-netflix-muted mb-1">Location</p>
-                    <p className="text-blue">Hyderabad, India</p>
+                    <p className="text-netflix-red font-semibold mb-1">Location</p>
+                    <p className="text-blue-700 font-medium">Hyderabad, India</p>
                   </div>
                 </div>
                 
                 <div className="pt-6">
-                  <p className="text-netflix-muted mb-4">Connect on Social Media</p>
+                  <p className="text-netflix-red font-semibold mb-4">Connect on Social Media</p>
                   <div className="flex space-x-4">
                     <a href="https://www.linkedin.com/in/anvesh-seeli/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-netflix-dark flex items-center justify-center hover:bg-netflix-red transition-colors duration-300">
                       <Linkedin className="w-5 h-5 text-white" />
@@ -146,7 +147,7 @@ const Contact = () => {
                 </div>
                 
                 <div className="pt-6">
-                  <p className="text-netflix-muted mb-4">Location</p>
+                  <p className="text-netflix-red font-semibold mb-4">Location</p>
                   <div className="relative h-[240px] rounded-md overflow-hidden">
                     <iframe src="https://maps.google.com/maps?q=hyderabad,india&t=&z=13&ie=UTF8&iwloc=&output=embed" className="w-full h-full border-0" allowFullScreen loading="lazy" title="Hyderabad Map" referrerPolicy="no-referrer-when-downgrade"></iframe>
                   </div>

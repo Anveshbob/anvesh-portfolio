@@ -8,8 +8,8 @@ const Hero = () => {
   const [showSecret, setShowSecret] = useState(false);
   const [secretTimer, setSecretTimer] = useState<NodeJS.Timeout | null>(null);
   
-  // Initial visitor count - will be incremented on component mount
-  const [visitorCount, setVisitorCount] = useState(540);
+  // Visitor count state
+  const [visitorCount, setVisitorCount] = useState(0);
   const countIntervalRef = useRef<NodeJS.Timeout | null>(null);
   
   const secretPoints = [
@@ -56,21 +56,50 @@ const Hero = () => {
     }
   };
   
-  // Start visitor counter increment with random values
+  // Initialize and update visitor counter
   useEffect(() => {
-    // Array of possible increment values
-    const incrementValues = [1, 2, 3, 4];
-    let currentIncrementIndex = 0;
+    // Check if it's a new week (Monday) to reset counter
+    const checkIfNewWeek = () => {
+      const now = new Date();
+      const dayOfWeek = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
+      const lastVisit = localStorage.getItem('lastVisitTime');
+      let storedCount = localStorage.getItem('visitorCount');
+      
+      // If it's Monday and either no last visit or last visit was before today
+      if (dayOfWeek === 1) {
+        const today = new Date().setHours(0, 0, 0, 0);
+        
+        if (!lastVisit || new Date(parseInt(lastVisit)).setHours(0, 0, 0, 0) < today) {
+          // Reset to base count
+          storedCount = '540';
+          localStorage.setItem('visitorCount', storedCount);
+        }
+      }
+      
+      // Update last visit time
+      localStorage.setItem('lastVisitTime', Date.now().toString());
+      
+      return storedCount ? parseInt(storedCount) : 540;
+    };
+    
+    // Get or initialize the visitor count
+    const initialCount = checkIfNewWeek();
+    setVisitorCount(initialCount);
+    
+    // Setup interval for incrementing
+    const incrementValues = [1, 2, 3, 4, 5];
     
     countIntervalRef.current = setInterval(() => {
-      // Get the current increment value from the array
-      const incrementAmount = incrementValues[currentIncrementIndex];
+      // Get random increment value
+      const randomIndex = Math.floor(Math.random() * incrementValues.length);
+      const incrementAmount = incrementValues[randomIndex];
       
-      // Update the visitor count by the current increment amount
-      setVisitorCount(prevCount => prevCount + incrementAmount);
-      
-      // Move to the next increment value in the array, cycling back to the start if necessary
-      currentIncrementIndex = (currentIncrementIndex + 1) % incrementValues.length;
+      // Update count
+      setVisitorCount(prevCount => {
+        const newCount = prevCount + incrementAmount;
+        localStorage.setItem('visitorCount', newCount.toString());
+        return newCount;
+      });
     }, 5000);
     
     return () => {
