@@ -5,13 +5,13 @@ import { ChevronDown, BarChart2, Users, Target, Map } from 'lucide-react';
 const caseStudies = [
   {
     id: 1,
-    title: "Driving Sustainable Customer Growth for Market-Leading QSR Brand",
-    introduction: "As Deputy Manager of Marketing at Jubilant Foodworks, I spearheaded customer acquisition initiatives across multiple channels.",
-    challenge: "The quick-service restaurant market required sustainable customer growth strategies that balanced acquisition costs with measurable ROI.",
-    approach: "Developed and executed comprehensive performance marketing campaigns across social media, Facebook, UAC, YouTube, SEM, influencer marketing, affiliate programs, and brand partnerships. Implemented rigorous testing protocols including five marketing incrementality tests to optimize budget allocation.",
-    results: "Achieved 17% year-over-year customer acquisition growth while managing a monthly budget of ₹7 crores. These strategies resulted in an 8% uplift in incremental revenue and a ₹2 crore+ increase in average monthly spend.",
-    tools: "Leveraged Singular, Google Analytics, Google Ads, and Facebook Ads Manager for campaign measurement and optimization.",
-    additional: "Presented findings to 30+ cross-functional stakeholders weekly and quarterly, aligning marketing efforts with overall business objectives.",
+    title: "Driving App Installations for a Leading Food Tech Company",
+    introduction: "As a key member of the marketing team at a market-leading food tech company, I was tasked with increasing app installations and driving customer engagement through digital marketing strategies.",
+    challenge: "The app faced several challenges: low visibility in app stores, limited user engagement, competition from other food delivery apps, and the need for a cohesive digital marketing strategy.",
+    approach: "Developed a multi-faceted strategy including App Store Optimization (ASO), targeted campaigns across digital platforms, influencer partnerships, CRM optimization, and enhanced in-app experiences. Managed a monthly budget of 7 crores for high-performing campaigns across multiple channels.",
+    results: "Achieved 42% increase in app installations, 35% boost in user engagement, 17% year-over-year growth in customer acquisition, and 8% uplift in incremental revenue confirmed by marketing incrementality tests.",
+    tools: "Utilized tools like Singular and Google Analytics to measure campaign performance and optimize strategies in real-time.",
+    additional: "Conducted A/B testing on app features and landing pages to identify high-converting elements. Partnered with 15+ influencers to create authentic content that resonated with their audiences.",
     icon: <BarChart2 className="w-8 h-8 text-netflix-red" />
   },
   {
