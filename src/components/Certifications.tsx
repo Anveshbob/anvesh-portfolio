@@ -16,6 +16,7 @@ const Certifications = () => {
             title="Technical Certifications"
             icon={<Database className="w-8 h-8 text-netflix-red" />}
             certifications={[
+              { name: "Google Ads Apps Certification", icon: <CheckCircle className="w-5 h-5" /> },
               { name: "AI-Powered Performance Ads Certification", icon: <TrendingUp className="w-5 h-5" /> },
               { name: "Google Ads - Measurement Certification", icon: <Target className="w-5 h-5" /> },
               { name: "Advanced Google Analytics Implementation", icon: <CheckCircle className="w-5 h-5" /> },
