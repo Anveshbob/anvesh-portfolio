@@ -2,8 +2,20 @@
 import React from 'react';
 import { Search, Users, Key } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
+import ThreeDChart from './ThreeDChart';
 
 const MarketingPlayground = () => {
+  // Data for the charts
+  const searchAppearancesData = [
+    { label: "Naukri Format", value: 3227, color: "#9b87f5", details: "Account A: Naukri's suggested format" },
+    { label: "My Format", value: 2954, color: "#33C3F0", details: "Account B: My original format" }
+  ];
+  
+  const recruiterActionsData = [
+    { label: "Naukri Format", value: 74, color: "#9b87f5", details: "Account A: Naukri's suggested format" },
+    { label: "My Format", value: 47, color: "#33C3F0", details: "Account B: My original format" }
+  ];
+
   return (
     <section id="marketing-playground" className="netflix-section">
       <div className="container mx-auto">
@@ -56,26 +68,25 @@ const MarketingPlayground = () => {
             
             <p className="mb-4">Here's what I found over 90 days:</p>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-              <div className="bg-netflix-card p-6 rounded-lg shadow-sm border border-gray-200">
-                <div className="flex items-center mb-3">
-                  <Search className="w-6 h-6 text-netflix-red mr-2" />
-                  <h3 className="text-lg font-semibold">Search Appearances</h3>
-                </div>
-                <p>Account A (Naukri Format): <span className="text-netflix-red font-bold">3227</span></p>
-                <p>Account B (My Format): <span className="text-netflix-red font-bold">2954</span></p>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <ThreeDChart 
+                data={searchAppearancesData}
+                title="Search Appearances Comparison"
+                height={200}
+                chartType="bar"
+                tooltipText="Comparison of search appearances between the two resume formats"
+              />
               
-              <div className="bg-netflix-card p-6 rounded-lg shadow-sm border border-gray-200">
-                <div className="flex items-center mb-3">
-                  <Users className="w-6 h-6 text-netflix-red mr-2" />
-                  <h3 className="text-lg font-semibold">Recruiter Actions</h3>
-                </div>
-                <p>Account A (Naukri Format): <span className="text-netflix-red font-bold">74</span></p>
-                <p>Account B (My Format): <span className="text-netflix-red font-bold">47</span></p>
-              </div>
-              
-              <div className="bg-netflix-card p-6 rounded-lg shadow-sm border border-gray-200">
+              <ThreeDChart 
+                data={recruiterActionsData}
+                title="Recruiter Actions Comparison"
+                height={200}
+                chartType="bar"
+                tooltipText="Comparison of recruiter actions between the two resume formats"
+              />
+            </div>
+            
+            <div className="bg-netflix-card p-6 rounded-lg shadow-sm border border-gray-200 mb-6">
                 <div className="flex items-center mb-3">
                   <Key className="w-6 h-6 text-netflix-red mr-2" />
                   <h3 className="text-lg font-semibold">Top Keywords</h3>
@@ -85,7 +96,6 @@ const MarketingPlayground = () => {
                   <p><strong>Account B:</strong> Digital Marketing (10), Business Development (5), Marketing (5), Performance Marketing (5), Sales (4)</p>
                 </div>
               </div>
-            </div>
             
             <div className="bg-netflix-dark/5 p-4 rounded-md">
               <p className="mb-2"><strong>My Takeaway:</strong> It seems the resume format isn't just about aesthetics! 
