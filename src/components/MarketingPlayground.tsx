@@ -1,0 +1,104 @@
+
+import React from 'react';
+import { Search, Users, Key } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
+
+const MarketingPlayground = () => {
+  return (
+    <section id="marketing-playground" className="netflix-section">
+      <div className="container mx-auto">
+        <h2 className="section-heading">Marketing Playground</h2>
+        
+        <div className="mb-12 max-w-3xl mx-auto">
+          <p className="section-subheading opacity-0 animate-fade-in">
+            Welcome to my little corner of the web where we ditch the jargon and dive into the fun side of marketing!
+          </p>
+          
+          <p className="mb-4 opacity-0 animate-fade-in">
+            Think of this as a peek behind the curtain, where I share real-life marketing experiments, A/B tests with (sometimes unexpected!) results, 
+            and explorations into the fascinating world of consumer psychology. It's all about testing hypotheses, uncovering insights, 
+            and maybe even debunking a few myths along the way.
+          </p>
+          
+          <p className="mb-4 opacity-0 animate-fade-in">
+            Consider this your invitation to see marketing in action, raw and unfiltered. What you find here might just change how you think about 
+            engagement, conversions, and what truly makes people tick.
+          </p>
+          
+          <p className="mb-6 opacity-0 animate-fade-in">
+            This space is constantly evolving, with new experiments and findings being added over time. So, buckle up and get ready to have 
+            some fun with marketing!
+          </p>
+          
+          <p className="text-netflix-red font-semibold mb-10 opacity-0 animate-fade-in">
+            <strong>Intrigued? More experiments and insights are brewing... Stay tuned!</strong>
+          </p>
+        </div>
+        
+        {/* Naukri Experiment Card */}
+        <Card className="netflix-card max-w-4xl mx-auto mb-12 opacity-0 animate-fade-in hover-scale">
+          <CardHeader>
+            <CardTitle className="text-2xl text-netflix-dark">
+              Naukri Resume Format Experiment: Does it Really Matter?
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="mb-4">
+              Ever wondered if the format of your resume on job portals actually makes a difference? I did too! 
+              So, I ran a little experiment on Naukri, creating two identical profiles with the exact same text 
+              but using different resume formats:
+            </p>
+            
+            <ul className="list-disc pl-6 mb-4">
+              <li className="mb-2"><strong>Account A:</strong> Used Naukri's own suggested resume format.</li>
+              <li className="mb-2"><strong>Account B:</strong> Used my original resume format.</li>
+            </ul>
+            
+            <p className="mb-4">Here's what I found over 90 days:</p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+              <div className="bg-netflix-card p-6 rounded-lg shadow-sm border border-gray-200">
+                <div className="flex items-center mb-3">
+                  <Search className="w-6 h-6 text-netflix-red mr-2" />
+                  <h3 className="text-lg font-semibold">Search Appearances</h3>
+                </div>
+                <p>Account A (Naukri Format): <span className="text-netflix-red font-bold">3227</span></p>
+                <p>Account B (My Format): <span className="text-netflix-red font-bold">2954</span></p>
+              </div>
+              
+              <div className="bg-netflix-card p-6 rounded-lg shadow-sm border border-gray-200">
+                <div className="flex items-center mb-3">
+                  <Users className="w-6 h-6 text-netflix-red mr-2" />
+                  <h3 className="text-lg font-semibold">Recruiter Actions</h3>
+                </div>
+                <p>Account A (Naukri Format): <span className="text-netflix-red font-bold">74</span></p>
+                <p>Account B (My Format): <span className="text-netflix-red font-bold">47</span></p>
+              </div>
+              
+              <div className="bg-netflix-card p-6 rounded-lg shadow-sm border border-gray-200">
+                <div className="flex items-center mb-3">
+                  <Key className="w-6 h-6 text-netflix-red mr-2" />
+                  <h3 className="text-lg font-semibold">Top Keywords</h3>
+                </div>
+                <div className="text-sm">
+                  <p className="mb-2"><strong>Account A:</strong> Digital Marketing (12), Sales (10), Marketing (7), Lead Generation (6), Performance Marketing (6)</p>
+                  <p><strong>Account B:</strong> Digital Marketing (10), Business Development (5), Marketing (5), Performance Marketing (5), Sales (4)</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-netflix-dark/5 p-4 rounded-md">
+              <p className="mb-2"><strong>My Takeaway:</strong> It seems the resume format isn't just about aesthetics! 
+              The numbers suggest that Naukri's algorithm might indeed favor profiles using their own suggested format, 
+              even when the content is identical.</p>
+              
+              <p className="italic">What do you think? Have you experienced similar results on Naukri or other job portals?</p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </section>
+  );
+};
+
+export default MarketingPlayground;
