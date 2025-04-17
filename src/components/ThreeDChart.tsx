@@ -1,6 +1,10 @@
+
 import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
+// Add imports for FontLoader and TextGeometry
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 
 interface ChartData {
   label: string;
@@ -74,72 +78,65 @@ const ThreeDChart: React.FC<ThreeDChartProps> = ({
       const spacing = 1;
       const startX = -(data.length * (barWidth + spacing)) / 2 + barWidth / 2;
       
-      const loader = new THREE.FontLoader();
-      loader.load('/path/to/helvetiker_regular.typeface.json', (font) => {
-        data.forEach((item, index) => {
-          const normalizedHeight = (item.value / maxValue) * 10;
-          
-          // Create bar geometry
-          const geometry = new THREE.BoxGeometry(barWidth, normalizedHeight, barWidth);
-          geometry.translate(0, normalizedHeight / 2, 0);
-          
-          // Create material
-          const material = new THREE.MeshPhongMaterial({
-            color: new THREE.Color(item.color),
-            transparent: true,
-            opacity: 0.9,
-            shininess: 100
-          });
-          
-          // Create mesh
-          const bar = new THREE.Mesh(geometry, material);
-          bar.position.x = startX + index * (barWidth + spacing);
-          
-          scene.add(bar);
-          bars.push(bar);
-          
-          // Create text label
-          const textGeometry = new THREE.TextGeometry(item.value.toString(), {
-            font: font,
-            size: 0.5,
-            height: 0.1,
-          });
-          
-          const textMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
-          const textMesh = new THREE.Mesh(textGeometry, textMaterial);
-          
-          // Position text above the bar
-          textMesh.position.set(
-            bar.position.x - 0.5, // Slightly offset to center
-            normalizedHeight + 0.5, 
-            bar.position.z
-          );
-          textMesh.rotation.x = -Math.PI / 2; // Rotate to face up
-          
-          scene.add(textMesh);
-          labels.push(textMesh);
+      // Add values directly instead of using text geometry
+      data.forEach((item, index) => {
+        const normalizedHeight = (item.value / maxValue) * 10;
+        
+        // Create bar geometry
+        const geometry = new THREE.BoxGeometry(barWidth, normalizedHeight, barWidth);
+        geometry.translate(0, normalizedHeight / 2, 0);
+        
+        // Create material
+        const material = new THREE.MeshPhongMaterial({
+          color: new THREE.Color(item.color),
+          transparent: true,
+          opacity: 0.9,
+          shininess: 100
         });
         
-        // Modify animation to include labels
-        let frame = 0;
-        const animate = () => {
-          frame = requestAnimationFrame(animate);
+        // Create mesh
+        const bar = new THREE.Mesh(geometry, material);
+        bar.position.x = startX + index * (barWidth + spacing);
+        
+        scene.add(bar);
+        bars.push(bar);
+        
+        // Create a canvas for the text
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        canvas.width = 128;
+        canvas.height = 64;
+        
+        if (context) {
+          context.fillStyle = '#ffffff';
+          context.fillRect(0, 0, canvas.width, canvas.height);
+          context.font = '32px Arial';
+          context.textAlign = 'center';
+          context.fillStyle = '#000000';
+          context.fillText(item.value.toString(), canvas.width / 2, canvas.height / 2);
           
-          bars.forEach((bar, index) => {
-            bar.rotation.y += 0.003;
-            bar.position.y += Math.sin(Date.now() * 0.0008 + index) * 0.01;
-            
-            // Also rotate and move labels with bars
-            if (labels[index]) {
-              labels[index].rotation.y = bar.rotation.y;
-              labels[index].position.y = bar.position.y + (bar.geometry.parameters.height / 2) + 0.5;
-            }
+          // Use the canvas as a texture
+          const texture = new THREE.CanvasTexture(canvas);
+          const labelMaterial = new THREE.MeshBasicMaterial({
+            map: texture,
+            transparent: true,
+            side: THREE.DoubleSide
           });
           
-          renderer.render(scene, camera);
-        };
-        
-        animate();
+          const labelGeometry = new THREE.PlaneGeometry(2, 1);
+          const label = new THREE.Mesh(labelGeometry, labelMaterial);
+          
+          // Position the label above the bar
+          label.position.set(
+            bar.position.x,
+            normalizedHeight + 0.5,
+            bar.position.z
+          );
+          label.rotation.x = -Math.PI / 2; // Face up
+          
+          scene.add(label);
+          labels.push(label);
+        }
       });
     } else if (chartType === 'pie') {
       // Create 3D pie chart
@@ -258,6 +255,22 @@ const ThreeDChart: React.FC<ThreeDChartProps> = ({
           
           // Add a subtle floating animation
           bar.position.y += Math.sin(Date.now() * 0.0008 + index) * 0.01;
+          
+          // Update label positions if we have labels
+          if (labels[index]) {
+            labels[index].rotation.y = bar.rotation.y;
+            
+            // Use boxGeometry dimensions if available
+            // We need to check the geometry type since different charts use different geometries
+            if (bar.geometry instanceof THREE.BoxGeometry) {
+              const boxGeometry = bar.geometry as THREE.BoxGeometry;
+              const height = boxGeometry.parameters.height;
+              labels[index].position.y = bar.position.y + height / 2 + 0.5;
+            } else {
+              // Default fallback
+              labels[index].position.y = bar.position.y + 0.5;
+            }
+          }
         });
       } else if (chartType === 'pie') {
         // Rotate the entire pie chart
