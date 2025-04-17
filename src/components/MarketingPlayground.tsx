@@ -16,6 +16,14 @@ const MarketingPlayground = () => {
     { label: "My Format", value: 47, color: "#33C3F0", details: "Account B: My original format" }
   ];
 
+  // Calculate percentage differences
+  const calculatePercentageDifference = (value1: number, value2: number) => {
+    return Math.round(((value1 - value2) / value2) * 100);
+  };
+
+  const searchPercentageDiff = calculatePercentageDifference(searchAppearancesData[0].value, searchAppearancesData[1].value);
+  const recruiterPercentageDiff = calculatePercentageDifference(recruiterActionsData[0].value, recruiterActionsData[1].value);
+
   return (
     <section id="marketing-playground" className="netflix-section">
       <div className="container mx-auto">
@@ -75,6 +83,7 @@ const MarketingPlayground = () => {
                 height={200}
                 chartType="bar"
                 tooltipText="Comparison of search appearances between the two resume formats"
+                percentageDifference={searchPercentageDiff}
               />
               
               <ThreeDChart 
@@ -83,6 +92,7 @@ const MarketingPlayground = () => {
                 height={200}
                 chartType="bar"
                 tooltipText="Comparison of recruiter actions between the two resume formats"
+                percentageDifference={recruiterPercentageDiff}
               />
             </div>
             

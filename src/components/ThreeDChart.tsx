@@ -1,10 +1,6 @@
-
 import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
-// Add imports for FontLoader and TextGeometry
-import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
-import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 
 interface ChartData {
   label: string;
@@ -19,6 +15,7 @@ interface ThreeDChartProps {
   height?: number;
   chartType?: 'bar' | 'pie' | 'line';
   tooltipText?: string;
+  percentageDifference?: number;
 }
 
 const ThreeDChart: React.FC<ThreeDChartProps> = ({ 
@@ -26,7 +23,8 @@ const ThreeDChart: React.FC<ThreeDChartProps> = ({
   title = "Performance Metrics", 
   height = 200,
   chartType = 'bar',
-  tooltipText
+  tooltipText,
+  percentageDifference
 }) => {
   const chartRef = useRef<HTMLDivElement>(null);
   
@@ -69,7 +67,6 @@ const ThreeDChart: React.FC<ThreeDChartProps> = ({
     
     // Create chart based on type
     const bars: THREE.Mesh[] = [];
-    const labels: THREE.Mesh[] = [];
     const maxValue = Math.max(...data.map(item => item.value));
     
     if (chartType === 'bar') {
@@ -78,7 +75,6 @@ const ThreeDChart: React.FC<ThreeDChartProps> = ({
       const spacing = 1;
       const startX = -(data.length * (barWidth + spacing)) / 2 + barWidth / 2;
       
-      // Add values directly instead of using text geometry
       data.forEach((item, index) => {
         const normalizedHeight = (item.value / maxValue) * 10;
         
@@ -108,11 +104,11 @@ const ThreeDChart: React.FC<ThreeDChartProps> = ({
         canvas.height = 64;
         
         if (context) {
-          context.fillStyle = '#ffffff';
+          context.fillStyle = 'rgba(255, 255, 255, 0)';
           context.fillRect(0, 0, canvas.width, canvas.height);
-          context.font = '32px Arial';
+          context.font = '24px Arial';
           context.textAlign = 'center';
-          context.fillStyle = '#000000';
+          context.fillStyle = '#ffffff';
           context.fillText(item.value.toString(), canvas.width / 2, canvas.height / 2);
           
           // Use the canvas as a texture
@@ -132,10 +128,9 @@ const ThreeDChart: React.FC<ThreeDChartProps> = ({
             normalizedHeight + 0.5,
             bar.position.z
           );
-          label.rotation.x = -Math.PI / 2; // Face up
+          label.rotation.x = -Math.PI / 4; // Angle for better readability
           
           scene.add(label);
-          labels.push(label);
         }
       });
     } else if (chartType === 'pie') {
@@ -243,39 +238,19 @@ const ThreeDChart: React.FC<ThreeDChartProps> = ({
       }
     }
     
-    // Animation
-    let frame = 0;
+    // Animation - simpler, no resizing/floating
     const animate = () => {
-      frame = requestAnimationFrame(animate);
+      requestAnimationFrame(animate);
       
-      if (chartType === 'bar' || chartType === 'line') {
-        // Rotate bars slightly
-        bars.forEach((bar, index) => {
-          bar.rotation.y += 0.003;
-          
-          // Add a subtle floating animation
-          bar.position.y += Math.sin(Date.now() * 0.0008 + index) * 0.01;
-          
-          // Update label positions if we have labels
-          if (labels[index]) {
-            labels[index].rotation.y = bar.rotation.y;
-            
-            // Use boxGeometry dimensions if available
-            // We need to check the geometry type since different charts use different geometries
-            if (bar.geometry instanceof THREE.BoxGeometry) {
-              const boxGeometry = bar.geometry as THREE.BoxGeometry;
-              const height = boxGeometry.parameters.height;
-              labels[index].position.y = bar.position.y + height / 2 + 0.5;
-            } else {
-              // Default fallback
-              labels[index].position.y = bar.position.y + 0.5;
-            }
-          }
+      if (chartType === 'bar') {
+        // Just a slight rotation for 3D effect, but no changing of sizes
+        bars.forEach((bar) => {
+          bar.rotation.y += 0.001;
         });
       } else if (chartType === 'pie') {
-        // Rotate the entire pie chart
+        // Simple rotation for pie chart
         bars.forEach(segment => {
-          segment.rotation.y += 0.005;
+          segment.rotation.y += 0.001;
         });
       }
       
@@ -297,7 +272,6 @@ const ThreeDChart: React.FC<ThreeDChartProps> = ({
     
     // Clean up on unmount
     return () => {
-      cancelAnimationFrame(frame);
       window.removeEventListener('resize', handleResize);
       if (chartRef.current && chartRef.current.contains(renderer.domElement)) {
         chartRef.current.removeChild(renderer.domElement);
@@ -314,17 +288,26 @@ const ThreeDChart: React.FC<ThreeDChartProps> = ({
   
   return (
     <div className="netflix-card p-4 hover:shadow-[0_5px_25px_rgba(37,99,235,0.4)] transition-all duration-300">
-      {title && <h3 className="text-lg font-semibold mb-2">{title}</h3>}
+      <div className="flex justify-between items-center mb-2">
+        {title && <h3 className="text-lg font-semibold">{title}</h3>}
+        {percentageDifference !== undefined && (
+          <div className="bg-netflix-card px-2 py-1 rounded text-sm font-medium bg-netflix-dark/10">
+            <span className="text-netflix-red">{percentageDifference}%</span> difference
+          </div>
+        )}
+      </div>
+      
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
             <div ref={chartRef} style={{ height: `${height}px` }} className="cursor-help" />
           </TooltipTrigger>
           <TooltipContent className="max-w-xs">
-            <p>{tooltipText || "Interactive 3D chart. Click and drag to rotate."}</p>
+            <p>{tooltipText || "Interactive 3D chart showing comparison data."}</p>
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
+      
       <div className="mt-4 grid grid-cols-3 gap-2">
         {data.map((item, index) => (
           <TooltipProvider key={index}>
