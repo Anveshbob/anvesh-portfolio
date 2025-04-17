@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
@@ -66,6 +65,7 @@ const ThreeDChart: React.FC<ThreeDChartProps> = ({
     
     // Create chart based on type
     const bars: THREE.Mesh[] = [];
+    const labels: THREE.Mesh[] = [];
     const maxValue = Math.max(...data.map(item => item.value));
     
     if (chartType === 'bar') {
@@ -74,29 +74,72 @@ const ThreeDChart: React.FC<ThreeDChartProps> = ({
       const spacing = 1;
       const startX = -(data.length * (barWidth + spacing)) / 2 + barWidth / 2;
       
-      data.forEach((item, index) => {
-        const normalizedHeight = (item.value / maxValue) * 10;
-        
-        // Create bar geometry
-        const geometry = new THREE.BoxGeometry(barWidth, normalizedHeight, barWidth);
-        
-        // Move pivot to bottom
-        geometry.translate(0, normalizedHeight / 2, 0);
-        
-        // Create material
-        const material = new THREE.MeshPhongMaterial({
-          color: new THREE.Color(item.color),
-          transparent: true,
-          opacity: 0.9,
-          shininess: 100
+      const loader = new THREE.FontLoader();
+      loader.load('/path/to/helvetiker_regular.typeface.json', (font) => {
+        data.forEach((item, index) => {
+          const normalizedHeight = (item.value / maxValue) * 10;
+          
+          // Create bar geometry
+          const geometry = new THREE.BoxGeometry(barWidth, normalizedHeight, barWidth);
+          geometry.translate(0, normalizedHeight / 2, 0);
+          
+          // Create material
+          const material = new THREE.MeshPhongMaterial({
+            color: new THREE.Color(item.color),
+            transparent: true,
+            opacity: 0.9,
+            shininess: 100
+          });
+          
+          // Create mesh
+          const bar = new THREE.Mesh(geometry, material);
+          bar.position.x = startX + index * (barWidth + spacing);
+          
+          scene.add(bar);
+          bars.push(bar);
+          
+          // Create text label
+          const textGeometry = new THREE.TextGeometry(item.value.toString(), {
+            font: font,
+            size: 0.5,
+            height: 0.1,
+          });
+          
+          const textMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+          const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+          
+          // Position text above the bar
+          textMesh.position.set(
+            bar.position.x - 0.5, // Slightly offset to center
+            normalizedHeight + 0.5, 
+            bar.position.z
+          );
+          textMesh.rotation.x = -Math.PI / 2; // Rotate to face up
+          
+          scene.add(textMesh);
+          labels.push(textMesh);
         });
         
-        // Create mesh
-        const bar = new THREE.Mesh(geometry, material);
-        bar.position.x = startX + index * (barWidth + spacing);
+        // Modify animation to include labels
+        let frame = 0;
+        const animate = () => {
+          frame = requestAnimationFrame(animate);
+          
+          bars.forEach((bar, index) => {
+            bar.rotation.y += 0.003;
+            bar.position.y += Math.sin(Date.now() * 0.0008 + index) * 0.01;
+            
+            // Also rotate and move labels with bars
+            if (labels[index]) {
+              labels[index].rotation.y = bar.rotation.y;
+              labels[index].position.y = bar.position.y + (bar.geometry.parameters.height / 2) + 0.5;
+            }
+          });
+          
+          renderer.render(scene, camera);
+        };
         
-        scene.add(bar);
-        bars.push(bar);
+        animate();
       });
     } else if (chartType === 'pie') {
       // Create 3D pie chart
