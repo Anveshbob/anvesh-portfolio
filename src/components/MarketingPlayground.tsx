@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Search, Users, Key } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
@@ -11,14 +12,14 @@ const MarketingPlayground = () => {
       value: 3227,
       color: "#9b87f5",
       details:
-        "Account A (Naukri Suggested Format): 🔼 3227 search appearances in 90 days & 🔼 74 recruiter actions. Top keywords: Digital Marketing (108), Sales (90), Business Development (81), Marketing (74), Lead Generation (63).",
+        "Account A (Naukri Suggested Format): Digital Marketing (108), Sales (90), Business Development (81), Marketing (74), Lead Generation (63).",
     },
     {
       label: "My Format",
       value: 2954,
       color: "#33C3F0",
       details:
-        "Account B (My Original Format): 🔽 2954 search appearances & 🔽 47 recruiter actions. Top keywords: Digital Marketing (130), Sales (89), Marketing (83), Business Development (82), Performance Marketing (65).",
+        "Account B (My Original Format): Digital Marketing (130), Sales (89), Marketing (83), Business Development (82), Performance Marketing (65).",
     },
   ];
 
@@ -114,6 +115,8 @@ const MarketingPlayground = () => {
                 chartType="bar"
                 tooltipText="Comparison of search appearances between the two resume formats"
                 percentageDifference={searchPercentageDiff}
+                showValueOnTop={true}
+                no3dAnimation={true}
               />
 
               <ThreeDChart
@@ -123,6 +126,8 @@ const MarketingPlayground = () => {
                 chartType="bar"
                 tooltipText="Comparison of recruiter actions between the two resume formats"
                 percentageDifference={recruiterPercentageDiff}
+                showValueOnTop={true}
+                no3dAnimation={true}
               />
             </div>
 
@@ -131,7 +136,7 @@ const MarketingPlayground = () => {
                 <Key className="w-6 h-6 text-netflix-red mr-2" />
                 <h3 className="text-lg font-semibold">Top Keywords</h3>
               </div>
-              <div className="text-sm">
+              <div className="text-sm whitespace-pre-line">
                 {searchAppearancesData.map((item, index) => (
                   <p key={index} className="mb-2">
                     {item.details}
