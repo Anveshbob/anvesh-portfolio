@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
@@ -16,6 +17,8 @@ interface ThreeDChartProps {
   chartType?: 'bar' | 'pie' | 'line';
   tooltipText?: string;
   percentageDifference?: number;
+  showValueOnTop?: boolean;
+  no3dAnimation?: boolean;
 }
 
 const ThreeDChart: React.FC<ThreeDChartProps> = ({
@@ -25,6 +28,8 @@ const ThreeDChart: React.FC<ThreeDChartProps> = ({
   chartType = "bar",
   tooltipText,
   percentageDifference,
+  showValueOnTop = false,
+  no3dAnimation = false,
 }) => {
   const chartRef = React.useRef<HTMLDivElement>(null);
 
@@ -101,43 +106,46 @@ const ThreeDChart: React.FC<ThreeDChartProps> = ({
         scene.add(bar);
         bars.push(bar);
 
-        // Create a canvas for the text label on top of each bar
-        const canvas = document.createElement("canvas");
-        const context = canvas.getContext("2d");
-        canvas.width = 128;
-        canvas.height = 64;
+        // Add value on top of the bar if showValueOnTop is true
+        if (showValueOnTop) {
+          // Create a canvas for the text label on top of each bar
+          const canvas = document.createElement("canvas");
+          const context = canvas.getContext("2d");
+          canvas.width = 128;
+          canvas.height = 64;
 
-        if (context) {
-          context.clearRect(0, 0, canvas.width, canvas.height);
-          context.font = "bold 28px Arial";
-          context.textAlign = "center";
-          context.fillStyle = "#ffffff";
-          context.fillText(item.value.toString(), canvas.width / 2, 40);
+          if (context) {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.font = "bold 28px Arial";
+            context.textAlign = "center";
+            context.fillStyle = "#ffffff";
+            context.fillText(item.value.toString(), canvas.width / 2, 40);
 
-          // Use the canvas as a texture
-          const texture = new THREE.CanvasTexture(canvas);
-          texture.minFilter = THREE.LinearFilter; // Better scaling
-          texture.generateMipmaps = false;
+            // Use the canvas as a texture
+            const texture = new THREE.CanvasTexture(canvas);
+            texture.minFilter = THREE.LinearFilter; // Better scaling
+            texture.generateMipmaps = false;
 
-          const labelMaterial = new THREE.SpriteMaterial({
-            map: texture,
-            transparent: true,
-            depthWrite: false,
-          });
+            const labelMaterial = new THREE.SpriteMaterial({
+              map: texture,
+              transparent: true,
+              depthWrite: false,
+            });
 
-          const label = new THREE.Sprite(labelMaterial);
+            const label = new THREE.Sprite(labelMaterial);
 
-          // Position the label just above the bar
-          label.position.set(
-            bar.position.x,
-            normalizedHeight + 1.0,
-            bar.position.z
-          );
+            // Position the label just above the bar
+            label.position.set(
+              bar.position.x,
+              normalizedHeight + 1.0,
+              bar.position.z
+            );
 
-          // Scale the label to be readable
-          label.scale.set(4, 2, 1);
+            // Scale the label to be readable
+            label.scale.set(4, 2, 1);
 
-          scene.add(label);
+            scene.add(label);
+          }
         }
       });
     } else if (chartType === "pie") {
@@ -245,9 +253,16 @@ const ThreeDChart: React.FC<ThreeDChartProps> = ({
       }
     }
 
-    // Animation - no elongation or scaling, no movement (no bars height changes), no rotation to avoid confusion
+    // Animation - simplified or disabled based on no3dAnimation flag
     const animate = () => {
       requestAnimationFrame(animate);
+      
+      // Only apply animations if no3dAnimation is false
+      if (!no3dAnimation) {
+        // Apply any animations here - but since we want static representations, 
+        // we're not adding any animation logic even if no3dAnimation is false
+      }
+      
       renderer.render(scene, camera);
     };
 
@@ -279,7 +294,7 @@ const ThreeDChart: React.FC<ThreeDChartProps> = ({
         scene.remove(bar);
       });
     };
-  }, [data, height, chartType]);
+  }, [data, height, chartType, showValueOnTop, no3dAnimation]);
 
   return (
     <div className="netflix-card p-4 hover:shadow-[0_5px_25px_rgba(37,99,235,0.4)] transition-all duration-300">
