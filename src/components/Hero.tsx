@@ -13,16 +13,16 @@ const Hero = () => {
   const countIntervalRef = useRef<NodeJS.Timeout | null>(null);
   
   const secretPoints = [
-    "My approach combines data-driven strategy with creative execution to deliver measurable results.",
-    "By focusing on ROI and customer-centric solutions, I've consistently achieved growth targets and optimized marketing performance across channels.",
-    "Strategic partnerships and innovative CRM optimization have been key drivers of my success.",
-    "My ability to lead cross-functional teams has delivered remarkable business outcomes.",
-    "Award-winning marketing strategies that exceed industry standards.",
-    "Certified expertise in AI-Powered Performance Ads and digital marketing optimization.",
-    "Lean Six Sigma Green Belt certified with a focus on process improvement.",
-    "Consistently delivering ROI above industry standards through analytical decision-making.",
-    "Digital-only approach revolutionized store location selection during challenging times.",
-    "Proven track record of exceeding marketing KPIs through data-backed strategies."
+    "I transform data into actionable strategies that consistently exceed KPI targets by 20-30%.",
+    "My hybrid approach combines creative intuition with analytical rigor to unlock new growth opportunities.",
+    "I've developed an expertise in optimizing CAC and ROI across diverse marketing channels and industries.",
+    "My leadership philosophy centers on empowering cross-functional teams to deliver exceptional results.",
+    "I excel at identifying untapped market segments and crafting tailored acquisition strategies.",
+    "My technical marketing acumen allows me to bridge the gap between marketing vision and technical execution.",
+    "I've cultivated the ability to predict emerging trends and pivot strategies before competitors catch on.",
+    "My process optimization mindset has consistently reduced operational costs while improving performance.",
+    "I've mastered the balance between short-term performance wins and long-term brand building initiatives.",
+    "My customer-centric approach enables me to create marketing experiences that truly resonate with audiences."
   ];
   
   // Reset secret after 5 seconds
