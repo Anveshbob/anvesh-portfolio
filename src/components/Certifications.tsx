@@ -13,14 +13,11 @@ const Certifications = () => {
         
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
           <CertificationCategory 
-            title="Technical Certifications"
+            title="Marketing & Analytics Certifications"
             icon={<Database className="w-8 h-8 text-netflix-red" />}
             certifications={[
-              { name: "Google Ads Apps Certification", icon: <CheckCircle className="w-5 h-5" /> },
               { name: "AI-Powered Performance Ads Certification", icon: <TrendingUp className="w-5 h-5" /> },
-              { name: "Google Ads - Measurement Certification", icon: <Target className="w-5 h-5" /> },
-              { name: "Advanced Google Analytics Implementation", icon: <CheckCircle className="w-5 h-5" /> },
-              { name: "Facebook Ads Manager Expert", icon: <Globe className="w-5 h-5" /> }
+              { name: "Google Ads - Measurement Certification by Google", icon: <Target className="w-5 h-5" /> }
             ]}
           />
           
@@ -28,19 +25,17 @@ const Certifications = () => {
             title="Process Improvement"
             icon={<BookCheck className="w-8 h-8 text-netflix-red" />}
             certifications={[
-              { name: "Lean Six Sigma Green Belt (KPMG, 2020)", icon: <Award className="w-5 h-5" /> },
-              { name: "Certified in Data-Driven Marketing Optimization", icon: <Star className="w-5 h-5" /> }
+              { name: "Lean Six Sigma Green Belt by KPMG (2020)", icon: <Award className="w-5 h-5" /> }
             ]}
           />
           
           <CertificationCategory 
-            title="Professional Development"
+            title="Education"
             icon={<GraduationCap className="w-8 h-8 text-netflix-red" />}
             certifications={[
-              { name: "Digital Marketing Strategy Certification", icon: <Book className="w-5 h-5" /> },
-              { name: "Influencer Marketing Specialist", icon: <Star className="w-5 h-5" /> },
-              { name: "SEO/SEM Professional Certification", icon: <Target className="w-5 h-5" /> },
-              { name: "LinkedIn Learning: Marketing Analytics, Data Visualization for Marketers", icon: <Database className="w-5 h-5" /> }
+              { name: "M.B.A - Indian Institute of Management, Calcutta (2021)", icon: <GraduationCap className="w-5 h-5" /> },
+              { name: "B. Tech (Mechanical Engineering) - National Institute of Technology, Calicut (2017)", icon: <GraduationCap className="w-5 h-5" /> },
+              { name: "Majored in Marketing with a minor in Organizational Behavior", icon: <Book className="w-5 h-5" /> }
             ]}
           />
         </div>

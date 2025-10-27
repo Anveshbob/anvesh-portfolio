@@ -158,17 +158,19 @@ const Hero = () => {
             </h1>
             
             <h2 className="text-xl md:text-2xl text-netflix-muted mb-8 opacity-0 animate-on-mount">
-              Results-driven Marketing Leader | <span className="text-netflix-red font-medium">4+ Years</span> in Digital & Social Media Marketing
+              Marketing Solution Lead | <span className="text-netflix-red font-medium">4+ Years</span> in Digital & Social Media Marketing
             </h2>
             
             <p className="text-lg text-netflix-muted mb-8 opacity-0 animate-on-mount leading-readable">
-              Specializing in customer acquisition, retention, and <span className="text-netflix-red font-medium">ROI-driven campaigns</span>
+              Specializing in customer acquisition, retention, and <span className="text-netflix-red font-medium">ROI-driven campaigns</span>. 
+              Proven track record of achieving 17% YoY growth and 35% increase in traffic through optimized CRM strategies. 
+              Adept at leveraging data analytics to drive decision-making and deliver measurable business outcomes.
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
               <div className="bg-netflix-card border border-gray-200 rounded-lg p-4 shadow-sm opacity-0 animate-on-mount">
-                <div className="text-netflix-red text-2xl font-bold mb-1">42%</div>
-                <span className="text-black">Increase in customer acquisition</span>
+                <div className="text-netflix-red text-2xl font-bold mb-1">17%</div>
+                <span className="text-black">YoY growth in customer acquisition</span>
               </div>
               
               <div className="bg-netflix-card border border-gray-200 rounded-lg p-4 shadow-sm opacity-0 animate-on-mount">
