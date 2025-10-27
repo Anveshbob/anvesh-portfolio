@@ -47,6 +47,19 @@ const Timeline = () => {
   return (
     <div className="space-y-12">
       <TimelineItem 
+        years="June'25 - Present"
+        title="Performance Marketing Manager"
+        company="Mars International"
+        details={[
+          "Leading Sampling campaigns on Media channels, including Google Ads, Meta Ads, Payment Partners (Gpay, Phonepe, PayTM), Digital commerce platforms, and offline channels",
+          "Leading Social Commerce project to pioneer user shopping experience through social platforms like Instagram shop to drive seamless user journey and improve conversion",
+          "Spearheading the Data-Driven Marketing (DDM) Programme for Mars Pet Nutrition India, focusing on new channel acquisitions to enhance cost efficiencies and revenue generation",
+          "Responsible for campaign planning, strategy, and liaising between all channel partners and Mars category teams",
+          "Delivered 655K samples in 3 months (50% of yearly target) at 40% reduced Cost per sample"
+        ]}
+      />
+      
+      <TimelineItem 
         years="Mar'24 - Feb'25"
         title="Product Leader Marketing"
         company="Brane Enterprises Pvt Ltd"
@@ -167,28 +180,34 @@ const TimelineItem = ({ years, title, company, details }: {
 const Skills = () => {
   const skillCategories = [
     {
-      category: "Digital Marketing",
+      category: "Revenue Planning",
       icon: <TrendingUp className="w-8 h-8 text-netflix-red" />,
-      description: "Expertise in various social media channels",
-      skills: ["Google Ads", "Facebook-Meta Ads", "SEO", "SEM", "Email Marketing", "Influencer Marketing", "Programmatic"]
+      description: "Monthly & quarterly planning, stakeholder collaboration, market potential analysis",
+      skills: ["Monthly Planning", "Quarterly Planning", "Stakeholder Collaboration", "Market Potential Analysis"]
     },
     {
-      category: "Data Analysis",
-      icon: <Database className="w-8 h-8 text-netflix-red" />,
-      description: "Proficiency in using data analytics tools to measure and optimize processes and campaign performance",
-      skills: ["Excel", "Powerpoint", "PowerBI", "Google Analytics", "Ad Managers", "Singular", "Amplitude", "SQL", "Cube"]
-    },
-    {
-      category: "Customer Acquisition & Retention",
-      icon: <Users className="w-8 h-8 text-netflix-red" />,
-      description: "Proven ability to implement customer growth and retention strategies through CRM",
-      skills: ["CRM Strategy", "User Engagement", "Retention Optimization"]
-    },
-    {
-      category: "Strategic Thinking",
+      category: "Pricing Strategy",
       icon: <Target className="w-8 h-8 text-netflix-red" />,
-      description: "Demonstrated ability to think strategically and develop data-driven marketing plans",
-      skills: ["Marketing Planning", "Campaign Optimization", "Performance Analysis"]
+      description: "Margin optimization, competitive analysis, consumer insights",
+      skills: ["Margin Optimization", "Competitive Analysis", "Consumer Insights"]
+    },
+    {
+      category: "Performance Marketing",
+      icon: <TrendingUp className="w-8 h-8 text-netflix-red" />,
+      description: "Top-of-funnel optimization, conversion rate improvement, collaboration with platforms",
+      skills: ["Funnel Optimization", "Conversion Rate Improvement", "Zomato & Swiggy Collaboration", "Digital Commerce"]
+    },
+    {
+      category: "Customer Behavior Analysis",
+      icon: <Users className="w-8 h-8 text-netflix-red" />,
+      description: "Deep understanding of customer preferences, interventions to enhance experience",
+      skills: ["Customer Preferences Analysis", "Experience Enhancement", "User Journey Optimization"]
+    },
+    {
+      category: "Tools & Analytics",
+      icon: <Database className="w-8 h-8 text-netflix-red" />,
+      description: "Proficiency in analytics and marketing tools",
+      skills: ["Google Analytics", "Google Ads", "Facebook Ads Manager", "CRM Systems", "MMP Platforms"]
     },
     {
       category: "Collaboration",
