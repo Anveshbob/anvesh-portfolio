@@ -47,15 +47,15 @@ const Timeline = () => {
   return (
     <div className="space-y-12">
       <TimelineItem 
-        years="June'25 - Present"
+        years="Jun'24 - Present"
         title="Performance Marketing Manager"
         company="Mars International"
         details={[
-          "Leading Sampling campaigns on Media channels, including Google Ads, Meta Ads, Payment Partners (Gpay, Phonepe, PayTM), Digital commerce platforms, and offline channels",
-          "Leading Social Commerce project to pioneer user shopping experience through social platforms like Instagram shop to drive seamless user journey and improve conversion",
-          "Spearheading the Data-Driven Marketing (DDM) Programme for Mars Pet Nutrition India, focusing on new channel acquisitions to enhance cost efficiencies and revenue generation",
-          "Responsible for campaign planning, strategy, and liaising between all channel partners and Mars category teams",
-          "Delivered 655K samples in 3 months (50% of yearly target) at 40% reduced Cost per sample"
+          "Campaign Strategy & Execution: Managed end-to-end performance marketing for key brands including Pedigree, Whiskas, and Sheba, overseeing budget allocation and execution across Google Ads (SEM), Meta Ads, and Performance Max (PMax) channels",
+          "High-Volume Sampling: Led sampling campaigns via media channels and payment partners (GPay, PhonePe, Paytm), delivering 655K samples in 3 months (50% of yearly target) at a 40% reduced cost per sample",
+          "Data-Driven Marketing (DDM): Spearheading the DDM Programme for Mars Pet Nutrition India, focusing on new channel acquisitions to enhance cost efficiencies and revenue generation",
+          "Social Commerce: Pioneering user shopping experiences through platforms like Instagram Shop, driving seamless user journeys and improving conversion rates",
+          "Analytics: Utilized Google Analytics (GA4) for in-depth website performance tracking, attribution modeling, and audience analysis to inform future media spend"
         ]}
       />
       
