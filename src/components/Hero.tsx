@@ -158,7 +158,7 @@ const Hero = () => {
             </h1>
             
             <h2 className="text-xl md:text-2xl text-netflix-muted mb-8 opacity-0 animate-on-mount">
-              Growth Professional | <span className="text-netflix-red font-medium">4+ Years</span> in Revenue Planning & Performance Marketing
+              Integrated Marketing Professional | <span className="text-netflix-red font-medium">5 Years</span> in Growth, Brand and Performance Marketing
             </h2>
             
             <p className="text-lg text-netflix-muted mb-8 opacity-0 animate-on-mount leading-readable">
@@ -169,13 +169,13 @@ const Hero = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
               <div className="bg-netflix-card border border-gray-200 rounded-lg p-4 shadow-sm opacity-0 animate-on-mount">
-                <div className="text-netflix-red text-2xl font-bold mb-1">655K</div>
-                <span className="text-black">Samples delivered in 3 months</span>
+                <div className="text-netflix-red text-2xl font-bold mb-1">₹7 Cr</div>
+                <span className="text-black">Monthly budget managed</span>
               </div>
               
               <div className="bg-netflix-card border border-gray-200 rounded-lg p-4 shadow-sm opacity-0 animate-on-mount">
-                <div className="text-netflix-red text-2xl font-bold mb-1">40%</div>
-                <span className="text-black">Reduction in cost per sample</span>
+                <div className="text-netflix-red text-2xl font-bold mb-1">17%</div>
+                <span className="text-black">Year-over-year growth achieved</span>
               </div>
             </div>
             
