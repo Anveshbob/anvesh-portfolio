@@ -22,6 +22,10 @@ const Resume = () => {
         </p>
         
         <div className="mt-12">
+          <Education />
+        </div>
+        
+        <div className="mt-12">
           <Timeline />
         </div>
         
@@ -48,14 +52,14 @@ const Timeline = () => {
     <div className="space-y-12">
       <TimelineItem 
         years="Jun'24 - Present"
-        title="Performance Marketing Manager"
+        title="Performance Marketing Manager (Pet Nutrition)"
         company="Mars International"
         details={[
-          "Campaign Strategy & Execution: Managed end-to-end performance marketing for key brands including Pedigree, Whiskas, and Sheba, overseeing budget allocation and execution across Google Ads (SEM), Meta Ads, and Performance Max (PMax) channels",
-          "High-Volume Sampling: Led sampling campaigns via media channels and payment partners (GPay, PhonePe, Paytm), delivering 655K samples in 3 months (50% of yearly target) at a 40% reduced cost per sample",
-          "Data-Driven Marketing (DDM): Spearheading the DDM Programme for Mars Pet Nutrition India, focusing on new channel acquisitions to enhance cost efficiencies and revenue generation",
-          "Social Commerce: Pioneering user shopping experiences through platforms like Instagram Shop, driving seamless user journeys and improving conversion rates",
-          "Analytics: Utilized Google Analytics (GA4) for in-depth website performance tracking, attribution modeling, and audience analysis to inform future media spend"
+          "Delivered 655K product samples in Q3 2024—achieving 50% of the annual target in just 3 months—while reducing cost-per-sample by 40% via GPay, PhonePe & Paytm partnerships",
+          "Orchestrate end-to-end performance strategy for Pedigree, Whiskas, and Sheba across Google Ads (SEM), Meta Ads, and Performance Max (PMax) channels",
+          "Spearheading the Data-Driven Marketing (DDM) Programme for Mars Pet Nutrition India, focusing on new channel acquisitions to enhance cost efficiencies and revenue generation",
+          "Pioneer social commerce innovation on Instagram Shop to reduce friction in the customer journey and improve conversion rates",
+          "Utilized GA4 for in-depth website performance tracking, attribution modeling, and audience analysis to inform future media spend"
         ]}
       />
       
@@ -71,17 +75,15 @@ const Timeline = () => {
       
       <TimelineItem 
         years="Aug'21 – Mar'24"
-        title="Deputy Manager, Marketing"
-        company="Jubilant Foodworks Ltd"
+        title="Deputy Manager - Digital Marketing"
+        company="Jubilant Foodworks Ltd (Domino's)"
         details={[
-          "Managed a diverse digital marketing portfolio encompassing social media, Facebook, UAC, YouTube, SEM, influencer, affiliate, and brand partnership channels",
-          "Drove Pan-India new customer acquisition and retention, achieving a 17% year-over-year growth rate while managing a monthly budget of 7 crores",
-          "Spearheaded ROI and CAC-focused performance campaigns for the market-leading QSR brand, prioritizing visibility and profitability",
-          "Optimized CRM strategies and in-app experiences to boost traffic by 35%, conversions by 25%, and sales by 11%",
-          "Leveraged data analytics platforms such as Singular, Google Analytics, Google Ads, and Facebook Ads Manager to measure and report campaign performance",
-          "Conducted five marketing incrementality tests, resulting in a 2 crore+ increase in average monthly spend and an 8% uplift in incremental revenue",
-          "Employed data-driven insights to optimize campaigns and troubleshoot challenges. Developed and executed the annual operational plan",
-          "Delivered impactful weekly and quarterly presentations to a cross-functional audience of 30+ stakeholders, collaborating with 10+ partners and support agencies"
+          "Achieved 17% YoY customer acquisition growth while managing a monthly marketing budget of ₹7 Crore with strict ROI accountability",
+          "Designed and executed five incrementality tests, generating a ₹2 Crore increase in average monthly spend and 8% uplift in incremental revenue",
+          "Delivered a 35% increase in traffic and 25% improvement in conversion rates through CRM and lifecycle optimization, boosting sales by 11%",
+          "Managed a diverse digital marketing portfolio across social media, Facebook, UAC, YouTube, SEM, influencer, affiliate, and brand partnership channels",
+          "Leveraged Singular, Google Analytics, Google Ads, and Facebook Ads Manager to measure, report, and optimize campaign performance",
+          "Delivered impactful weekly and quarterly presentations to a cross-functional audience of 30+ stakeholders, collaborating with 10+ partners and agencies"
         ]}
       />
       
@@ -180,40 +182,34 @@ const TimelineItem = ({ years, title, company, details }: {
 const Skills = () => {
   const skillCategories = [
     {
-      category: "Revenue Planning",
+      category: "Marketing Platforms",
       icon: <TrendingUp className="w-8 h-8 text-netflix-red" />,
-      description: "Monthly & quarterly planning, stakeholder collaboration, market potential analysis",
-      skills: ["Monthly Planning", "Quarterly Planning", "Stakeholder Collaboration", "Market Potential Analysis"]
+      description: "End-to-end campaign execution across paid and organic channels",
+      skills: ["Google Ads (Search, PMax, UAC)", "Meta Ads", "YouTube", "Social Commerce", "Influencer Marketing", "Programmatic"]
     },
     {
-      category: "Pricing Strategy",
-      icon: <Target className="w-8 h-8 text-netflix-red" />,
-      description: "Margin optimization, competitive analysis, consumer insights",
-      skills: ["Margin Optimization", "Competitive Analysis", "Consumer Insights"]
-    },
-    {
-      category: "Performance Marketing",
-      icon: <TrendingUp className="w-8 h-8 text-netflix-red" />,
-      description: "Top-of-funnel optimization, conversion rate improvement, collaboration with platforms",
-      skills: ["Funnel Optimization", "Conversion Rate Improvement", "Zomato & Swiggy Collaboration", "Digital Commerce"]
-    },
-    {
-      category: "Customer Behavior Analysis",
-      icon: <Users className="w-8 h-8 text-netflix-red" />,
-      description: "Deep understanding of customer preferences, interventions to enhance experience",
-      skills: ["Customer Preferences Analysis", "Experience Enhancement", "User Journey Optimization"]
-    },
-    {
-      category: "Tools & Analytics",
+      category: "Analytics & Data",
       icon: <Database className="w-8 h-8 text-netflix-red" />,
-      description: "Proficiency in analytics and marketing tools",
-      skills: ["Google Analytics", "Google Ads", "Facebook Ads Manager", "CRM Systems", "MMP Platforms"]
+      description: "Data-driven decision making with advanced analytics tools",
+      skills: ["GA4", "SQL", "PowerBI", "Amplitude", "Singular", "Marketing Mix Modeling"]
     },
     {
-      category: "Collaboration",
+      category: "Strategy",
+      icon: <Target className="w-8 h-8 text-netflix-red" />,
+      description: "Strategic planning and optimization for measurable business outcomes",
+      skills: ["GTM Strategy", "Incrementality Testing", "CAC Optimization", "CRM & Lifecycle", "Revenue Planning"]
+    },
+    {
+      category: "Customer Acquisition & Retention",
+      icon: <Users className="w-8 h-8 text-netflix-red" />,
+      description: "Proven ability to scale growth and retain customers across industries",
+      skills: ["Customer Growth Strategy", "Retention Optimization", "User Journey Design", "Conversion Rate Optimization"]
+    },
+    {
+      category: "Collaboration & Leadership",
       icon: <Share2 className="w-8 h-8 text-netflix-red" />,
-      description: "Experience working effectively with cross-functional teams including CXOs and agencies",
-      skills: ["Cross-functional Collaboration", "Stakeholder Management", "Agency Partnerships"]
+      description: "Cross-functional leadership with CXOs, agencies, and global teams",
+      skills: ["Cross-functional Leadership", "Stakeholder Management", "Agency Partnerships", "Team Development"]
     }
   ];
   
@@ -241,6 +237,32 @@ const Skills = () => {
             </div>
           </div>
         ))}
+      </div>
+    </div>
+  );
+};
+
+const Education = () => {
+  return (
+    <div className="netflix-card p-6">
+      <h3 className="text-2xl font-semibold mb-6">Education</h3>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="opacity-0 animate-fade-in">
+          <div className="flex items-center gap-3 mb-2">
+            <Crown className="w-6 h-6 text-netflix-red" />
+            <h4 className="text-lg font-semibold">MBA</h4>
+          </div>
+          <p className="text-netflix-red font-medium">Indian Institute of Management Calcutta (IIM Calcutta)</p>
+          <p className="text-netflix-muted">2019 – 2021 | Major: Marketing | Minor: Organizational Behavior</p>
+        </div>
+        <div className="opacity-0 animate-fade-in" style={{ animationDelay: '200ms' }}>
+          <div className="flex items-center gap-3 mb-2">
+            <Crown className="w-6 h-6 text-netflix-red" />
+            <h4 className="text-lg font-semibold">B.Tech (Mechanical Engineering)</h4>
+          </div>
+          <p className="text-netflix-red font-medium">National Institute of Technology, Calicut (NIT Calicut)</p>
+          <p className="text-netflix-muted">Graduated 2017</p>
+        </div>
       </div>
     </div>
   );
