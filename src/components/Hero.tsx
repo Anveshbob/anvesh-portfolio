@@ -158,13 +158,12 @@ const Hero = () => {
             </h1>
             
             <h2 className="text-xl md:text-2xl text-netflix-muted mb-8 opacity-0 animate-on-mount">
-              Integrated Marketing Professional | <span className="text-netflix-red font-medium">5 Years</span> in Growth, Brand and Performance Marketing
+              Strategic Integrated Marketing Leader | <span className="text-netflix-red font-medium">IIM Calcutta MBA</span> | Performance & Product Marketing
             </h2>
             
             <p className="text-lg text-netflix-muted mb-8 opacity-0 animate-on-mount leading-readable">
-              Proven expertise in scaling businesses, building acquisition channels, and optimizing customer experiences. 
-              Achieving <span className="text-netflix-red font-medium">17% YoY growth</span> through data-driven strategies. 
-              Passionate about food and building brands from the ground up.
+              Integrated Marketing Leader with <span className="text-netflix-red font-medium">5+ years</span> of experience driving measurable growth across FMCG, QSR, and FinTech. 
+              Currently managing <span className="text-netflix-red font-medium">₹7Cr+ monthly budgets</span> for global brands like Mars and Domino's, specializing in data-driven optimization and customer acquisition.
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
