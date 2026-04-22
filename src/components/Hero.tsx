@@ -1,215 +1,97 @@
-
-import React, { useEffect, useState, useRef } from 'react';
-import ThreeBackground from './ThreeBackground';
+import { ArrowRight, Download, Calendar } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import heroBg from "@/assets/hero-bg.jpg";
 
 const Hero = () => {
-  // State to track current secret index
-  const [secretIndex, setSecretIndex] = useState(-1);
-  const [showSecret, setShowSecret] = useState(false);
-  const [secretTimer, setSecretTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
-  
-  // Visitor count state
-  const [visitorCount, setVisitorCount] = useState(0);
-  const countIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  
-  const secretPoints = [
-    "I transform data into actionable strategies that consistently exceed KPI targets by 20-30%.",
-    "My hybrid approach combines creative intuition with analytical rigor to unlock new growth opportunities.",
-    "I've developed an expertise in optimizing CAC and ROI across diverse marketing channels and industries.",
-    "My leadership philosophy centers on empowering cross-functional teams to deliver exceptional results.",
-    "I excel at identifying untapped market segments and crafting tailored acquisition strategies.",
-    "My technical marketing acumen allows me to bridge the gap between marketing vision and technical execution.",
-    "I've cultivated the ability to predict emerging trends and pivot strategies before competitors catch on.",
-    "My process optimization mindset has consistently reduced operational costs while improving performance.",
-    "I've mastered the balance between short-term performance wins and long-term brand building initiatives.",
-    "My customer-centric approach enables me to create marketing experiences that truly resonate with audiences."
-  ];
-  
-  // Reset secret after 5 seconds
-  const startSecretTimer = () => {
-    if (secretTimer) {
-      clearTimeout(secretTimer);
-    }
-    
-    const timer = setTimeout(() => {
-      setShowSecret(false);
-      setSecretIndex(-1);
-    }, 5000);
-    
-    setSecretTimer(timer);
-  };
-  
-  // Toggle secret visibility
-  const toggleSecret = () => {
-    if (showSecret) {
-      setShowSecret(false);
-      setSecretIndex(-1);
-      if (secretTimer) {
-        clearTimeout(secretTimer);
-        setSecretTimer(null);
-      }
-    } else {
-      const newIndex = Math.floor(Math.random() * secretPoints.length);
-      setSecretIndex(newIndex);
-      setShowSecret(true);
-      startSecretTimer();
-    }
-  };
-  
-  // Initialize and update visitor counter
-  useEffect(() => {
-    // Check if it's a new week (Monday) to reset counter
-    const checkIfNewWeek = () => {
-      const now = new Date();
-      const dayOfWeek = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
-      const lastVisit = localStorage.getItem('lastVisitTime');
-      let storedCount = localStorage.getItem('visitorCount');
-      
-      // If it's Monday and either no last visit or last visit was before today
-      if (dayOfWeek === 1) {
-        const today = new Date().setHours(0, 0, 0, 0);
-        
-        if (!lastVisit || new Date(parseInt(lastVisit)).setHours(0, 0, 0, 0) < today) {
-          // Reset to base count
-          storedCount = '540';
-          localStorage.setItem('visitorCount', storedCount);
-        }
-      }
-      
-      // Update last visit time
-      localStorage.setItem('lastVisitTime', Date.now().toString());
-      
-      return storedCount ? parseInt(storedCount) : 540;
-    };
-    
-    // Get or initialize the visitor count
-    const initialCount = checkIfNewWeek();
-    setVisitorCount(initialCount);
-    
-    // Setup interval for incrementing
-    const incrementValues = [1, 2, 3, 4, 5];
-    
-    countIntervalRef.current = setInterval(() => {
-      // Get random increment value
-      const randomIndex = Math.floor(Math.random() * incrementValues.length);
-      const incrementAmount = incrementValues[randomIndex];
-      
-      // Update count
-      setVisitorCount(prevCount => {
-        const newCount = prevCount + incrementAmount;
-        localStorage.setItem('visitorCount', newCount.toString());
-        return newCount;
-      });
-    }, 5000);
-    
-    return () => {
-      if (countIntervalRef.current) {
-        clearInterval(countIntervalRef.current);
-      }
-    };
-  }, []);
-  
-  // Clear timer on unmount
-  useEffect(() => {
-    return () => {
-      if (secretTimer) {
-        clearTimeout(secretTimer);
-      }
-    };
-  }, [secretTimer]);
-  
-  // Animation for the elements when the component mounts
-  useEffect(() => {
-    const elements = document.querySelectorAll('.animate-on-mount');
-    
-    elements.forEach((el, index) => {
-      setTimeout(() => {
-        el.classList.add('animate-fade-in');
-        el.classList.remove('opacity-0');
-      }, 200 * index);
-    });
-  }, []);
-  
   return (
-    <section id="home" className="relative min-h-screen flex items-center pt-32 pb-20 bg-white">
-      {/* Background overlay with subtle pattern */}
-      <div className="absolute inset-0 bg-[url('https://images.samsung.com/is/image/samsung/assets/us/home/062420/HP-KV-S20-Plus-Note-20-heros-1440x640.jpg')] bg-cover bg-center opacity-5">
-      </div>
-      
-      {/* Samsung-style content */}
-      <div className="container mx-auto relative z-10">
-        <div className="max-w-3xl f-pattern">
-          <div className="col-span-3">
-            <div className="flex flex-col md:flex-row items-center justify-between mb-8">
-              <div className="mb-3 inline-block px-3 py-1 border border-netflix-red/30 rounded-md text-sm text-black bg-white shadow-sm opacity-0 animate-on-mount">
-                Welcome to my portfolio
-              </div>
-              
-              <div className="bg-white text-black px-2 py-0.5 rounded shadow-sm border border-gray-200 animate-on-mount opacity-0 mt-2 md:mt-0">
-                <p className="flex items-center justify-center gap-1 text-xs">
-                  <span id="visitor-counter" className="text-netflix-red font-semibold counter-animate" data-target={visitorCount}>{visitorCount}</span> 
-                  <span>visitors this week</span>
-                </p>
-              </div>
-            </div>
-            
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-4 opacity-0 animate-on-mount">
-              <span className="bg-gradient-to-r from-netflix-dark via-netflix-red to-blue-400 bg-clip-text text-transparent">Anvesh Seeli</span>
-            </h1>
-            
-            <h2 className="text-xl md:text-2xl text-netflix-muted mb-8 opacity-0 animate-on-mount">
-              Strategic Integrated Marketing Leader | <span className="text-netflix-red font-medium">IIM Calcutta MBA</span> | Performance & Product Marketing
-            </h2>
-            
-            <p className="text-lg text-netflix-muted mb-8 opacity-0 animate-on-mount leading-readable">
-              Integrated Marketing Leader with <span className="text-netflix-red font-medium">5+ years</span> of experience driving measurable growth across FMCG, QSR, and FinTech. 
-              Currently managing <span className="text-netflix-red font-medium">₹7Cr+ monthly budgets</span> for global brands like Mars and Domino's, specializing in data-driven optimization and customer acquisition.
-            </p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-              <div className="bg-netflix-card border border-gray-200 rounded-lg p-4 shadow-sm opacity-0 animate-on-mount">
-                <div className="text-netflix-red text-2xl font-bold mb-1">₹7 Cr</div>
-                <span className="text-black">Monthly budget managed</span>
-              </div>
-              
-              <div className="bg-netflix-card border border-gray-200 rounded-lg p-4 shadow-sm opacity-0 animate-on-mount">
-                <div className="text-netflix-red text-2xl font-bold mb-1">17%</div>
-                <span className="text-black">Year-over-year growth achieved</span>
-              </div>
-            </div>
-            
-            <div className="flex flex-wrap gap-4 mt-6 opacity-0 animate-on-mount">
-              <a href="#case-studies" className="bg-netflix-red hover:bg-blue-700 text-white font-semibold py-2.5 px-5 rounded-md transition-all duration-300">
-                Explore My Work
-              </a>
-              <a href="#contact" className="border border-netflix-red text-netflix-red py-2.5 px-5 rounded-md hover:bg-netflix-red/5 transition-all duration-300">
-                Get In Touch
-              </a>
-            </div>
+    <section
+      id="top"
+      className="relative min-h-[100svh] flex items-center overflow-hidden bg-hero-gradient pt-24 pb-16"
+    >
+      {/* Background image */}
+      <img
+        src={heroBg}
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-screen"
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/60 to-background" />
+
+      {/* Grid overlay */}
+      <div className="absolute inset-0 grid-bg opacity-30" />
+
+      {/* Floating orbs */}
+      <div className="absolute top-20 right-10 w-72 h-72 rounded-full bg-primary/20 blur-3xl animate-pulse-glow" />
+      <div className="absolute bottom-10 left-10 w-96 h-96 rounded-full bg-gold/10 blur-3xl animate-pulse-glow" style={{ animationDelay: "2s" }} />
+
+      <div className="container-premium relative z-10">
+        <div className="max-w-5xl">
+          <div className="eyebrow mb-6 animate-fade-in">
+            <span className="h-1.5 w-1.5 rounded-full bg-primary shadow-glow-cyan" />
+            Performance Marketing · Strategy · Measurement
           </div>
-          
-          <div className="col-span-3 mt-16 opacity-0 animate-on-mount">
-            <p className="text-netflix-muted">
-              <span className="font-semibold text-black">The Secret Behind My Success</span> — Click to discover
-            </p>
-            <div 
-              className="mt-2 p-4 bg-netflix-card border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition-all duration-300 group relative overflow-hidden shadow-sm"
-              onClick={toggleSecret}
+
+          <h1 className="heading-display font-display mb-8 animate-fade-in-up" style={{ animationDelay: "0.1s", opacity: 0 }}>
+            I build performance marketing systems that deliver{" "}
+            <span className="gradient-text-cyan">predictable, multi-crore growth.</span>
+          </h1>
+
+          <p className="text-lead max-w-3xl mb-10 animate-fade-in-up" style={{ animationDelay: "0.25s", opacity: 0 }}>
+            Performance Marketing Leader at <span className="text-foreground font-medium">Mars Pet Nutrition</span> (Pedigree, Whiskas, Sheba). Ex-Domino's Pizza India · IIM Calcutta MBA. Specialist in incrementality-first marketing, social commerce innovation, and advanced measurement.
+          </p>
+
+          <div className="flex flex-wrap gap-3 md:gap-4 animate-fade-in-up" style={{ animationDelay: "0.4s", opacity: 0 }}>
+            <Button
+              asChild
+              size="lg"
+              className="bg-primary text-primary-foreground hover:bg-primary-glow shadow-glow-cyan group h-12 px-6"
             >
-              {!showSecret ? (
-                <div className="lock-icon flex items-center justify-center py-4 animate-pulse">
-                  <svg className="w-8 h-8 text-netflix-red" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                  </svg>
-                </div>
-              ) : (
-                <div className="animate-fade-in py-4">
-                  <p className="text-black">{secretPoints[secretIndex]}</p>
-                </div>
-              )}
-            </div>
+              <a href="#case-studies">
+                Explore Case Studies
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </a>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="border-border bg-surface/40 backdrop-blur hover:bg-surface hover:border-gold/50 h-12 px-6"
+            >
+              <a href="/Anvesh_Seeli_Resume.pdf" download>
+                <Download className="mr-2 h-4 w-4" />
+                Download Executive Resume
+              </a>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="ghost"
+              className="text-foreground hover:bg-surface h-12 px-6"
+            >
+              <a href="#connect">
+                <Calendar className="mr-2 h-4 w-4" />
+                Book Strategy Call
+              </a>
+            </Button>
+          </div>
+
+          <div className="mt-16 flex items-center gap-8 text-xs text-muted-foreground uppercase tracking-widest animate-fade-in" style={{ animationDelay: "0.7s", opacity: 0 }}>
+            <span>Currently @</span>
+            <span className="font-display text-sm text-foreground/80">Mars Pet Nutrition</span>
+            <span className="hidden md:inline text-border">•</span>
+            <span className="hidden md:inline font-display text-sm text-foreground/80">Pedigree</span>
+            <span className="hidden md:inline text-border">•</span>
+            <span className="hidden md:inline font-display text-sm text-foreground/80">Whiskas</span>
+            <span className="hidden md:inline text-border">•</span>
+            <span className="hidden md:inline font-display text-sm text-foreground/80">Sheba</span>
           </div>
         </div>
+      </div>
+
+      {/* Scroll indicator */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-muted-foreground text-xs uppercase tracking-widest animate-float-slow">
+        <span>Scroll</span>
+        <div className="h-10 w-px bg-gradient-to-b from-primary to-transparent" />
       </div>
     </section>
   );

@@ -1,90 +1,101 @@
+import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+const links = [
+  { label: "Work", href: "#case-studies" },
+  { label: "Capabilities", href: "#capabilities" },
+  { label: "Career", href: "#career" },
+  { label: "Insights", href: "#insights" },
+  { label: "Credentials", href: "#credentials" },
+];
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  
-  // Handle scroll events to change navbar appearance
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    const onScroll = () => setScrolled(window.scrollY > 16);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'Case Studies', href: '#case-studies' },
-    { name: 'Resume', href: '#resume' },
-    { name: 'Certifications', href: '#certifications' },
-    { name: 'Marketing Playground', href: '#marketing-playground' },
-    { name: 'Testimonials', href: '#testimonials' },
-    { name: 'Contact', href: '#contact' }
-  ];
-  
   return (
-    <nav 
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-md' : 'bg-white'
+    <header
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? "bg-background/80 backdrop-blur-xl border-b border-border/60"
+          : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
-          <a href="#home" className="text-netflix-dark text-2xl font-bold">A<span className="text-netflix-red">S</span></a>
-          
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-10">
-            {navLinks.map((link) => (
-              <a 
-                key={link.name}
-                href={link.href}
-                className="text-black hover:text-netflix-red transition-colors duration-300 font-medium"
+      <nav className="container-premium flex h-16 md:h-20 items-center justify-between">
+        <a href="#top" className="flex items-center gap-2 font-display text-lg font-semibold">
+          <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-cyan text-primary-foreground font-bold">
+            A
+          </span>
+          <span className="hidden sm:inline">Anvesh Seeli</span>
+        </a>
+
+        <div className="hidden md:flex items-center gap-8">
+          {links.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
+            >
+              {l.label}
+            </a>
+          ))}
+        </div>
+
+        <div className="hidden md:flex items-center gap-3">
+          <a
+            href="/Anvesh_Seeli_Resume.pdf"
+            download
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Resume
+          </a>
+          <Button asChild size="sm" className="bg-primary text-primary-foreground hover:bg-primary-glow">
+            <a href="#connect">Connect</a>
+          </Button>
+        </div>
+
+        <button
+          className="md:hidden text-foreground"
+          onClick={() => setOpen((v) => !v)}
+          aria-label="Toggle menu"
+        >
+          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
+      </nav>
+
+      {open && (
+        <div className="md:hidden bg-background/95 backdrop-blur-xl border-t border-border/60">
+          <div className="container-premium py-6 flex flex-col gap-4">
+            {links.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                className="text-base text-foreground/80 hover:text-primary transition-colors"
+                onClick={() => setOpen(false)}
               >
-                {link.name}
+                {l.label}
               </a>
             ))}
-          </div>
-          
-          {/* Mobile Navigation Toggle */}
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-black focus:outline-none"
-            >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-        </div>
-        
-        {/* Mobile Navigation Menu */}
-        {isOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-4 space-y-4 bg-white mt-2 rounded-md animate-slide-down shadow-lg">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="block text-black hover:text-netflix-red transition-colors duration-300"
-                >
-                  {link.name}
-                </a>
-              ))}
+            <div className="flex gap-3 pt-3 border-t border-border/60">
+              <Button asChild variant="outline" size="sm" className="flex-1">
+                <a href="/Anvesh_Seeli_Resume.pdf" download>Resume</a>
+              </Button>
+              <Button asChild size="sm" className="flex-1 bg-primary text-primary-foreground">
+                <a href="#connect" onClick={() => setOpen(false)}>Connect</a>
+              </Button>
             </div>
           </div>
-        )}
-      </div>
-    </nav>
+        </div>
+      )}
+    </header>
   );
 };
 

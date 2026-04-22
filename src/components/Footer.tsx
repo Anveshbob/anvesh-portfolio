@@ -1,36 +1,64 @@
-
-import React from 'react';
-import { ArrowUp } from 'lucide-react';
+import { Linkedin, Mail, ArrowUpRight } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-white py-12 px-6 border-t border-gray-200">
-      <div className="container mx-auto">
-        <div className="flex justify-center mb-8">
-          <button 
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="w-12 h-12 rounded-full bg-netflix-red flex items-center justify-center hover:bg-blue-700 transition-colors duration-300 shadow-md"
-          >
-            <ArrowUp className="w-6 h-6 text-white" />
-          </button>
-        </div>
-        
-        <div className="text-center">
-          <div className="flex flex-wrap justify-center gap-6 mb-6">
-            <a href="#home" className="text-netflix-muted hover:text-netflix-red transition-colors duration-300">Home</a>
-            <a href="#case-studies" className="text-netflix-muted hover:text-netflix-red transition-colors duration-300">Case Studies</a>
-            <a href="#resume" className="text-netflix-muted hover:text-netflix-red transition-colors duration-300">Resume</a>
-            <a href="#certifications" className="text-netflix-muted hover:text-netflix-red transition-colors duration-300">Certifications</a>
-            <a href="#marketing-playground" className="text-netflix-muted hover:text-netflix-red transition-colors duration-300">Marketing Playground</a>
-            <a href="#testimonials" className="text-netflix-muted hover:text-netflix-red transition-colors duration-300">Testimonials</a>
-            <a href="#contact" className="text-netflix-muted hover:text-netflix-red transition-colors duration-300">Contact</a>
+    <footer className="relative border-t border-border/60 bg-surface-muted/40">
+      <div className="container-premium py-16">
+        <div className="grid md:grid-cols-12 gap-10">
+          <div className="md:col-span-5">
+            <div className="flex items-center gap-2 font-display text-lg font-semibold mb-4">
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-cyan text-primary-foreground font-bold">
+                A
+              </span>
+              Anvesh Seeli
+            </div>
+            <p className="text-muted-foreground max-w-sm leading-relaxed">
+              Performance marketing leader building incrementality-first growth systems for global brands.
+            </p>
           </div>
-          
-          <p className="text-netflix-muted mb-2">seelianvesh@gmail.com</p>
-          <p className="text-netflix-muted mb-2">+91 8143130661</p>
-          <p className="text-netflix-muted text-sm">
-            &copy; {new Date().getFullYear()} Anvesh Seeli. All rights reserved.
-          </p>
+
+          <div className="md:col-span-3">
+            <div className="text-xs uppercase tracking-widest text-muted-foreground mb-4">Navigate</div>
+            <ul className="space-y-2 text-sm">
+              <li><a href="#case-studies" className="text-foreground/80 hover:text-primary transition-colors">Work</a></li>
+              <li><a href="#capabilities" className="text-foreground/80 hover:text-primary transition-colors">Capabilities</a></li>
+              <li><a href="#career" className="text-foreground/80 hover:text-primary transition-colors">Career</a></li>
+              <li><a href="#credentials" className="text-foreground/80 hover:text-primary transition-colors">Credentials</a></li>
+            </ul>
+          </div>
+
+          <div className="md:col-span-4">
+            <div className="text-xs uppercase tracking-widest text-muted-foreground mb-4">Connect</div>
+            <ul className="space-y-3 text-sm">
+              <li>
+                <a
+                  href="mailto:seelianvesh@gmail.com"
+                  className="inline-flex items-center gap-2 text-foreground/80 hover:text-primary transition-colors group"
+                >
+                  <Mail className="h-4 w-4" />
+                  seelianvesh@gmail.com
+                  <ArrowUpRight className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/anvesh-seeli/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-foreground/80 hover:text-primary transition-colors group"
+                >
+                  <Linkedin className="h-4 w-4" />
+                  /in/anvesh-seeli
+                  <ArrowUpRight className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-16 pt-8 border-t border-border/60 flex flex-col md:flex-row justify-between gap-4 text-xs text-muted-foreground">
+          <div>© {new Date().getFullYear()} Anvesh Seeli. Crafted with intent.</div>
+          <div className="font-mono">v2.0 · Executive Dark</div>
         </div>
       </div>
     </footer>
