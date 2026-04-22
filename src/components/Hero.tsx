@@ -6,11 +6,11 @@ const Hero = () => {
   // State to track current secret index
   const [secretIndex, setSecretIndex] = useState(-1);
   const [showSecret, setShowSecret] = useState(false);
-  const [secretTimer, setSecretTimer] = useState<NodeJS.Timeout | null>(null);
+  const [secretTimer, setSecretTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
   
   // Visitor count state
   const [visitorCount, setVisitorCount] = useState(0);
-  const countIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const countIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   
   const secretPoints = [
     "I transform data into actionable strategies that consistently exceed KPI targets by 20-30%.",
