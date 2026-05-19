@@ -13,6 +13,10 @@ const Hero = () => {
         src={heroBg}
         alt=""
         aria-hidden="true"
+        width={1920}
+        height={1080}
+        fetchPriority="high"
+        decoding="async"
         className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-screen"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/60 to-background" />
