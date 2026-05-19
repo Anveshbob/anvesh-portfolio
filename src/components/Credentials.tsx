@@ -13,37 +13,44 @@ const education = [
   },
 ];
 
-const certifications: { issuer: string; items: string[] }[] = [
+const certifications: { category: string; items: string[] }[] = [
   {
-    issuer: "Google Digital Academy",
+    category: "Performance & Ad Tech",
     items: [
       "Google Ads — Measurement Certification",
       "Google Ads — Display Certification",
       "Google Ads — Apps Certification",
       "AI-Powered Performance Ads Certification",
+      "Setting up Ad Campaigns",
     ],
   },
   {
-    issuer: "Google",
-    items: ["Fundamentals of Digital Marketing"],
+    category: "Marketing Strategy",
+    items: [
+      "Fundamentals of Digital Marketing",
+      "Product, Pricing, and Promotion in the Marketing Mix",
+      "Reaching Customers Digitally",
+      "Helping Customers Find You",
+    ],
   },
   {
-    issuer: "Skillshop",
+    category: "Analytics & Insights",
     items: [
-      "Setting up Ad Campaigns",
-      "Product, Pricing, and Promotion in the Marketing Mix",
-      "Communicating with Confidence",
-      "Helping Customers Find You",
-      "Report Insights on Social Media Marketing",
-      "Reaching Customers Digitally",
-      "Social Media and Social Selling",
       "Analyzing Audiences & Users Behavior",
       "Creating & Managing Properties",
+      "Report Insights on Social Media Marketing",
     ],
   },
   {
-    issuer: "KPMG",
-    items: ["Lean Six Sigma — Green Belt"],
+    category: "Social & Commerce",
+    items: ["Social Media and Social Selling"],
+  },
+  {
+    category: "Leadership & Operations",
+    items: [
+      "Lean Six Sigma — Green Belt",
+      "Communicating with Confidence",
+    ],
   },
 ];
 
@@ -94,9 +101,9 @@ const Credentials = () => {
             <h3 className="font-display text-lg font-semibold mb-6">Certifications</h3>
             <div className="space-y-5">
               {certifications.map((group) => (
-                <div key={group.issuer}>
+                <div key={group.category}>
                   <div className="text-xs uppercase tracking-widest text-muted-foreground mb-2">
-                    {group.issuer}
+                    {group.category}
                   </div>
                   <ul className="space-y-2">
                     {group.items.map((c) => (
