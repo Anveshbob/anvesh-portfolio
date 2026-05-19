@@ -13,10 +13,38 @@ const education = [
   },
 ];
 
-const certifications = [
-  "Google Ads — Measurement Certification",
-  "AI-Powered Performance Ads (Google)",
-  "Lean Six Sigma Green Belt — KPMG",
+const certifications: { issuer: string; items: string[] }[] = [
+  {
+    issuer: "Google Digital Academy",
+    items: [
+      "Google Ads — Measurement Certification",
+      "Google Ads — Display Certification",
+      "Google Ads — Apps Certification",
+      "AI-Powered Performance Ads Certification",
+    ],
+  },
+  {
+    issuer: "Google",
+    items: ["Fundamentals of Digital Marketing"],
+  },
+  {
+    issuer: "Skillshop",
+    items: [
+      "Setting up Ad Campaigns",
+      "Product, Pricing, and Promotion in the Marketing Mix",
+      "Communicating with Confidence",
+      "Helping Customers Find You",
+      "Report Insights on Social Media Marketing",
+      "Reaching Customers Digitally",
+      "Social Media and Social Selling",
+      "Analyzing Audiences & Users Behavior",
+      "Creating & Managing Properties",
+    ],
+  },
+  {
+    issuer: "KPMG",
+    items: ["Lean Six Sigma — Green Belt"],
+  },
 ];
 
 const skills = {
@@ -64,14 +92,23 @@ const Credentials = () => {
               <Award className="h-5 w-5" />
             </div>
             <h3 className="font-display text-lg font-semibold mb-6">Certifications</h3>
-            <ul className="space-y-4">
-              {certifications.map((c, i) => (
-                <li key={i} className="flex gap-3 text-sm text-foreground/80">
-                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0" />
-                  {c}
-                </li>
+            <div className="space-y-5">
+              {certifications.map((group) => (
+                <div key={group.issuer}>
+                  <div className="text-xs uppercase tracking-widest text-muted-foreground mb-2">
+                    {group.issuer}
+                  </div>
+                  <ul className="space-y-2">
+                    {group.items.map((c) => (
+                      <li key={c} className="flex gap-3 text-sm text-foreground/80">
+                        <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0" />
+                        {c}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
 
           {/* Skills */}
