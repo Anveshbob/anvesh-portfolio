@@ -1,31 +1,31 @@
-import { GraduationCap, Award, Wrench } from "lucide-react";
+import { GraduationCap } from "lucide-react";
 
 const education = [
   {
     degree: "MBA — Marketing & Organizational Behavior",
     school: "Indian Institute of Management, Calcutta",
-    period: "2019 — 2021",
+    years: "2019 — 2021",
   },
   {
     degree: "B.Tech — Mechanical Engineering",
     school: "National Institute of Technology, Calicut",
-    period: "2013 — 2017",
+    years: "2013 — 2017",
   },
 ];
 
-const certifications: { category: string; items: string[] }[] = [
+const certGroups = [
   {
-    category: "Performance & Ad Tech",
+    title: "Performance & Ad Tech",
     items: [
-      "Google Ads — Measurement Certification",
-      "Google Ads — Display Certification",
-      "Google Ads — Apps Certification",
+      "Google Ads Measurement Certification",
+      "Google Ads Display Certification",
+      "Google Ads Apps Certification",
       "AI-Powered Performance Ads Certification",
       "Setting up Ad Campaigns",
     ],
   },
   {
-    category: "Marketing Strategy",
+    title: "Marketing Strategy",
     items: [
       "Fundamentals of Digital Marketing",
       "Product, Pricing, and Promotion in the Marketing Mix",
@@ -34,115 +34,111 @@ const certifications: { category: string; items: string[] }[] = [
     ],
   },
   {
-    category: "Analytics & Insights",
+    title: "Analytics & Insights",
     items: [
-      "Analyzing Audiences & Users Behavior",
+      "Analyzing Audiences & User Behavior",
       "Creating & Managing Properties",
       "Report Insights on Social Media Marketing",
     ],
   },
   {
-    category: "Social & Commerce",
-    items: ["Social Media and Social Selling"],
-  },
-  {
-    category: "Leadership & Operations",
-    items: [
-      "Lean Six Sigma — Green Belt",
-      "Communicating with Confidence",
-    ],
+    title: "Leadership & Operations",
+    items: ["Lean Six Sigma — Green Belt", "Communicating with Confidence"],
   },
 ];
 
-const skills = {
-  "Marketing Platforms": ["Google Ads", "Meta Ads", "Performance Max", "YouTube", "DV360", "Programmatic", "Instagram Shop"],
-  "Analytics & Data": ["GA4", "SQL", "PowerBI", "Amplitude", "Singular", "Cube", "Marketing Mix Modeling"],
-  "Strategy": ["GTM Strategy", "Incrementality Testing", "CAC Optimisation", "CRM & Lifecycle", "Product Marketing"],
-};
+const stackGroups = [
+  {
+    title: "Marketing Platforms",
+    items: ["Google Ads", "Meta Ads", "Performance Max", "YouTube", "DV360", "Programmatic", "Instagram Shop"],
+  },
+  {
+    title: "Analytics & Data",
+    items: ["GA4", "SQL", "Power BI", "Amplitude", "Singular", "Cube", "Marketing Mix Modeling"],
+  },
+  {
+    title: "Growth Strategy",
+    items: ["GTM Strategy", "Incrementality Testing", "CAC Optimization", "CRM & Lifecycle", "Product Marketing", "Social Commerce"],
+  },
+];
+
+const Chip = ({ children, accent }: { children: React.ReactNode; accent?: "gold" | "cyan" }) => (
+  <span
+    className={`inline-flex items-center rounded-full border px-3 py-1 text-xs ${
+      accent === "gold"
+        ? "border-gold/30 bg-gold/5 text-gold"
+        : "border-border bg-surface-muted text-foreground/85"
+    }`}
+  >
+    {children}
+  </span>
+);
 
 const Credentials = () => {
   return (
     <section id="credentials" className="section-padding relative">
       <div className="container-premium">
-        <div className="max-w-3xl mb-16">
+        <div className="max-w-3xl mb-14">
           <div className="eyebrow mb-4">
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
             Credentials
           </div>
           <h2 className="heading-section font-display">
-            Education, certifications and the{" "}
-            <span className="gradient-text-gold">technical stack.</span>
+            Education, certifications, and{" "}
+            <span className="gradient-text-cyan">technical stack</span>
           </h2>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-6">
-          {/* Education */}
-          <div className="premium-card">
-            <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-gold/10 text-gold mb-6">
-              <GraduationCap className="h-5 w-5" />
-            </div>
-            <h3 className="font-display text-lg font-semibold mb-6">Education</h3>
-            <div className="space-y-6">
-              {education.map((e, i) => (
-                <div key={i} className="border-l-2 border-gold/40 pl-4">
-                  <div className="text-xs uppercase tracking-widest text-gold mb-1">{e.period}</div>
-                  <div className="font-medium text-foreground">{e.degree}</div>
-                  <div className="text-sm text-muted-foreground mt-1">{e.school}</div>
+        {/* Education */}
+        <div className="mb-14">
+          <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-5">Education</div>
+          <div className="grid md:grid-cols-2 gap-5">
+            {education.map((e, i) => (
+              <div key={i} className="rounded-2xl border border-border/60 bg-surface p-6 flex items-start gap-4">
+                <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gold/10 text-gold flex-shrink-0">
+                  <GraduationCap className="h-5 w-5" />
                 </div>
-              ))}
-            </div>
+                <div>
+                  <h3 className="font-display text-base md:text-lg font-semibold leading-snug">{e.degree}</h3>
+                  <div className="text-sm text-foreground/80 mt-1">{e.school}</div>
+                  <div className="text-xs text-muted-foreground mt-1">{e.years}</div>
+                </div>
+              </div>
+            ))}
           </div>
+        </div>
 
-          {/* Certifications */}
-          <div className="premium-card">
-            <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary mb-6">
-              <Award className="h-5 w-5" />
-            </div>
-            <h3 className="font-display text-lg font-semibold mb-6">Certifications</h3>
-            <div className="space-y-5">
-              {certifications.map((group) => (
-                <div key={group.category}>
-                  <div className="text-xs uppercase tracking-widest text-muted-foreground mb-2">
-                    {group.category}
-                  </div>
-                  <ul className="space-y-2">
-                    {group.items.map((c) => (
-                      <li key={c} className="flex gap-3 text-sm text-foreground/80">
-                        <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0" />
-                        {c}
-                      </li>
-                    ))}
-                  </ul>
+        {/* Certifications */}
+        <div className="mb-14">
+          <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-5">Certifications</div>
+          <div className="grid md:grid-cols-2 gap-5">
+            {certGroups.map((g, i) => (
+              <div key={i} className="rounded-2xl border border-border/60 bg-surface p-6">
+                <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-primary mb-4">{g.title}</h3>
+                <div className="flex flex-wrap gap-2">
+                  {g.items.map((c, j) => (
+                    <Chip key={j}>{c}</Chip>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
+        </div>
 
-          {/* Skills */}
-          <div className="premium-card">
-            <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-gold/10 text-gold mb-6">
-              <Wrench className="h-5 w-5" />
-            </div>
-            <h3 className="font-display text-lg font-semibold mb-6">Technical Stack</h3>
-            <div className="space-y-5">
-              {Object.entries(skills).map(([cat, items]) => (
-                <div key={cat}>
-                  <div className="text-xs uppercase tracking-widest text-muted-foreground mb-2">
-                    {cat}
-                  </div>
-                  <div className="flex flex-wrap gap-1.5">
-                    {items.map((s) => (
-                      <span
-                        key={s}
-                        className="text-xs px-2.5 py-1 rounded-md bg-surface border border-border/60 text-foreground/80"
-                      >
-                        {s}
-                      </span>
-                    ))}
-                  </div>
+        {/* Technical Stack */}
+        <div>
+          <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-5">Technical Stack</div>
+          <div className="grid md:grid-cols-3 gap-5">
+            {stackGroups.map((g, i) => (
+              <div key={i} className="rounded-2xl border border-border/60 bg-surface p-6">
+                <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-gold mb-4">{g.title}</h3>
+                <div className="flex flex-wrap gap-2">
+                  {g.items.map((c, j) => (
+                    <Chip key={j}>{c}</Chip>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

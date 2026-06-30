@@ -9,42 +9,27 @@ const Narrative = () => {
               About
             </div>
             <h2 className="heading-section font-display">
-              Leadership <span className="gradient-text-cyan">Narrative</span>
+              I operate where media, measurement, and{" "}
+              <span className="gradient-text-cyan">business outcomes meet.</span>
             </h2>
-            <div className="mt-8 hidden lg:block">
-              <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                <span className="h-px w-10 bg-gold" />
-                IIM Calcutta MBA
-              </div>
-              <div className="flex items-center gap-3 text-sm text-muted-foreground mt-2">
-                <span className="h-px w-10 bg-gold" />
-                NIT Calicut B.Tech
-              </div>
-              <div className="flex items-center gap-3 text-sm text-muted-foreground mt-2">
-                <span className="h-px w-10 bg-gold" />
-                5+ years · ₹7Cr+ monthly P&L
-              </div>
-            </div>
           </div>
 
           <div className="lg:col-span-8 space-y-6 text-base md:text-lg leading-relaxed text-foreground/80">
             <p>
-              I am a strategic marketing leader who sits at the intersection of{" "}
-              <span className="text-foreground font-medium">performance marketing</span>,{" "}
-              <span className="text-foreground font-medium">product thinking</span>, and{" "}
-              <span className="text-foreground font-medium">business strategy</span>.
+              I am a performance marketing and growth professional with experience across{" "}
+              <span className="text-foreground font-medium">QSR, FMCG / pet care, SaaS product marketing, and financial services</span>.
             </p>
             <p>
-              At <span className="text-foreground font-medium">Mars Pet Nutrition</span>, I orchestrate integrated performance ecosystems across Google, Meta, and social commerce channels for three of India's most loved pet brands. Previously at <span className="text-foreground font-medium">Domino's Pizza India</span>, I built and scaled a full-funnel digital marketing engine that delivered{" "}
-              <span className="gradient-text-gold font-semibold">17% YoY customer growth</span> while managing <span className="gradient-text-gold font-semibold">₹7 Cr+ monthly budgets</span> with extreme ROI accountability.
+              At <span className="text-foreground font-medium">Domino's Pizza India</span>, I worked on large-scale digital acquisition and retention across Meta, Google, YouTube, UAC, CRM, affiliates, influencers, and brand partnerships while managing high-accountability media budgets.
             </p>
             <p>
-              My expertise lies in building{" "}
-              <span className="gradient-text-cyan font-semibold">incrementality-first</span>{" "}
-              marketing systems — leveraging advanced measurement (GA4 + SQL + marketing mix modeling), social commerce innovation, and cross-functional leadership to drive both scalable acquisition and profitable growth.
+              At <span className="text-foreground font-medium">Mars Pet Nutrition</span>, I worked across performance marketing, sampling-led acquisition, social commerce, and data-driven marketing initiatives for brands including Pedigree, Whiskas, and Sheba.
+            </p>
+            <p>
+              My strength is combining campaign execution, measurement discipline, and business context — turning marketing activity into clear decisions for leadership teams.
             </p>
             <p className="text-muted-foreground italic border-l-2 border-primary/60 pl-6">
-              MBA from IIM Calcutta. Obsessed with turning complex data into clear strategic advantage.
+              I care about clean measurement, practical execution, and growth systems that can survive real-world complexity.
             </p>
           </div>
         </div>

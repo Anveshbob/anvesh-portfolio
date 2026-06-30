@@ -1,166 +1,179 @@
-import { ArrowUpRight } from "lucide-react";
-import marsImg from "@/assets/case-mars.jpg";
-import dominosImg from "@/assets/case-dominos.jpg";
-import braneImg from "@/assets/case-brane.jpg";
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 
-type Study = {
-  number: string;
+type CaseStudy = {
+  label: string;
   title: string;
-  client: string;
-  image: string;
-  challenge: string;
-  approach: string;
-  results: string;
-  methods?: string;
-  metrics: { value: string; label: string }[];
+  context: string;
+  scope: string;
+  interventions: string[];
+  outcomes: string[];
+  tools: string;
+  cta: string;
 };
 
-const studies: Study[] = [
+const studies: CaseStudy[] = [
   {
-    number: "01",
-    client: "Mars Pet Nutrition",
-    title: "Scaling Mars Pet Nutrition through Social Commerce & Data-Driven Marketing",
-    image: marsImg,
-    challenge:
-      "Launch premium pet nutrition brands in a competitive market with high customer acquisition costs.",
-    approach:
-      "Built end-to-end performance strategy including Performance Max, Meta Advantage+, Instagram Shop innovation, and a comprehensive Data-Driven Marketing (DDM) program. Created seamless shopping experiences and reduced cost-per-sample by 40%.",
-    results:
-      "Delivered 655,000 product samples in Q3 2024 (50% of annual target in 3 months), identified new high-ROI acquisition channels, and significantly improved ROAS through multi-touch attribution modeling.",
-    methods: "GA4 · SQL · Singular · Marketing Mix Modeling",
-    metrics: [
-      { value: "655K", label: "Samples in Q3" },
-      { value: "−40%", label: "Cost per sample" },
-      { value: "50%", label: "Annual target in 3 months" },
+    label: "01 · Domino's Pizza India / Jubilant FoodWorks",
+    title: "Building a full-funnel digital growth engine for Domino's India",
+    context:
+      "Domino's needed to grow customer acquisition and retention across India while maintaining strict ROI discipline across a large and complex digital media portfolio.",
+    scope:
+      "I worked across Pan-India digital marketing channels including Meta, Google, YouTube, UAC, CRM, affiliates, influencers, and brand partnerships. The role involved campaign planning, performance tracking, agency coordination, stakeholder alignment, and continuous optimization across acquisition and retention journeys.",
+    interventions: [
+      "Managed and optimized a ₹7Cr+ monthly digital media portfolio.",
+      "Rebalanced channel priorities based on acquisition efficiency and business impact.",
+      "Worked on incrementality tests to validate the true contribution of media investments.",
+      "Improved CRM and app communication journeys to increase traffic and conversion efficiency.",
+      "Coordinated across 30+ internal stakeholders and 10+ partner agencies.",
+      "Built clearer reporting structures for leadership visibility and media accountability.",
     ],
+    outcomes: [
+      "17% YoY customer acquisition growth.",
+      "35% traffic increase.",
+      "25% conversion rate improvement.",
+      "11% sales growth.",
+      "₹2Cr+ incremental monthly revenue impact.",
+    ],
+    tools: "Google Ads · Meta Ads · YouTube · UAC · CRM · GA4 · Singular · Incrementality Testing · Marketing Automation",
+    cta: "View growth levers",
   },
   {
-    number: "02",
-    client: "Domino's Pizza India",
-    title: "Building Domino's 17% Growth Engine Across Paid + Owned + Social Commerce",
-    image: dominosImg,
-    challenge:
-      "Drive customer acquisition and retention for India's largest QSR brand while maintaining strict ROI thresholds.",
-    approach:
-      "Designed and led full-funnel strategy across Meta, Google, YouTube, Influencers, and CRM/lifecycle marketing. Ran five major incrementality tests and transformed CRM + app experience.",
-    results:
-      "17% YoY customer growth, 35% traffic increase, 25% improvement in conversion rate, ₹2+ Cr incremental monthly revenue, 11% sales growth.",
-    methods:
-      "GA4 · Singular · Incrementality testing · Marketing automation · Cross-functional leadership of 30+ stakeholders",
-    metrics: [
-      { value: "17%", label: "YoY customer growth" },
-      { value: "₹2+ Cr", label: "Incremental monthly rev" },
-      { value: "25%", label: "CR improvement" },
+    label: "02 · Mars Pet Nutrition",
+    title: "Scaling sampling-led acquisition and performance marketing for pet care brands",
+    context:
+      "Mars Pet Nutrition needed to scale product trial and acquisition across a competitive pet care market while improving sampling efficiency, media measurement, and digital commerce readiness.",
+    scope:
+      "I worked across performance marketing and data-driven marketing initiatives for Pedigree, Whiskas, and Sheba. The work involved Google and Meta campaigns, sampling-led acquisition, partner-led activations, GA4-led measurement, reporting, and agency coordination.",
+    interventions: [
+      "Supported performance marketing across Google Ads, Meta Ads, and Performance Max.",
+      "Worked on sampling-led acquisition initiatives across media and partner channels.",
+      "Helped improve visibility into acquisition quality, cost efficiency, and channel contribution.",
+      "Contributed to DDM planning, reporting, and performance governance.",
+      "Worked with internal teams and agencies to improve campaign clarity and execution discipline.",
+      "Supported social commerce and Instagram Shop-led growth initiatives where relevant.",
     ],
+    outcomes: [
+      "655K product samples delivered in one quarter.",
+      "40% reduction in cost per sample.",
+      "Improved visibility into high-performing acquisition channels.",
+      "Stronger performance reporting across sampling and paid media initiatives.",
+    ],
+    tools: "Google Ads · Meta Ads · Performance Max · GA4 · SQL · Power BI · Singular · Partner Dashboards",
+    cta: "View acquisition system",
   },
   {
-    number: "03",
-    client: "Brane Enterprises",
-    title: "Product Marketing Transformation at Brane (SaaS)",
-    image: braneImg,
-    challenge:
-      "Bridge product, design, engineering and business teams to launch market-driven products.",
-    approach:
-      "Built product marketing function from the ground up. Created product roadmaps, GTM strategies, positioning, and multi-channel launch campaigns. Implemented OKR framework and agile collaboration.",
-    results:
-      "Successfully launched multiple products with clear market fit, improved cross-functional velocity, and established measurable success metrics.",
-    metrics: [
-      { value: "0→1", label: "PMM function built" },
-      { value: "Multi", label: "Product launches" },
-      { value: "OKR", label: "Framework rollout" },
+    label: "03 · Brane Enterprises",
+    title: "Building product marketing and GTM operating systems",
+    context:
+      "Brane required stronger alignment between product, design, engineering, and business teams to improve product-market clarity, launch readiness, and GTM execution.",
+    scope:
+      "I worked at the intersection of product marketing, GTM planning, roadmap alignment, and cross-functional execution. The role involved translating product capabilities into clearer positioning, launch documentation, and structured business narratives.",
+    interventions: [
+      "Created product marketing workflows from the ground up.",
+      "Developed GTM planning structures for product launches.",
+      "Worked on product positioning, messaging, and launch narratives.",
+      "Supported roadmap alignment between product, design, engineering, and business teams.",
+      "Introduced OKR-based planning and execution tracking.",
+      "Improved cross-functional clarity around product goals and launch priorities.",
     ],
+    outcomes: [
+      "Established product marketing operating structure.",
+      "Improved GTM readiness for multiple product initiatives.",
+      "Created clearer alignment between product, business, and execution teams.",
+      "Strengthened documentation and planning discipline.",
+    ],
+    tools: "GTM Strategy · Product Positioning · OKRs · Roadmap Planning · Cross-functional Workshops · Launch Documentation",
+    cta: "View GTM system",
   },
 ];
 
 const CaseStudies = () => {
+  const [open, setOpen] = useState<number | null>(0);
+
   return (
-    <section id="case-studies" className="section-padding relative">
+    <section id="work" className="section-padding relative">
       <div className="container-premium">
-        <div className="max-w-3xl mb-16 md:mb-24">
+        <div className="max-w-3xl mb-14">
           <div className="eyebrow mb-4">
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-            Signature Work
+            Selected Work
           </div>
           <h2 className="heading-section font-display">
-            Case studies that compounded into{" "}
-            <span className="gradient-text-cyan">measurable business outcomes.</span>
+            Case studies grounded in <span className="gradient-text-gold">business outcomes</span>
           </h2>
+          <p className="text-lead mt-5">
+            A closer look at the growth systems, media operations, and measurement work I have contributed to across consumer and product-led businesses.
+          </p>
         </div>
 
-        <div className="space-y-24 md:space-y-32">
-          {studies.map((s, i) => (
-            <article
-              key={s.number}
-              className={`grid lg:grid-cols-12 gap-8 lg:gap-16 items-center ${
-                i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""
-              }`}
-            >
-              <div className="lg:col-span-6">
-                <div className="relative group rounded-2xl overflow-hidden border border-border/60 shadow-elegant">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-gold/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 pointer-events-none" />
-                  <img
-                    src={s.image}
-                    alt={s.client}
-                    loading="lazy"
-                    width={1280}
-                    height={800}
-                    className="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute top-4 left-4 z-20 px-3 py-1 rounded-full bg-background/80 backdrop-blur border border-border/60 text-xs font-medium text-foreground">
-                    {s.client}
+        <div className="space-y-4">
+          {studies.map((s, i) => {
+            const isOpen = open === i;
+            return (
+              <article key={i} className="rounded-2xl border border-border/60 bg-surface overflow-hidden transition-colors hover:border-primary/40">
+                <button
+                  onClick={() => setOpen(isOpen ? null : i)}
+                  className="w-full text-left p-6 md:p-8 flex items-start justify-between gap-6"
+                  aria-expanded={isOpen}
+                >
+                  <div className="flex-1 min-w-0">
+                    <div className="text-xs uppercase tracking-[0.18em] text-primary mb-2">{s.label}</div>
+                    <h3 className="font-display text-xl md:text-2xl font-semibold leading-snug">{s.title}</h3>
                   </div>
-                </div>
-              </div>
-
-              <div className="lg:col-span-6">
-                <div className="flex items-center gap-4 mb-6">
-                  <span className="font-display text-5xl gradient-text-gold leading-none">
-                    {s.number}
-                  </span>
-                  <div className="h-px flex-1 bg-border" />
-                  <ArrowUpRight className="h-5 w-5 text-primary" />
-                </div>
-
-                <h3 className="heading-card font-display text-2xl md:text-3xl mb-6 leading-tight">
-                  {s.title}
-                </h3>
-
-                <div className="space-y-5 text-sm md:text-base">
-                  <div>
-                    <div className="text-xs uppercase tracking-widest text-primary mb-1.5">Challenge</div>
-                    <p className="text-foreground/80 leading-relaxed">{s.challenge}</p>
+                  <div className="flex items-center gap-3 flex-shrink-0">
+                    <span className="hidden md:inline text-xs uppercase tracking-widest text-muted-foreground">
+                      {isOpen ? "Collapse" : s.cta}
+                    </span>
+                    <ChevronDown className={`h-5 w-5 text-muted-foreground transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
                   </div>
-                  <div>
-                    <div className="text-xs uppercase tracking-widest text-primary mb-1.5">Approach</div>
-                    <p className="text-foreground/80 leading-relaxed">{s.approach}</p>
-                  </div>
-                  <div>
-                    <div className="text-xs uppercase tracking-widest text-gold mb-1.5">Results</div>
-                    <p className="text-foreground/80 leading-relaxed">{s.results}</p>
-                  </div>
-                  {s.methods && (
-                    <div>
-                      <div className="text-xs uppercase tracking-widest text-muted-foreground mb-1.5">Methods</div>
-                      <p className="text-muted-foreground text-sm">{s.methods}</p>
-                    </div>
-                  )}
-                </div>
+                </button>
 
-                <div className="grid grid-cols-3 gap-px bg-border/60 mt-8 rounded-xl overflow-hidden border border-border/60">
-                  {s.metrics.map((m, j) => (
-                    <div key={j} className="bg-surface p-4">
-                      <div className="font-display text-xl md:text-2xl gradient-text-cyan font-semibold">
-                        {m.value}
+                {isOpen && (
+                  <div className="px-6 md:px-8 pb-8 grid lg:grid-cols-2 gap-8 border-t border-border/60 pt-8">
+                    <div className="space-y-6">
+                      <div>
+                        <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-2">Context</div>
+                        <p className="text-sm md:text-base text-foreground/85 leading-relaxed">{s.context}</p>
                       </div>
-                      <div className="text-[11px] uppercase tracking-wider text-muted-foreground mt-1 leading-tight">
-                        {m.label}
+                      <div>
+                        <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-2">My Scope</div>
+                        <p className="text-sm md:text-base text-foreground/85 leading-relaxed">{s.scope}</p>
+                      </div>
+                      <div>
+                        <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-2">Tools Used</div>
+                        <p className="text-sm text-muted-foreground">{s.tools}</p>
                       </div>
                     </div>
-                  ))}
-                </div>
-              </div>
-            </article>
-          ))}
+                    <div className="space-y-6">
+                      <div>
+                        <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-3">Key Interventions</div>
+                        <ul className="space-y-2.5">
+                          {s.interventions.map((b, j) => (
+                            <li key={j} className="flex gap-3 text-sm text-foreground/85">
+                              <span className="text-primary mt-1.5 h-1 w-1 rounded-full bg-primary flex-shrink-0" />
+                              <span>{b}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="rounded-xl border border-gold/20 bg-gold/5 p-5">
+                        <div className="text-[10px] uppercase tracking-[0.2em] text-gold mb-3">Outcomes</div>
+                        <ul className="space-y-2">
+                          {s.outcomes.map((b, j) => (
+                            <li key={j} className="flex gap-3 text-sm text-foreground/90">
+                              <span className="text-gold mt-1.5 h-1 w-1 rounded-full bg-gold flex-shrink-0" />
+                              <span>{b}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>

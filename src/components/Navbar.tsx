@@ -3,11 +3,12 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const links = [
-  { label: "Work", href: "#case-studies" },
+  { label: "Work", href: "#work" },
   { label: "Capabilities", href: "#capabilities" },
-  { label: "Career", href: "#career" },
-  { label: "Insights", href: "#insights" },
+  { label: "Services", href: "#services" },
+  { label: "Timeline", href: "#timeline" },
   { label: "Credentials", href: "#credentials" },
+  { label: "Contact", href: "#contact" },
 ];
 
 const Navbar = () => {
@@ -23,9 +24,9 @@ const Navbar = () => {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-background/80 backdrop-blur-xl border-b border-border/60"
+          ? "bg-background/85 backdrop-blur-xl border-b border-border/60"
           : "bg-transparent"
       }`}
     >
@@ -37,33 +38,26 @@ const Navbar = () => {
           <span className="hidden sm:inline">Anvesh Seeli</span>
         </a>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-8">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
             >
               {l.label}
             </a>
           ))}
         </div>
 
-        <div className="hidden md:flex items-center gap-3">
-          <a
-            href="/Anvesh_Seeli_Resume.pdf"
-            download
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Resume
-          </a>
+        <div className="hidden lg:flex items-center">
           <Button asChild size="sm" className="bg-primary text-primary-foreground hover:bg-primary-glow">
-            <a href="#connect">Connect</a>
+            <a href="#contact">Book Growth Audit</a>
           </Button>
         </div>
 
         <button
-          className="md:hidden text-foreground"
+          className="lg:hidden text-foreground"
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
         >
@@ -72,7 +66,7 @@ const Navbar = () => {
       </nav>
 
       {open && (
-        <div className="md:hidden bg-background/95 backdrop-blur-xl border-t border-border/60">
+        <div className="lg:hidden bg-background/95 backdrop-blur-xl border-t border-border/60">
           <div className="container-premium py-6 flex flex-col gap-4">
             {links.map((l) => (
               <a
@@ -84,14 +78,9 @@ const Navbar = () => {
                 {l.label}
               </a>
             ))}
-            <div className="flex gap-3 pt-3 border-t border-border/60">
-              <Button asChild variant="outline" size="sm" className="flex-1">
-                <a href="/Anvesh_Seeli_Resume.pdf" download>Resume</a>
-              </Button>
-              <Button asChild size="sm" className="flex-1 bg-primary text-primary-foreground">
-                <a href="#connect" onClick={() => setOpen(false)}>Connect</a>
-              </Button>
-            </div>
+            <Button asChild size="sm" className="mt-2 bg-primary text-primary-foreground">
+              <a href="#contact" onClick={() => setOpen(false)}>Book Growth Audit</a>
+            </Button>
           </div>
         </div>
       )}
