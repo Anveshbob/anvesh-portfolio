@@ -223,7 +223,22 @@ const CaseStudies = () => {
                           ))}
                         </ul>
                       </div>
+                      {s.proof && (
+                        <figure className="rounded-xl border border-border/60 bg-surface-muted/50 p-4">
+                          <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-3">Validation</div>
+                          <img
+                            src={s.proof.src}
+                            alt={s.proof.caption}
+                            loading="lazy"
+                            className="w-full rounded-md border border-border/60 opacity-90"
+                          />
+                          <figcaption className="mt-2 text-[11px] text-muted-foreground/80 leading-snug">
+                            {s.proof.caption}
+                          </figcaption>
+                        </figure>
+                      )}
                     </div>
+
                   </div>
                 )}
               </article>
