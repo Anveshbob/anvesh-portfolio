@@ -37,7 +37,12 @@ const Hero = () => {
                 </a>
               </Button>
               <Button asChild size="lg" variant="outline" className="h-12 border-border hover:border-primary/60 hover:bg-surface">
-                <a href="/Anvesh_Seeli_Resume.pdf" download>
+                <a
+                  href="/Anvesh_Seeli_Resume.pdf"
+                  download="Anvesh_Seeli_Resume.pdf"
+                  target="_blank"
+                  rel="noopener"
+                >
                   <Download className="mr-2 h-4 w-4" />
                   Download Resume
                 </a>
