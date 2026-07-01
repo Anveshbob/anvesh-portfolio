@@ -42,6 +42,18 @@ const Hero = () => {
                   download="Anvesh_Seeli_Resume.pdf"
                   target="_blank"
                   rel="noopener"
+                  onClick={() => {
+                    if (typeof window !== "undefined" && typeof (window as any).gtag === "function") {
+                      (window as any).gtag("event", "resume_download", {
+                        event_category: "engagement",
+                        event_label: "Hero - Download Resume",
+                        file_name: "Anvesh_Seeli_Resume.pdf",
+                        file_extension: "pdf",
+                        link_url: "/Anvesh_Seeli_Resume.pdf",
+                        location: "hero",
+                      });
+                    }
+                  }}
                 >
                   <Download className="mr-2 h-4 w-4" />
                   Download Resume
