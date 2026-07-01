@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import jumiaValidation from "@/assets/jumia-validation.png.asset.json";
+
 
 type CaseStudy = {
   label: string;
@@ -10,7 +12,9 @@ type CaseStudy = {
   outcomes: string[];
   tools: string;
   cta: string;
+  proof?: { src: string; caption: string };
 };
+
 
 const studies: CaseStudy[] = [
   {
