@@ -90,7 +90,58 @@ const studies: CaseStudy[] = [
     tools: "GTM Strategy · Product Positioning · OKRs · Roadmap Planning · Cross-functional Workshops · Launch Documentation",
     cta: "View GTM system",
   },
+  {
+    label: "04 · Amazon Easy · Prione / Cloudtail (Amazon–Catamaran JV) · MBA Internship, 2020",
+    title: "Amazon Easy: Lead Generation & Store-Location Model",
+    context:
+      "Amazon Easy Exclusive Stores needed cost-effective lead generation and faster store-location scouting across Tier-2 India to scale offline-assisted commerce.",
+    scope:
+      "I owned the lead-generation and location-scouting workstreams during a live MBA internship. This included evaluating digital and non-digital channels, designing paid social campaigns end-to-end, and building an internal scouting tool to accelerate store site selection.",
+    interventions: [
+      "Built a channel cost-effectiveness framework comparing digital and non-digital acquisition sources.",
+      "Designed and ran A/B-tested Meta lead-gen campaigns with iterative creative and audience testing.",
+      "Structured lead-gen funnels with clear hot-lead qualification criteria.",
+      "Built a scalable location-scouting tool using Google My Maps, browser automation, and Excel macros.",
+      "Documented playbooks so the internal team could replicate the scouting workflow across cities.",
+    ],
+    outcomes: [
+      "4,000+ leads targeted via cost-effective channels.",
+      "Hot-lead conversion lifted to 66–74%.",
+      "Cost-per-hot-lead reduced to ~₹29.",
+      "Store-location turnaround time reduced by ~40%.",
+    ],
+    tools: "Meta Ads · A/B Testing · Lead-gen Funnels · Google My Maps · Browser Automation · Excel Macros",
+    cta: "View acquisition model",
+  },
+  {
+    label: "05 · Jumia Egypt · Live Project (validated by Country Manager)",
+    title: "Return-Rate Reduction & Reverse Logistics",
+    context:
+      "Jumia Egypt needed to reduce product return rates and improve reverse-logistics efficiency across categories, sellers, and warehouses.",
+    scope:
+      "I worked on a live consulting project spanning policy benchmarking, user-journey analysis, and analytics tooling. The output was a prioritized roadmap of policy and UX interventions plus a diagnostic dashboard for operations.",
+    interventions: [
+      "Benchmarked Jumia Egypt's return policy against local and international peers.",
+      "Identified 20+ opportunities and policy changes across the returns lifecycle.",
+      "Ran user-journey analysis and ideated 6 UX initiatives to reduce return intent.",
+      "Suggested reverse and forward logistics flow changes to improve authenticity and efficiency.",
+      "Built an interactive dashboard tracking return-rate contributors across categories, sellers, and warehouses.",
+    ],
+    outcomes: [
+      "Roadmap targeting up to 30% return-rate reduction.",
+      "~10% projected improvement in return authenticity and reverse-logistics efficiency.",
+      "6 UX initiatives ideated to enhance the customer experience.",
+      "All project points formally validated by Jumia Egypt's Country Manager.",
+    ],
+    tools: "Policy Benchmarking · User-Journey Analysis · Excel Dashboards · Reverse Logistics Design",
+    cta: "View returns roadmap",
+    proof: {
+      src: jumiaValidation.url,
+      caption: "Email validation from Thomas Maudet, Country Manager, Jumia Services — Egypt.",
+    },
+  },
 ];
+
 
 const CaseStudies = () => {
   const [open, setOpen] = useState<number | null>(0);
