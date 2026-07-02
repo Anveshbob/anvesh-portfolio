@@ -1,8 +1,16 @@
 import { ArrowRight } from "lucide-react";
+import { useEffect } from "react";
 
 const NEW_URL = "https://anveshseeli.com";
 
 const Index = () => {
+  useEffect(() => {
+    const t = window.setTimeout(() => {
+      window.location.replace(NEW_URL);
+    }, 1500);
+    return () => window.clearTimeout(t);
+  }, []);
+
   return (
     <main className="min-h-screen bg-white text-slate-900 flex items-center justify-center px-6 py-16">
       <div className="max-w-2xl w-full text-center">
